@@ -1,0 +1,33 @@
+name: update_elixir_versions
+
+on:
+  schedule:
+    - cron: "0 16 * * 2"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10' 
+
+      - name: Update version file
+        run: |
+          cd assets
+          python -m pip install requests
+          python get_all_elixir_versions.py
+
+      - name: Push updated version file
+        run: |
+          pwd
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"github-actions[bot]
+          git status -s
+          git add .
+          git commit -m "chore(versions.txt): update Elixir version file"
+          git push https://github-actions[bot]:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
