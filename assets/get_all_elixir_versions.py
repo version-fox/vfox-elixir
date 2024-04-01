@@ -1,11 +1,11 @@
 import json
 import requests
 
-# fetch version: -> https://api.github.com/repos/elixir-lang/elixir/tags?per_page=100
+# fetch version: -> https://api.github.com/repos/elixir-lang/elixir/tags?per_page=100?sort=pushed
 # github api has rate limt
 # prefer use local version file
 def update_all_version_from_github_api():
-    url = "https://api.github.com/repos/elixir-lang/elixir/tags?per_page=100"
+    url = "https://api.github.com/repos/elixir-lang/elixir/tags?per_page=100?sort=pushed"
     response = requests.get(url)
     data = response.json()
     print(data)
@@ -23,7 +23,7 @@ def get_all_version():
         for item in data:
             if "refs/tags/" not in item["tarball_url"]:
                 continue
-            version = item["tarball_url"].split("refs/tags/")[1]
+            version = item["tarball_url"].split("refs/tags/v")[1]
             version_set.add(version)
     return version_set
 
