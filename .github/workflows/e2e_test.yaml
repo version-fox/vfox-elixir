@@ -42,8 +42,8 @@ jobs:
           sudo apt-get -y install build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libwxgtk-webview3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
           vfox install erlang@26.2.3
           vfox use -g erlang@26.2.3
-          vfox install elixir@1.16
-          vfox use -g elixir@1.16
+          vfox install elixir@1.16.2
+          vfox use -g elixir@1.16.2
 
       - name: install Erlang/OTP by vfox-erlang plugin (Darwin)
         if: runner.os == 'MacOS'
@@ -51,7 +51,7 @@ jobs:
           brew install autoconf libxslt fop wxwidgets openssl
           vfox install erlang@26.2.3
           vfox use -g erlang@26.2.3
-          vfox install elixir@1.16
-          vfox use -g elixir@1.16
+          vfox install elixir@1.16.2
+          vfox use -g elixir@1.16.2
           elixir assets/hello.ex
           
