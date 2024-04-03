@@ -59,9 +59,21 @@ jobs:
           echo $PATH
           echo "===============PATH==============="
           ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/erl /usr/local/bin/erl
-          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/erlc /usr/local/bin/erlc
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/escript /usr/local/bin/escript
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/start_clean.script /usr/local/bin/start_clean.script
           ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/ct_run /usr/local/bin/ct_run
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/no_dot_erlang.boot /usr/local/bin/no_dot_erlang.boot
           ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/dialyzer /usr/local/bin/dialyzer
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/no_dot_erlang.script /usr/local/bin/no_dot_erlang.script
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/erl /usr/local/bin/erl
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/start.boot /usr/local/bin/start.boot
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/typer /usr/local/bin/typer
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/erl_call /usr/local/bin/erl_call
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/start.script /usr/local/bin/start.script
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/erlc /usr/local/bin/erlc
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/start_clean.boot /usr/local/bin/start_clean.boot
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/start_sasl.boot /usr/local/bin/start_sasl.boot
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/start_sasl.script /usr/local/bin/start_sasl.script
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
           elixir assets/hello.ex
