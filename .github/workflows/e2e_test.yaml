@@ -58,7 +58,10 @@ jobs:
           echo "===============PATH==============="
           echo $PATH
           echo "===============PATH==============="
-          cp ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/* /usr/local/bin/
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/erl /usr/local/bin/erl
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/erlc /usr/local/bin/erlc
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/ct_run /usr/local/bin/ct_run
+          ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/dialyzer /usr/local/bin/dialyzer
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
           elixir assets/hello.ex
