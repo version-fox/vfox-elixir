@@ -47,7 +47,7 @@ end
 
 function elixir_utils.get_elixir_release_verions()
     local resp, err = http.get({
-        url = "https://fastly.jsdelivr.net/gh/yeshan333/vfox-elixir@main/assets/versions.txt"
+        url = "https://fastly.jsdelivr.net/gh/version-fox/vfox-elixir@main/assets/versions.txt"
     })
     local result = {}
     for version in string.gmatch(resp.body, '([^\n]+)') do
