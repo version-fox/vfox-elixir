@@ -41,6 +41,9 @@ jobs:
           source ~/.bashrc
           vfox install erlang@26.2.3
           vfox use -g erlang@26.2.3
+          echo "===============PATH==============="
+          echo $PATH
+          echo "===============PATH==============="
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
 
@@ -52,6 +55,10 @@ jobs:
           source ~/.bashrc
           vfox install erlang@26.2.3
           vfox use -g erlang@26.2.3
+          echo "===============PATH==============="
+          echo $PATH
+          echo "===============PATH==============="
+          cp ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/* /usr/local/bin/
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
           elixir assets/hello.ex
