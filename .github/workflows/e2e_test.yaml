@@ -76,5 +76,4 @@ jobs:
           ln -sf ~/.version-fox/cache/erlang/v-26.2.3/erlang-26.2.3/bin/start_sasl.script /usr/local/bin/start_sasl.script
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
-          elixir assets/hello.ex
           
