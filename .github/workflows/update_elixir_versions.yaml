@@ -5,8 +5,11 @@ on:
     - cron: "0 16 * * 2"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  update_elixir_versions:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
