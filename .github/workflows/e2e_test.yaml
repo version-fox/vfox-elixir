@@ -46,6 +46,7 @@ jobs:
           echo "===============PATH==============="
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
+          eval "$(vfox activate bash)"
           elixirc -v
           elixir hello.ex
 
@@ -62,6 +63,7 @@ jobs:
           echo "===============PATH==============="
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
+          eval "$(vfox activate bash)"
           elixirc -v
           elixir hello.ex
           
