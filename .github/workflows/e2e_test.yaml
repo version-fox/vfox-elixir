@@ -40,13 +40,14 @@ jobs:
           vfox install erlang@26.2.3
           vfox use -g erlang@26.2.3
           eval "$(vfox activate bash)"
-          erlc -help 
+          which erl 
           echo "===============PATH==============="
           echo $PATH
           echo "===============PATH==============="
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
           elixirc -v
+          elixir hello.ex
 
       - name: install Erlang/OTP & Elixir by vfox-erlang & vfox-elixir plugin (Darwin)
         if: runner.os == 'MacOS'
@@ -55,11 +56,12 @@ jobs:
           vfox install erlang@26.2.3
           vfox use -g erlang@26.2.3
           eval "$(vfox activate bash)"
-          erlc -help 
+          which erl 
           echo "===============PATH==============="
           echo $PATH
           echo "===============PATH==============="
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
           elixirc -v
+          elixir hello.ex
           
