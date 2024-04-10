@@ -30,7 +30,10 @@ jobs:
           pwd
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"github-actions[bot]
-          git status -s
-          git add .
-          git commit -m "chore(versions.txt): update Elixir version file"
-          git push https://github-actions[bot]:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          if [[ -n $(git status -s) ]]; then
+            git add .
+            git commit -m "chore(versions.txt): update Elixir version file"
+            git push https://github-actions[bot]:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          else
+            echo "never updated."
+          fi
