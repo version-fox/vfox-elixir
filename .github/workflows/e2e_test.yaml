@@ -48,6 +48,7 @@ jobs:
           vfox use -g elixir@1.16.2
           eval "$(vfox activate bash)"
           elixirc -v
+          cd assets
           elixir hello.ex
 
       - name: install Erlang/OTP & Elixir by vfox-erlang & vfox-elixir plugin (Darwin)
@@ -65,5 +66,6 @@ jobs:
           vfox use -g elixir@1.16.2
           eval "$(vfox activate bash)"
           elixirc -v
+          cd assets
           elixir hello.ex
           
