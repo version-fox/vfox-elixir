@@ -1,3 +1,11 @@
+<div align="center">
+
+![logo](./assets/vfox-elixir-logo.png)
+
+[![E2E tests](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml)
+
+</div>
+
 # vfox-elixir plugin
 
 Elixir [vfox](https://github.com/version-fox) plugin. Use the vfox to manage multiple Elixir versions in Linux/Darwin.
