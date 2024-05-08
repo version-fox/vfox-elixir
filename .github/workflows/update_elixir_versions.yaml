@@ -22,7 +22,7 @@ jobs:
       - name: Update version file
         run: |
           cd assets
-          python -m pip install requests
+          python -m pip install requests packaging
           python get_all_elixir_versions.py
 
       - name: Push updated version file
