@@ -1,5 +1,6 @@
 import json
 import requests
+from packaging import version
 
 # fetch version: -> https://api.github.com/repos/elixir-lang/elixir/tags?per_page=100&sort=pushed
 # github api has rate limt
@@ -18,12 +19,12 @@ def update_all_version_from_github_api():
         all_version = all_version + data
 
 
-    with open("elixir_versions_from_gtihub_api.json", 'w', encoding="utf-8") as file:
+    with open("elixir_versions_from_github_api.json", 'w', encoding="utf-8") as file:
         json.dump(all_version, file, indent=4)
 
 def get_all_version():
     version_set = set()
-    with open("elixir_versions_from_gtihub_api.json", 'r', encoding="utf-8") as file:
+    with open("elixir_versions_from_github_api.json", 'r', encoding="utf-8") as file:
         data = json.load(file)
         for item in data:
             if "refs/tags/" not in item["tarball_url"]:
@@ -35,8 +36,8 @@ def get_all_version():
 if __name__ == "__main__":
     update_all_version_from_github_api()
     versions = list(get_all_version())
-    versions.sort(reverse=True)
+    versions = sorted(versions, key=lambda v: version.parse(v), reverse=True)
     print(versions)
     with open("versions.txt", 'w') as file:
-        for version in versions:
-            file.write(version + '\n')
+        for v in versions:
+            file.write(v + '\n')
