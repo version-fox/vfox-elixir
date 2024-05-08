@@ -5,16 +5,21 @@ import requests
 # github api has rate limt
 # prefer use local version file
 def update_all_version_from_github_api():
-    url = "https://api.github.com/repos/elixir-lang/elixir/tags?per_page=300&sort=pushed"
-    response = requests.get(url)
-    data = response.json()
-    print(data)
-    if response.status_code != 200:
-        print("Failed to fetch data from github api")
-        return
+    all_version = []
+    for page in range(1,10):
+        url = f"https://api.github.com/repos/elixir-lang/elixir/tags?per_page=100&sort=pushed&page={page}"
+        response = requests.get(url)
+        if response.status_code != 200:
+            print("Failed to fetch data from github api")
+            return
+        data = response.json()
+
+        data = response.json()
+        all_version = all_version + data
+
 
     with open("elixir_versions_from_gtihub_api.json", 'w', encoding="utf-8") as file:
-        json.dump(data, file, indent=4)
+        json.dump(all_version, file, indent=4)
 
 def get_all_version():
     version_set = set()
@@ -29,7 +34,9 @@ def get_all_version():
 
 if __name__ == "__main__":
     update_all_version_from_github_api()
-    version_set = get_all_version()
+    versions = list(get_all_version())
+    versions.sort(reverse=True)
+    print(versions)
     with open("versions.txt", 'w') as file:
-        for version in version_set:
+        for version in versions:
             file.write(version + '\n')
