@@ -1,3 +1,5 @@
+local elixirUtils = require("elixir_utils")
+
 --- Extension point, called after PreInstall, can perform additional operations,
 --- such as file operations for the SDK installation directory or compile source code
 --- Currently can be left unimplemented!
@@ -8,8 +10,7 @@ function PLUGIN:PostInstall(ctx)
     local install_cmd
 
     if RUNTIME.osType == "windows" then
-        local installer = path .. "\\" .. string.gsub(sdkInfo.version, "-", "/", 1) .. ".exe"
-        install_cmd = installer " -Wait -PassThru" .. " /S /D=" .. path
+        return elixirUtils.windows_install_exe(sdkInfo.version)
     else
         install_cmd = "cd " .. path .. " && make"
     end

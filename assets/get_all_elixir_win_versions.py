@@ -33,7 +33,7 @@ def get_all_version():
                     continue
                 version = asset["browser_download_url"].split("releases/download/")[1]
                 fix_version = version.replace("/", "-")
-                version_set.add(fix_version.replace(".exe", ""))
+                version_set.add(fix_version.replace(".exe", "")[1:])
     return version_set
 
 if __name__ == "__main__":

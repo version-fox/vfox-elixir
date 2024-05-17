@@ -12,11 +12,11 @@ function PLUGIN:PreInstall(ctx)
     end
 
     local download_url
-
     print("You will install the elixir version is " .. elixir_version)
     if RUNTIME.osType == "windows" then
-        elixir_version = string.gsub(elixir_version, "-", "/", 1)
-        download_url = "https://github.com/elixir-lang/elixir/releases/download/" .. elixir_version .. "/.exe"
+        return {
+            version = elixir_version,
+        }
     else
         elixirUtils.check_version_existence("https://github.com/elixir-lang/elixir/releases/tag/v" .. elixir_version)
         download_url = "https://github.com/elixir-lang/elixir/archive/refs/tags/v" .. elixir_version .. ".tar.gz"
@@ -24,6 +24,6 @@ function PLUGIN:PreInstall(ctx)
 
     return {
         version = elixir_version,
-        url = download_url
+        url = download_url,
     }
 end
