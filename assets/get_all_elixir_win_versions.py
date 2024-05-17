@@ -39,7 +39,6 @@ def get_all_version():
 if __name__ == "__main__":
     update_all_version_from_github_api()
     versions = list(get_all_version())
-    # versions = sorted(versions, key=lambda v: version.parse(v), reverse=True)
     versions = sorted(versions, reverse=True)
     print(versions)
     with open("versions_win.txt", 'w') as file:

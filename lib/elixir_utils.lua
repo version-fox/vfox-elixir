@@ -45,9 +45,22 @@ function elixir_utils.check_erlang_existence()
     end
 end
 
-function elixir_utils.get_elixir_release_verions()
+function elixir_utils.get_elixir_release_verions_in_linux()
     local resp, err = http.get({
         url = "https://fastly.jsdelivr.net/gh/version-fox/vfox-elixir@main/assets/versions.txt"
+    })
+    local result = {}
+    for version in string.gmatch(resp.body, '([^\n]+)') do
+        table.insert(result, {
+            version = version
+        })
+    end
+    return result
+end
+
+function elixir_utils.get_elixir_release_verions_in_windows()
+    local resp, err = http.get({
+        url = "https://fastly.jsdelivr.net/gh/version-fox/vfox-elixir@main/assets/versions_win.txt"
     })
     local result = {}
     for version in string.gmatch(resp.body, '([^\n]+)') do

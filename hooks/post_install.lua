@@ -5,7 +5,16 @@ function PLUGIN:PostInstall(ctx)
     --- ctx.rootPath SDK installation directory
     local sdkInfo = ctx.sdkInfo['elixir']
     local path = sdkInfo.path
-    local status = os.execute("cd " .. path .. " && make")
+    local install_cmd
+
+    if RUNTIME.osType == "windows" then
+        local installer = path .. "\\" .. string.gsub(sdkInfo.version, "-", "/", 1) .. ".exe"
+        install_cmd = installer " -Wait -PassThru" .. " /S /D=" .. path
+    else
+        install_cmd = "cd " .. path .. " && make"
+    end
+
+    local status = os.execute(install_cmd)
     if status ~= 0 then
         error("Elixir install failed, please check the stdout for details.")
     end
