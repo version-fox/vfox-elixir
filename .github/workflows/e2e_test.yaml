@@ -3,6 +3,7 @@ name: E2E tests
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -31,7 +32,7 @@ jobs:
       - name: add vfox-erlang & vfox-elixir plugin
         run: |
           vfox add --source https://github.com/version-fox/vfox-erlang/archive/refs/heads/main.zip erlang
-          vfox add --source https://github.com/version-fox/vfox-elixir/archive/refs/heads/main.zip elixir
+          vfox add --source https://github.com/version-fox/vfox-elixir/archive/${GITHUB_REF}.zip elixir
 
       - name: install Erlang/OTP & Elixir by vfox-erlang & vfox-elixir plugin (Darwin)
         if: runner.os == 'Linux'
