@@ -104,4 +104,4 @@ jobs:
           echo "===============PATH==============="
           echo $env:PATH
           echo "===============PATH==============="
-          & elixirc.bat -v
+          elixirc.bat -v
