@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         # ref: https://github.com/actions/runner-images
-        os: [ubuntu-20.04, macos-13]
+        os: [ubuntu-20.04, macos-13, windows-2022]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -28,11 +28,27 @@ jobs:
         run: |
           brew tap version-fox/tap
           brew install vfox
-      
+
+      - name: install scoop (Windows)
+        if: runner.os == 'Windows'
+        uses: MinoruSekine/setup-scoop@v3
+    
+      - name: install vfox (Windows)      
+        if: runner.os == 'Windows'
+        run: |
+          scoop install vfox 
+
       - name: add vfox-erlang & vfox-elixir plugin
+        if: runner.os != 'Windows'
         run: |
           vfox add --source https://github.com/version-fox/vfox-erlang/archive/refs/heads/main.zip erlang
           vfox add --source https://github.com/version-fox/vfox-elixir/archive/${GITHUB_REF}.zip elixir
+
+      - name: add vfox-erlang & vfox-elixir plugin
+        if: runner.os == 'Windows'
+        run: |
+          vfox add --source https://github.com/version-fox/vfox-erlang/archive/refs/heads/main.zip erlang
+          vfox add --source https://github.com/version-fox/vfox-elixir/archive/$env:GITHUB_REF.zip elixir
 
       - name: install Erlang/OTP & Elixir by vfox-erlang & vfox-elixir plugin (Linux)
         if: runner.os == 'Linux'
@@ -71,4 +87,17 @@ jobs:
           elixirc -v
           cd assets
           elixir hello.ex
-          
+
+      - name: install Erlang/OTP & Elixir by vfox-erlang & vfox-elixir plugin (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          vfox install erlang@26.2.3
+          vfox use -g erlang@26.2.3
+          Invoke-Expression "$(vfox activate pwsh)"
+          echo "===============PATH==============="
+          echo $env:PATH
+          echo "===============PATH==============="
+          & erl.exe -eval 'erlang:display({otp_release, erlang:system_info(otp_release)}), halt().' -noshell
+          vfox install elixi@1.16.2-elixir-otp-26
+          vfox use -g elixir@1.16.2-elixir-otp-26
+          & elixirc.bat -v
