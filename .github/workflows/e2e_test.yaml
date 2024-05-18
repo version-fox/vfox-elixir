@@ -98,6 +98,6 @@ jobs:
           echo $env:PATH
           echo "===============PATH==============="
           & erl.exe -eval 'erlang:display({otp_release, erlang:system_info(otp_release)}), halt().' -noshell
-          vfox install elixi@1.16.2-elixir-otp-26
+          vfox install elixir@1.16.2-elixir-otp-26
           vfox use -g elixir@1.16.2-elixir-otp-26
           & elixirc.bat -v
