@@ -17,7 +17,7 @@ Elixir [vfox](https://github.com/version-fox) plugin. Use the vfox to manage mul
 vfox add --source https://github.com/version-fox/vfox-elixir/archive/refs/heads/main.zip elixir
 
 # install an available version
-vofx search elixir
+vfox search elixir
 # or specific version 
 vfox install elixir@1.16.2
 ```
