@@ -1,5 +1,15 @@
 [
     {
+        "name": "v1.17.0-rc.0",
+        "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.17.0-rc.0",
+        "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.17.0-rc.0",
+        "commit": {
+            "sha": "a2600eace138aaff04f67db70485e44e2a372be7",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/a2600eace138aaff04f67db70485e44e2a372be7"
+        },
+        "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvdjEuMTcuMC1yYy4w"
+    },
+    {
         "name": "v1.16.3",
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.16.3",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.16.3",
