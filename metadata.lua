@@ -5,7 +5,7 @@ PLUGIN = {}
 --- Plugin name
 PLUGIN.name = "elixir"
 --- Plugin version
-PLUGIN.version = "0.3.0"
+PLUGIN.version = "0.4.0"
 --- Plugin homepage
 PLUGIN.homepage = "https://github.com/version-fox/vfox-elixir"
 --- Plugin license, please choose a correct license according to your needs.
@@ -21,7 +21,7 @@ NOTE:
     If the plugin is not compatible with the current vfox version,
     vfox will not load the plugin and prompt the user to upgrade vfox.
  --]]
-PLUGIN.minRuntimeVersion = "0.3.0"
+PLUGIN.minRuntimeVersion = "0.5.3"
 --[[
 NOTE:
     If configured, vfox will check for updates to the plugin at this address,
