@@ -108,4 +108,5 @@ jobs:
           echo "===============PATH==============="
           echo $env:PATH
           echo "===============PATH==============="
+          cd assets
           elixirc.bat hello.ex
