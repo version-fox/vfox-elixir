@@ -24,6 +24,7 @@ jobs:
           cd assets
           python -m pip install requests packaging
           python get_all_elixir_versions.py
+          python get_all_elixir_win_versions.py
 
       - name: Push updated version file
         run: |

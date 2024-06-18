@@ -5,7 +5,13 @@
 --- @field ctx.path string SDK installation directory
 function PLUGIN:EnvKeys(ctx)
     --- this variable is same as ctx.sdkInfo['plugin-name'].path
-    local mainPath = ctx.path .. "/bin"
+    local sdkInfo = ctx.sdkInfo['elixir']
+    local mainPath
+    if RUNTIME.osType == "windows" then
+        mainPath = ctx.path .. "\\bin"
+    else
+        mainPath = ctx.path .. "/bin"
+    end
     return {
         {
             key = "PATH",

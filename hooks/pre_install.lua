@@ -6,19 +6,24 @@ local elixirUtils = require("elixir_utils")
 --- @field ctx.version string User-input version
 --- @return table Version information
 function PLUGIN:PreInstall(ctx)
-    
-    elixirUtils.check_platform()
-
     local elixir_version = ctx.version
     if elixir_version == nil then
-        print("You will install the elixir version is" .. elixir_version)
         error("You must provide a version number for Elixir, eg: vfox install elixir@1.16.2")
     end
-    elixirUtils.check_version_existence("https://github.com/elixir-lang/elixir/releases/tag/v" .. elixir_version)
-    
-    local download_url = "https://github.com/elixir-lang/elixir/archive/refs/tags/v" .. elixir_version .. ".tar.gz"
+
+    local download_url
+    print("You will install the elixir version is " .. elixir_version)
+    if RUNTIME.osType == "windows" then
+        return {
+            version = elixir_version,
+        }
+    else
+        elixirUtils.check_version_existence("https://github.com/elixir-lang/elixir/releases/tag/v" .. elixir_version)
+        download_url = "https://github.com/elixir-lang/elixir/archive/refs/tags/v" .. elixir_version .. ".tar.gz"
+    end
+
     return {
         version = elixir_version,
-        url = download_url
+        url = download_url,
     }
 end
