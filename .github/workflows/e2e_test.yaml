@@ -101,6 +101,7 @@ jobs:
           vfox install elixir@1.16.2-elixir-otp-26
           vfox use -g elixir@1.16.2-elixir-otp-26
           Invoke-Expression "$(vfox activate pwsh)"
+          Get-Command iex.bat
           echo "===============PATH==============="
           echo $env:PATH
           echo "===============PATH==============="
