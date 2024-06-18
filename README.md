@@ -8,7 +8,7 @@
 
 # vfox-elixir plugin
 
-Elixir [vfox](https://github.com/version-fox) plugin. Use the vfox to manage multiple Elixir versions in Linux/Darwin.
+Elixir [vfox](https://github.com/version-fox) plugin. Use the vfox to manage multiple Elixir versions in Linux/Darwin MacOS/Windows. all platform~
 
 ## Usage
 
@@ -70,7 +70,7 @@ vfox use -g elixir@1.16.2
 
 You can reference the E2E test in MacOS 12: [https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml)
 
-## install ELixir in Windows platform
+## install Elixir in Windows platform
 
 You should use the v.0.5.3+ vfox version to add vfox-elixir plugin in Wondows platform. **Only support install Elixir versions after v1.15**, Elixir versions before v1.15 can also be installed using the deprecated [Online Elixir Installer](https://github.com/elixir-lang/elixir-windows-setup/releases/tag/v2.4).
 
