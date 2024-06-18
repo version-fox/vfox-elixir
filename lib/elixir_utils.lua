@@ -46,6 +46,7 @@ function elixir_utils.windows_install_exe(version)
     end
 
     -- Install exe
+    -- FIXME: ..\\.. path
     local install_cmd = installer .. " -Wait -PassThru" .. " /S /D=" .. RUNTIME.pluginDirPath .. "\\..\\..\\cache\\elixir\\v-" .. version .. "\\elixir-" .. version
     print("install cmd: " .. install_cmd)
     local status = os.execute(install_cmd)
