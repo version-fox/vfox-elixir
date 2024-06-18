@@ -109,4 +109,10 @@ jobs:
           echo $env:PATH
           echo "===============PATH==============="
           cd assets
-          elixirc.bat hello.ex
+          $result = elixirc.bat hello.ex
+          if ($result -match "Hello world") {
+              Write-Output "elixir installed successfully!"
+          } else {
+              Write-Output "elixir installed failed!"
+              exit 1
+          }
