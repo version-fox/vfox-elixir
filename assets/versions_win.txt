@@ -1,3 +1,6 @@
+1.17.2-elixir-otp-27
+1.17.2-elixir-otp-26
+1.17.2-elixir-otp-25
 1.17.1-elixir-otp-27
 1.17.1-elixir-otp-26
 1.17.1-elixir-otp-25
