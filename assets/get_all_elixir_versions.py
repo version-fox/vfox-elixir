@@ -29,8 +29,10 @@ def get_all_version():
         for item in data:
             if "refs/tags/" not in item["tarball_url"]:
                 continue
-            version = item["tarball_url"].split("refs/tags/v")[1]
-            version_set.add(version)
+            split_info = item["tarball_url"].split("refs/tags/v")
+            if len(split_info) > 1:
+                version = split_info[1]
+                version_set.add(version)
     return version_set
 
 if __name__ == "__main__":
