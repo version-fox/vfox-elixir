@@ -72,7 +72,7 @@ You can reference the E2E test in MacOS 12: [https://github.com/version-fox/vfox
 
 ## install Elixir in Windows platform
 
-You should use the v.0.5.3+ vfox version to add vfox-elixir plugin in Wondows platform. **Only support install Elixir versions after v1.15**, Elixir versions before v1.15 can also be installed using the deprecated [Online Elixir Installer](https://github.com/elixir-lang/elixir-windows-setup/releases/tag/v2.4).
+You should use the v.0.5.3+ vfox version to add vfox-elixir plugin in Windows platform. **Only support install Elixir versions after v1.15**, Elixir versions before v1.15 can also be installed using the deprecated [Online Elixir Installer](https://github.com/elixir-lang/elixir-windows-setup/releases/tag/v2.4).
 
 ```shell
 # make sure an Erlang/OTP version is installed.
