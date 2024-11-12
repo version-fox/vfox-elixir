@@ -32,13 +32,13 @@
         "name": "main-latest",
         "draft": false,
         "prerelease": false,
-        "created_at": "2024-11-05T16:11:39Z",
+        "created_at": "2024-11-11T22:06:31Z",
         "published_at": "2024-09-17T07:21:04Z",
         "assets": [
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264710",
-                "id": 204264710,
-                "node_id": "RA_kwDOABLXGs4MLNUG",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770522",
+                "id": 205770522,
+                "node_id": "RA_kwDOABLXGs4MQ88a",
                 "name": "Docs.zip",
                 "label": "",
                 "uploader": {
@@ -64,16 +64,16 @@
                 },
                 "content_type": "application/zip",
                 "state": "uploaded",
-                "size": 6315941,
+                "size": 6321337,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:09Z",
-                "updated_at": "2024-11-05T12:19:10Z",
+                "created_at": "2024-11-11T22:14:52Z",
+                "updated_at": "2024-11-11T22:14:52Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/Docs.zip"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264712",
-                "id": 204264712,
-                "node_id": "RA_kwDOABLXGs4MLNUI",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770523",
+                "id": 205770523,
+                "node_id": "RA_kwDOABLXGs4MQ88b",
                 "name": "Docs.zip.sha1sum",
                 "label": "",
                 "uploader": {
@@ -101,14 +101,14 @@
                 "state": "uploaded",
                 "size": 51,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:09Z",
-                "updated_at": "2024-11-05T12:19:09Z",
+                "created_at": "2024-11-11T22:14:52Z",
+                "updated_at": "2024-11-11T22:14:52Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/Docs.zip.sha1sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264713",
-                "id": 204264713,
-                "node_id": "RA_kwDOABLXGs4MLNUJ",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770524",
+                "id": 205770524,
+                "node_id": "RA_kwDOABLXGs4MQ88c",
                 "name": "Docs.zip.sha256sum",
                 "label": "",
                 "uploader": {
@@ -136,14 +136,14 @@
                 "state": "uploaded",
                 "size": 75,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:09Z",
-                "updated_at": "2024-11-05T12:19:09Z",
+                "created_at": "2024-11-11T22:14:52Z",
+                "updated_at": "2024-11-11T22:14:52Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/Docs.zip.sha256sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264714",
-                "id": 204264714,
-                "node_id": "RA_kwDOABLXGs4MLNUK",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770525",
+                "id": 205770525,
+                "node_id": "RA_kwDOABLXGs4MQ88d",
                 "name": "Docs.zip.sigstore",
                 "label": "",
                 "uploader": {
@@ -169,16 +169,16 @@
                 },
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
-                "size": 10234,
+                "size": 10183,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:10Z",
-                "updated_at": "2024-11-05T12:19:10Z",
+                "created_at": "2024-11-11T22:14:52Z",
+                "updated_at": "2024-11-11T22:14:52Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/Docs.zip.sigstore"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264693",
-                "id": 204264693,
-                "node_id": "RA_kwDOABLXGs4MLNT1",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770509",
+                "id": 205770509,
+                "node_id": "RA_kwDOABLXGs4MQ88N",
                 "name": "elixir-otp-25.exe",
                 "label": "",
                 "uploader": {
@@ -204,16 +204,16 @@
                 },
                 "content_type": "application/x-msdownload",
                 "state": "uploaded",
-                "size": 7754112,
+                "size": 7924624,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:08Z",
-                "updated_at": "2024-11-05T12:19:08Z",
+                "created_at": "2024-11-11T22:14:50Z",
+                "updated_at": "2024-11-11T22:14:51Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-25.exe"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264697",
-                "id": 204264697,
-                "node_id": "RA_kwDOABLXGs4MLNT5",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770512",
+                "id": 205770512,
+                "node_id": "RA_kwDOABLXGs4MQ88Q",
                 "name": "elixir-otp-25.exe.sha1sum",
                 "label": "",
                 "uploader": {
@@ -241,14 +241,14 @@
                 "state": "uploaded",
                 "size": 60,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:08Z",
-                "updated_at": "2024-11-05T12:19:08Z",
+                "created_at": "2024-11-11T22:14:51Z",
+                "updated_at": "2024-11-11T22:14:51Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-25.exe.sha1sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264701",
-                "id": 204264701,
-                "node_id": "RA_kwDOABLXGs4MLNT9",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770516",
+                "id": 205770516,
+                "node_id": "RA_kwDOABLXGs4MQ88U",
                 "name": "elixir-otp-25.exe.sha256sum",
                 "label": "",
                 "uploader": {
@@ -276,14 +276,14 @@
                 "state": "uploaded",
                 "size": 84,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:09Z",
-                "updated_at": "2024-11-05T12:19:09Z",
+                "created_at": "2024-11-11T22:14:51Z",
+                "updated_at": "2024-11-11T22:14:51Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-25.exe.sha256sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264705",
-                "id": 204264705,
-                "node_id": "RA_kwDOABLXGs4MLNUB",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770519",
+                "id": 205770519,
+                "node_id": "RA_kwDOABLXGs4MQ88X",
                 "name": "elixir-otp-25.exe.sigstore",
                 "label": "",
                 "uploader": {
@@ -309,16 +309,16 @@
                 },
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
-                "size": 10289,
+                "size": 10101,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:09Z",
-                "updated_at": "2024-11-05T12:19:09Z",
+                "created_at": "2024-11-11T22:14:52Z",
+                "updated_at": "2024-11-11T22:14:52Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-25.exe.sigstore"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264682",
-                "id": 204264682,
-                "node_id": "RA_kwDOABLXGs4MLNTq",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770499",
+                "id": 205770499,
+                "node_id": "RA_kwDOABLXGs4MQ88D",
                 "name": "elixir-otp-25.zip",
                 "label": "",
                 "uploader": {
@@ -344,16 +344,16 @@
                 },
                 "content_type": "application/zip",
                 "state": "uploaded",
-                "size": 7705663,
+                "size": 7876487,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:07Z",
-                "updated_at": "2024-11-05T12:19:07Z",
+                "created_at": "2024-11-11T22:14:49Z",
+                "updated_at": "2024-11-11T22:14:50Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-25.zip"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264683",
-                "id": 204264683,
-                "node_id": "RA_kwDOABLXGs4MLNTr",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770498",
+                "id": 205770498,
+                "node_id": "RA_kwDOABLXGs4MQ88C",
                 "name": "elixir-otp-25.zip.sha1sum",
                 "label": "",
                 "uploader": {
@@ -381,14 +381,14 @@
                 "state": "uploaded",
                 "size": 60,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:07Z",
-                "updated_at": "2024-11-05T12:19:07Z",
+                "created_at": "2024-11-11T22:14:49Z",
+                "updated_at": "2024-11-11T22:14:49Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-25.zip.sha1sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264687",
-                "id": 204264687,
-                "node_id": "RA_kwDOABLXGs4MLNTv",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770502",
+                "id": 205770502,
+                "node_id": "RA_kwDOABLXGs4MQ88G",
                 "name": "elixir-otp-25.zip.sha256sum",
                 "label": "",
                 "uploader": {
@@ -416,14 +416,14 @@
                 "state": "uploaded",
                 "size": 84,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:07Z",
-                "updated_at": "2024-11-05T12:19:07Z",
+                "created_at": "2024-11-11T22:14:49Z",
+                "updated_at": "2024-11-11T22:14:49Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-25.zip.sha256sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264689",
-                "id": 204264689,
-                "node_id": "RA_kwDOABLXGs4MLNTx",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770505",
+                "id": 205770505,
+                "node_id": "RA_kwDOABLXGs4MQ88J",
                 "name": "elixir-otp-25.zip.sigstore",
                 "label": "",
                 "uploader": {
@@ -449,16 +449,16 @@
                 },
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
-                "size": 10293,
+                "size": 10070,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:08Z",
-                "updated_at": "2024-11-05T12:19:08Z",
+                "created_at": "2024-11-11T22:14:50Z",
+                "updated_at": "2024-11-11T22:14:50Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-25.zip.sigstore"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264694",
-                "id": 204264694,
-                "node_id": "RA_kwDOABLXGs4MLNT2",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770510",
+                "id": 205770510,
+                "node_id": "RA_kwDOABLXGs4MQ88O",
                 "name": "elixir-otp-26.exe",
                 "label": "",
                 "uploader": {
@@ -484,16 +484,16 @@
                 },
                 "content_type": "application/x-msdownload",
                 "state": "uploaded",
-                "size": 7668968,
+                "size": 7837576,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:08Z",
-                "updated_at": "2024-11-05T12:19:09Z",
+                "created_at": "2024-11-11T22:14:50Z",
+                "updated_at": "2024-11-11T22:14:51Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-26.exe"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264699",
-                "id": 204264699,
-                "node_id": "RA_kwDOABLXGs4MLNT7",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770514",
+                "id": 205770514,
+                "node_id": "RA_kwDOABLXGs4MQ88S",
                 "name": "elixir-otp-26.exe.sha1sum",
                 "label": "",
                 "uploader": {
@@ -521,14 +521,14 @@
                 "state": "uploaded",
                 "size": 60,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:08Z",
-                "updated_at": "2024-11-05T12:19:08Z",
+                "created_at": "2024-11-11T22:14:51Z",
+                "updated_at": "2024-11-11T22:14:51Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-26.exe.sha1sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264703",
-                "id": 204264703,
-                "node_id": "RA_kwDOABLXGs4MLNT_",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770517",
+                "id": 205770517,
+                "node_id": "RA_kwDOABLXGs4MQ88V",
                 "name": "elixir-otp-26.exe.sha256sum",
                 "label": "",
                 "uploader": {
@@ -556,14 +556,14 @@
                 "state": "uploaded",
                 "size": 84,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:09Z",
-                "updated_at": "2024-11-05T12:19:09Z",
+                "created_at": "2024-11-11T22:14:51Z",
+                "updated_at": "2024-11-11T22:14:51Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-26.exe.sha256sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264709",
-                "id": 204264709,
-                "node_id": "RA_kwDOABLXGs4MLNUF",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770520",
+                "id": 205770520,
+                "node_id": "RA_kwDOABLXGs4MQ88Y",
                 "name": "elixir-otp-26.exe.sigstore",
                 "label": "",
                 "uploader": {
@@ -589,16 +589,16 @@
                 },
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
-                "size": 10293,
+                "size": 10148,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:09Z",
-                "updated_at": "2024-11-05T12:19:09Z",
+                "created_at": "2024-11-11T22:14:52Z",
+                "updated_at": "2024-11-11T22:14:52Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-26.exe.sigstore"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264679",
-                "id": 204264679,
-                "node_id": "RA_kwDOABLXGs4MLNTn",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770495",
+                "id": 205770495,
+                "node_id": "RA_kwDOABLXGs4MQ87_",
                 "name": "elixir-otp-26.zip",
                 "label": "",
                 "uploader": {
@@ -624,16 +624,16 @@
                 },
                 "content_type": "application/zip",
                 "state": "uploaded",
-                "size": 7620855,
+                "size": 7789699,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:07Z",
-                "updated_at": "2024-11-05T12:19:07Z",
+                "created_at": "2024-11-11T22:14:49Z",
+                "updated_at": "2024-11-11T22:14:50Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-26.zip"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264680",
-                "id": 204264680,
-                "node_id": "RA_kwDOABLXGs4MLNTo",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770496",
+                "id": 205770496,
+                "node_id": "RA_kwDOABLXGs4MQ88A",
                 "name": "elixir-otp-26.zip.sha1sum",
                 "label": "",
                 "uploader": {
@@ -661,14 +661,14 @@
                 "state": "uploaded",
                 "size": 60,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:07Z",
-                "updated_at": "2024-11-05T12:19:07Z",
+                "created_at": "2024-11-11T22:14:49Z",
+                "updated_at": "2024-11-11T22:14:49Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-26.zip.sha1sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264691",
-                "id": 204264691,
-                "node_id": "RA_kwDOABLXGs4MLNTz",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770503",
+                "id": 205770503,
+                "node_id": "RA_kwDOABLXGs4MQ88H",
                 "name": "elixir-otp-26.zip.sha256sum",
                 "label": "",
                 "uploader": {
@@ -696,14 +696,14 @@
                 "state": "uploaded",
                 "size": 84,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:08Z",
-                "updated_at": "2024-11-05T12:19:08Z",
+                "created_at": "2024-11-11T22:14:50Z",
+                "updated_at": "2024-11-11T22:14:50Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-26.zip.sha256sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264690",
-                "id": 204264690,
-                "node_id": "RA_kwDOABLXGs4MLNTy",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770506",
+                "id": 205770506,
+                "node_id": "RA_kwDOABLXGs4MQ88K",
                 "name": "elixir-otp-26.zip.sigstore",
                 "label": "",
                 "uploader": {
@@ -729,16 +729,16 @@
                 },
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
-                "size": 10195,
+                "size": 10215,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:08Z",
-                "updated_at": "2024-11-05T12:19:08Z",
+                "created_at": "2024-11-11T22:14:50Z",
+                "updated_at": "2024-11-11T22:14:50Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-26.zip.sigstore"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264695",
-                "id": 204264695,
-                "node_id": "RA_kwDOABLXGs4MLNT3",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770511",
+                "id": 205770511,
+                "node_id": "RA_kwDOABLXGs4MQ88P",
                 "name": "elixir-otp-27.exe",
                 "label": "",
                 "uploader": {
@@ -764,16 +764,16 @@
                 },
                 "content_type": "application/x-msdownload",
                 "state": "uploaded",
-                "size": 7671472,
-                "download_count": 0,
-                "created_at": "2024-11-05T12:19:08Z",
-                "updated_at": "2024-11-05T12:19:09Z",
+                "size": 7839472,
+                "download_count": 1,
+                "created_at": "2024-11-11T22:14:51Z",
+                "updated_at": "2024-11-11T22:14:51Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-27.exe"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264702",
-                "id": 204264702,
-                "node_id": "RA_kwDOABLXGs4MLNT-",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770515",
+                "id": 205770515,
+                "node_id": "RA_kwDOABLXGs4MQ88T",
                 "name": "elixir-otp-27.exe.sha1sum",
                 "label": "",
                 "uploader": {
@@ -800,15 +800,15 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 60,
-                "download_count": 0,
-                "created_at": "2024-11-05T12:19:09Z",
-                "updated_at": "2024-11-05T12:19:09Z",
+                "download_count": 1,
+                "created_at": "2024-11-11T22:14:51Z",
+                "updated_at": "2024-11-11T22:14:51Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-27.exe.sha1sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264704",
-                "id": 204264704,
-                "node_id": "RA_kwDOABLXGs4MLNUA",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770518",
+                "id": 205770518,
+                "node_id": "RA_kwDOABLXGs4MQ88W",
                 "name": "elixir-otp-27.exe.sha256sum",
                 "label": "",
                 "uploader": {
@@ -835,15 +835,15 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 0,
-                "created_at": "2024-11-05T12:19:09Z",
-                "updated_at": "2024-11-05T12:19:09Z",
+                "download_count": 2,
+                "created_at": "2024-11-11T22:14:51Z",
+                "updated_at": "2024-11-11T22:14:51Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-27.exe.sha256sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264707",
-                "id": 204264707,
-                "node_id": "RA_kwDOABLXGs4MLNUD",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770521",
+                "id": 205770521,
+                "node_id": "RA_kwDOABLXGs4MQ88Z",
                 "name": "elixir-otp-27.exe.sigstore",
                 "label": "",
                 "uploader": {
@@ -869,16 +869,16 @@
                 },
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
-                "size": 10258,
+                "size": 10101,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:09Z",
-                "updated_at": "2024-11-05T12:19:09Z",
+                "created_at": "2024-11-11T22:14:52Z",
+                "updated_at": "2024-11-11T22:14:52Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-27.exe.sigstore"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264681",
-                "id": 204264681,
-                "node_id": "RA_kwDOABLXGs4MLNTp",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770497",
+                "id": 205770497,
+                "node_id": "RA_kwDOABLXGs4MQ88B",
                 "name": "elixir-otp-27.zip",
                 "label": "",
                 "uploader": {
@@ -904,16 +904,16 @@
                 },
                 "content_type": "application/zip",
                 "state": "uploaded",
-                "size": 7623385,
-                "download_count": 0,
-                "created_at": "2024-11-05T12:19:07Z",
-                "updated_at": "2024-11-05T12:19:07Z",
+                "size": 7791590,
+                "download_count": 2,
+                "created_at": "2024-11-11T22:14:49Z",
+                "updated_at": "2024-11-11T22:14:50Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-27.zip"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264685",
-                "id": 204264685,
-                "node_id": "RA_kwDOABLXGs4MLNTt",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770501",
+                "id": 205770501,
+                "node_id": "RA_kwDOABLXGs4MQ88F",
                 "name": "elixir-otp-27.zip.sha1sum",
                 "label": "",
                 "uploader": {
@@ -941,14 +941,14 @@
                 "state": "uploaded",
                 "size": 60,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:07Z",
-                "updated_at": "2024-11-05T12:19:07Z",
+                "created_at": "2024-11-11T22:14:49Z",
+                "updated_at": "2024-11-11T22:14:49Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-27.zip.sha1sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264688",
-                "id": 204264688,
-                "node_id": "RA_kwDOABLXGs4MLNTw",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770504",
+                "id": 205770504,
+                "node_id": "RA_kwDOABLXGs4MQ88I",
                 "name": "elixir-otp-27.zip.sha256sum",
                 "label": "",
                 "uploader": {
@@ -976,14 +976,14 @@
                 "state": "uploaded",
                 "size": 84,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:08Z",
-                "updated_at": "2024-11-05T12:19:08Z",
+                "created_at": "2024-11-11T22:14:50Z",
+                "updated_at": "2024-11-11T22:14:50Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-27.zip.sha256sum"
             },
             {
-                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/204264692",
-                "id": 204264692,
-                "node_id": "RA_kwDOABLXGs4MLNT0",
+                "url": "https://api.github.com/repos/elixir-lang/elixir/releases/assets/205770508",
+                "id": 205770508,
+                "node_id": "RA_kwDOABLXGs4MQ88M",
                 "name": "elixir-otp-27.zip.sigstore",
                 "label": "",
                 "uploader": {
@@ -1009,10 +1009,10 @@
                 },
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
-                "size": 10211,
+                "size": 10101,
                 "download_count": 0,
-                "created_at": "2024-11-05T12:19:08Z",
-                "updated_at": "2024-11-05T12:19:08Z",
+                "created_at": "2024-11-11T22:14:50Z",
+                "updated_at": "2024-11-11T22:14:50Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/main-latest/elixir-otp-27.zip.sigstore"
             }
         ],
@@ -1098,7 +1098,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6305718,
-                "download_count": 582,
+                "download_count": 643,
                 "created_at": "2024-09-18T12:42:17Z",
                 "updated_at": "2024-09-18T12:42:17Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.3/Docs.zip"
@@ -1133,7 +1133,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 51,
-                "download_count": 10,
+                "download_count": 11,
                 "created_at": "2024-09-18T12:42:17Z",
                 "updated_at": "2024-09-18T12:42:17Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.3/Docs.zip.sha1sum"
@@ -1203,7 +1203,7 @@
                 "content_type": "application/x-ms-dos-executable",
                 "state": "uploaded",
                 "size": 7486363,
-                "download_count": 178,
+                "download_count": 198,
                 "created_at": "2024-09-18T12:41:36Z",
                 "updated_at": "2024-09-18T12:41:36Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.3/elixir-otp-25.exe"
@@ -1308,7 +1308,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7452019,
-                "download_count": 9694,
+                "download_count": 11588,
                 "created_at": "2024-09-18T12:41:36Z",
                 "updated_at": "2024-09-18T12:41:36Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.3/elixir-otp-25.zip"
@@ -1378,7 +1378,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 20,
+                "download_count": 39,
                 "created_at": "2024-09-18T12:41:36Z",
                 "updated_at": "2024-09-18T12:41:36Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.3/elixir-otp-25.zip.sha256sum"
@@ -1413,7 +1413,7 @@
                 "content_type": "application/x-ms-dos-executable",
                 "state": "uploaded",
                 "size": 7402493,
-                "download_count": 309,
+                "download_count": 338,
                 "created_at": "2024-09-18T12:41:52Z",
                 "updated_at": "2024-09-18T12:41:53Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.3/elixir-otp-26.exe"
@@ -1518,7 +1518,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7368144,
-                "download_count": 217,
+                "download_count": 230,
                 "created_at": "2024-09-18T12:41:52Z",
                 "updated_at": "2024-09-18T12:41:53Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.3/elixir-otp-26.zip"
@@ -1588,7 +1588,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 73,
+                "download_count": 105,
                 "created_at": "2024-09-18T12:41:52Z",
                 "updated_at": "2024-09-18T12:41:52Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.3/elixir-otp-26.zip.sha256sum"
@@ -1623,7 +1623,7 @@
                 "content_type": "application/x-ms-dos-executable",
                 "state": "uploaded",
                 "size": 7403690,
-                "download_count": 3549,
+                "download_count": 4009,
                 "created_at": "2024-09-18T12:42:16Z",
                 "updated_at": "2024-09-18T12:42:16Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.3/elixir-otp-27.exe"
@@ -1728,7 +1728,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7369342,
-                "download_count": 2035,
+                "download_count": 2398,
                 "created_at": "2024-09-18T12:42:16Z",
                 "updated_at": "2024-09-18T12:42:16Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.3/elixir-otp-27.zip"
@@ -1798,7 +1798,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 17,
+                "download_count": 39,
                 "created_at": "2024-09-18T12:42:16Z",
                 "updated_at": "2024-09-18T12:42:16Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.3/elixir-otp-27.zip.sha256sum"
@@ -2096,7 +2096,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7445884,
-                "download_count": 12269,
+                "download_count": 12274,
                 "created_at": "2024-07-06T21:18:31Z",
                 "updated_at": "2024-07-06T21:18:31Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.2/elixir-otp-25.zip"
@@ -2166,7 +2166,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 25,
+                "download_count": 44,
                 "created_at": "2024-07-06T21:18:31Z",
                 "updated_at": "2024-07-06T21:18:31Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.2/elixir-otp-25.zip.sha256sum"
@@ -2306,7 +2306,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7362174,
-                "download_count": 1430,
+                "download_count": 1451,
                 "created_at": "2024-07-06T21:18:57Z",
                 "updated_at": "2024-07-06T21:18:57Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.2/elixir-otp-26.zip"
@@ -2376,7 +2376,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 19,
+                "download_count": 38,
                 "created_at": "2024-07-06T21:18:57Z",
                 "updated_at": "2024-07-06T21:18:57Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.2/elixir-otp-26.zip.sha256sum"
@@ -2411,7 +2411,7 @@
                 "content_type": "application/x-ms-dos-executable",
                 "state": "uploaded",
                 "size": 7397717,
-                "download_count": 5215,
+                "download_count": 5224,
                 "created_at": "2024-07-06T21:19:10Z",
                 "updated_at": "2024-07-06T21:19:11Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.2/elixir-otp-27.exe"
@@ -2516,7 +2516,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7363384,
-                "download_count": 1489,
+                "download_count": 1501,
                 "created_at": "2024-07-06T21:19:10Z",
                 "updated_at": "2024-07-06T21:19:11Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.2/elixir-otp-27.zip"
@@ -2586,7 +2586,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 27,
+                "download_count": 46,
                 "created_at": "2024-07-06T21:19:10Z",
                 "updated_at": "2024-07-06T21:19:10Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.2/elixir-otp-27.zip.sha256sum"
@@ -2954,7 +2954,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 10,
+                "download_count": 29,
                 "created_at": "2024-06-18T11:21:09Z",
                 "updated_at": "2024-06-18T11:21:09Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.1/elixir-otp-25.zip.sha256sum"
@@ -3164,7 +3164,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 9,
+                "download_count": 28,
                 "created_at": "2024-06-18T11:21:14Z",
                 "updated_at": "2024-06-18T11:21:14Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.1/elixir-otp-26.zip.sha256sum"
@@ -3199,7 +3199,7 @@
                 "content_type": "application/x-ms-dos-executable",
                 "state": "uploaded",
                 "size": 7396814,
-                "download_count": 1204,
+                "download_count": 1205,
                 "created_at": "2024-06-18T11:21:43Z",
                 "updated_at": "2024-06-18T11:21:43Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.1/elixir-otp-27.exe"
@@ -3374,7 +3374,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 17,
+                "download_count": 36,
                 "created_at": "2024-06-18T11:21:43Z",
                 "updated_at": "2024-06-18T11:21:43Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.1/elixir-otp-27.zip.sha256sum"
@@ -3742,7 +3742,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 8,
+                "download_count": 27,
                 "created_at": "2024-06-12T10:35:34Z",
                 "updated_at": "2024-06-12T10:35:34Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.0/elixir-otp-25.zip.sha256sum"
@@ -3882,7 +3882,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7360149,
-                "download_count": 41,
+                "download_count": 42,
                 "created_at": "2024-06-12T10:35:28Z",
                 "updated_at": "2024-06-12T10:35:29Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.0/elixir-otp-26.zip"
@@ -3952,7 +3952,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 8,
+                "download_count": 27,
                 "created_at": "2024-06-12T10:35:28Z",
                 "updated_at": "2024-06-12T10:35:29Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.0/elixir-otp-26.zip.sha256sum"
@@ -3987,7 +3987,7 @@
                 "content_type": "application/x-ms-dos-executable",
                 "state": "uploaded",
                 "size": 7395649,
-                "download_count": 573,
+                "download_count": 574,
                 "created_at": "2024-06-12T10:36:02Z",
                 "updated_at": "2024-06-12T10:36:02Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.0/elixir-otp-27.exe"
@@ -4162,7 +4162,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 12,
+                "download_count": 31,
                 "created_at": "2024-06-12T10:36:02Z",
                 "updated_at": "2024-06-12T10:36:02Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.17.0/elixir-otp-27.zip.sha256sum"
@@ -5826,7 +5826,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6088686,
-                "download_count": 576,
+                "download_count": 609,
                 "created_at": "2024-05-20T22:16:34Z",
                 "updated_at": "2024-05-20T22:16:35Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.3/Docs.zip"
@@ -5931,7 +5931,7 @@
                 "content_type": "application/x-ms-dos-executable",
                 "state": "uploaded",
                 "size": 7295937,
-                "download_count": 92,
+                "download_count": 94,
                 "created_at": "2024-05-20T22:16:18Z",
                 "updated_at": "2024-05-20T22:16:18Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.3/elixir-otp-24.exe"
@@ -6036,7 +6036,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7260649,
-                "download_count": 6512,
+                "download_count": 6741,
                 "created_at": "2024-05-20T22:16:18Z",
                 "updated_at": "2024-05-20T22:16:18Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.3/elixir-otp-24.zip"
@@ -6211,7 +6211,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 10,
+                "download_count": 11,
                 "created_at": "2024-05-20T22:15:55Z",
                 "updated_at": "2024-05-20T22:15:56Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.3/elixir-otp-25.exe.sha256sum"
@@ -6246,7 +6246,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7297965,
-                "download_count": 1618,
+                "download_count": 1717,
                 "created_at": "2024-05-20T22:15:55Z",
                 "updated_at": "2024-05-20T22:15:56Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.3/elixir-otp-25.zip"
@@ -6316,7 +6316,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 11,
+                "download_count": 31,
                 "created_at": "2024-05-20T22:15:55Z",
                 "updated_at": "2024-05-20T22:15:55Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.3/elixir-otp-25.zip.sha256sum"
@@ -6351,7 +6351,7 @@
                 "content_type": "application/x-ms-dos-executable",
                 "state": "uploaded",
                 "size": 7247796,
-                "download_count": 1538,
+                "download_count": 1540,
                 "created_at": "2024-05-20T22:16:33Z",
                 "updated_at": "2024-05-20T22:16:34Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.3/elixir-otp-26.exe"
@@ -6456,7 +6456,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7211685,
-                "download_count": 3044,
+                "download_count": 3054,
                 "created_at": "2024-05-20T22:16:33Z",
                 "updated_at": "2024-05-20T22:16:34Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.3/elixir-otp-26.zip"
@@ -6526,7 +6526,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 17,
+                "download_count": 36,
                 "created_at": "2024-05-20T22:16:33Z",
                 "updated_at": "2024-05-20T22:16:33Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.3/elixir-otp-26.zip.sha256sum"
@@ -6614,7 +6614,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 3322506,
-                "download_count": 102,
+                "download_count": 106,
                 "created_at": "2024-05-20T22:25:12Z",
                 "updated_at": "2024-05-20T22:25:13Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.15.8/Docs.zip"
@@ -7104,7 +7104,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 15,
+                "download_count": 34,
                 "created_at": "2024-05-20T22:23:40Z",
                 "updated_at": "2024-05-20T22:23:41Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.15.8/elixir-otp-25.zip.sha256sum"
@@ -7314,7 +7314,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 12,
+                "download_count": 36,
                 "created_at": "2024-05-20T22:25:11Z",
                 "updated_at": "2024-05-20T22:25:11Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.15.8/elixir-otp-26.zip.sha256sum"
@@ -7612,7 +7612,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7258512,
-                "download_count": 12050,
+                "download_count": 12101,
                 "created_at": "2024-03-10T10:58:25Z",
                 "updated_at": "2024-03-10T10:58:26Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.2/elixir-otp-24.zip"
@@ -7892,7 +7892,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 15,
+                "download_count": 34,
                 "created_at": "2024-03-10T10:58:09Z",
                 "updated_at": "2024-03-10T10:58:09Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.2/elixir-otp-25.zip.sha256sum"
@@ -7927,7 +7927,7 @@
                 "content_type": "application/x-ms-dos-executable",
                 "state": "uploaded",
                 "size": 7245752,
-                "download_count": 4835,
+                "download_count": 4844,
                 "created_at": "2024-03-10T10:59:02Z",
                 "updated_at": "2024-03-10T10:59:02Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.2/elixir-otp-26.exe"
@@ -8032,7 +8032,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7209670,
-                "download_count": 3739,
+                "download_count": 3752,
                 "created_at": "2024-03-10T10:59:02Z",
                 "updated_at": "2024-03-10T10:59:02Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.2/elixir-otp-26.zip"
@@ -8102,7 +8102,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 37,
+                "download_count": 56,
                 "created_at": "2024-03-10T10:59:02Z",
                 "updated_at": "2024-03-10T10:59:02Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.2/elixir-otp-26.zip.sha256sum"
@@ -8400,7 +8400,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7246917,
-                "download_count": 3665,
+                "download_count": 3666,
                 "created_at": "2024-01-31T09:28:31Z",
                 "updated_at": "2024-01-31T09:28:31Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.1/elixir-otp-24.zip"
@@ -8820,7 +8820,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7198703,
-                "download_count": 1764,
+                "download_count": 1765,
                 "created_at": "2024-01-31T09:27:35Z",
                 "updated_at": "2024-01-31T09:27:36Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.1/elixir-otp-26.zip"
@@ -9608,7 +9608,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 7196555,
-                "download_count": 1803,
+                "download_count": 1805,
                 "created_at": "2023-12-22T16:48:54Z",
                 "updated_at": "2023-12-22T16:48:55Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.16.0/elixir-otp-26.zip"
@@ -11552,7 +11552,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6841586,
-                "download_count": 8138,
+                "download_count": 8365,
                 "created_at": "2023-10-14T10:19:49Z",
                 "updated_at": "2023-10-14T10:19:51Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.15.7/elixir-otp-24.zip"
@@ -11762,7 +11762,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6879758,
-                "download_count": 1101,
+                "download_count": 1103,
                 "created_at": "2023-10-14T10:21:53Z",
                 "updated_at": "2023-10-14T10:21:54Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.15.7/elixir-otp-25.zip"
@@ -11867,7 +11867,7 @@
                 "content_type": "application/x-ms-dos-executable",
                 "state": "uploaded",
                 "size": 6835151,
-                "download_count": 5101,
+                "download_count": 5102,
                 "created_at": "2023-10-14T10:22:14Z",
                 "updated_at": "2023-10-14T10:22:15Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.15.7/elixir-otp-26.exe"
@@ -13548,7 +13548,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6803246,
-                "download_count": 370,
+                "download_count": 371,
                 "created_at": "2023-08-28T11:51:45Z",
                 "updated_at": "2023-08-28T11:51:46Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.15.5/elixir-otp-26.zip"
@@ -14336,7 +14336,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6801977,
-                "download_count": 5421,
+                "download_count": 5422,
                 "created_at": "2023-07-18T09:52:52Z",
                 "updated_at": "2023-07-18T09:52:53Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.15.4/elixir-otp-26.zip"
@@ -15912,7 +15912,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6800523,
-                "download_count": 290,
+                "download_count": 291,
                 "created_at": "2023-07-01T20:20:59Z",
                 "updated_at": "2023-07-01T20:21:00Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.15.2/elixir-otp-26.zip"
@@ -17278,7 +17278,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6871107,
-                "download_count": 708,
+                "download_count": 727,
                 "created_at": "2023-06-19T11:43:33Z",
                 "updated_at": "2023-06-19T11:43:33Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.15.0/elixir-otp-25.zip"
@@ -19380,7 +19380,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 4153853,
-                "download_count": 1255,
+                "download_count": 1256,
                 "created_at": "2023-05-22T14:44:53Z",
                 "updated_at": "2023-05-22T14:44:53Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.14.5/Docs.zip"
@@ -19590,7 +19590,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6647135,
-                "download_count": 471,
+                "download_count": 482,
                 "created_at": "2023-05-22T14:43:03Z",
                 "updated_at": "2023-05-22T14:43:04Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.14.5/elixir-otp-24.zip"
@@ -19695,7 +19695,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6684758,
-                "download_count": 5724,
+                "download_count": 5729,
                 "created_at": "2023-05-22T14:44:18Z",
                 "updated_at": "2023-05-22T14:44:19Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.14.5/elixir-otp-25.zip"
@@ -19958,7 +19958,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6471454,
-                "download_count": 3909,
+                "download_count": 3914,
                 "created_at": "2023-04-03T07:41:48Z",
                 "updated_at": "2023-04-03T07:41:49Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.14.4/elixir-otp-23.zip"
@@ -20063,7 +20063,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6643006,
-                "download_count": 22981,
+                "download_count": 23169,
                 "created_at": "2023-04-03T07:41:14Z",
                 "updated_at": "2023-04-03T07:41:15Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.14.4/elixir-otp-24.zip"
@@ -20431,7 +20431,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6466471,
-                "download_count": 6666,
+                "download_count": 6668,
                 "created_at": "2023-01-14T15:24:45Z",
                 "updated_at": "2023-01-14T15:24:45Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.14.3/elixir-otp-23.zip"
@@ -21009,7 +21009,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6636706,
-                "download_count": 16232,
+                "download_count": 16233,
                 "created_at": "2022-11-11T11:34:23Z",
                 "updated_at": "2022-11-11T11:34:24Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.14.2/elixir-otp-24.zip"
@@ -21114,7 +21114,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6674204,
-                "download_count": 9272,
+                "download_count": 9284,
                 "created_at": "2022-11-11T11:34:23Z",
                 "updated_at": "2022-11-11T11:34:24Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.14.2/elixir-otp-25.zip"
@@ -21184,7 +21184,7 @@
                 "content_type": "application/octet-stream",
                 "state": "uploaded",
                 "size": 84,
-                "download_count": 41,
+                "download_count": 42,
                 "created_at": "2022-11-11T11:34:23Z",
                 "updated_at": "2022-11-11T11:34:23Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.14.2/elixir-otp-25.zip.sha256sum"
@@ -21850,7 +21850,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6451097,
-                "download_count": 91636,
+                "download_count": 91637,
                 "created_at": "2022-09-01T18:08:27Z",
                 "updated_at": "2022-09-01T18:08:27Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.14.0/elixir-otp-23.zip"
@@ -21955,7 +21955,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6621976,
-                "download_count": 1650,
+                "download_count": 1651,
                 "created_at": "2022-09-01T18:08:11Z",
                 "updated_at": "2022-09-01T18:08:11Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.14.0/elixir-otp-24.zip"
@@ -23164,7 +23164,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 2065456,
-                "download_count": 2176,
+                "download_count": 2177,
                 "created_at": "2022-04-07T06:15:26Z",
                 "updated_at": "2022-04-07T06:15:46Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.13.4/Docs.zip"
@@ -23199,7 +23199,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6236182,
-                "download_count": 88597,
+                "download_count": 89001,
                 "created_at": "2022-04-07T06:15:30Z",
                 "updated_at": "2022-04-07T06:15:46Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.13.4/Precompiled.zip"
@@ -24060,7 +24060,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6057822,
-                "download_count": 54519,
+                "download_count": 54531,
                 "created_at": "2021-09-05T08:30:17Z",
                 "updated_at": "2021-09-05T08:30:28Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.12.3/Precompiled.zip"
@@ -24183,7 +24183,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 6054165,
-                "download_count": 24567,
+                "download_count": 24570,
                 "created_at": "2021-07-01T16:35:56Z",
                 "updated_at": "2021-07-01T16:36:09Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.12.2/Precompiled.zip"
@@ -24996,7 +24996,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5940618,
-                "download_count": 21229,
+                "download_count": 21230,
                 "created_at": "2020-11-03T14:31:15Z",
                 "updated_at": "2020-11-03T14:31:42Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.11.2/Precompiled.zip"
@@ -25218,7 +25218,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5937894,
-                "download_count": 2619,
+                "download_count": 2620,
                 "created_at": "2020-10-06T14:29:14Z",
                 "updated_at": "2020-10-06T14:29:36Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.11.0/Precompiled.zip"
@@ -25440,7 +25440,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5699657,
-                "download_count": 42345,
+                "download_count": 42348,
                 "created_at": "2020-07-04T11:21:34Z",
                 "updated_at": "2020-07-04T11:21:58Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.10.4/Precompiled.zip"
@@ -25551,7 +25551,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5680239,
-                "download_count": 25881,
+                "download_count": 25890,
                 "created_at": "2020-04-25T08:37:10Z",
                 "updated_at": "2020-04-25T08:37:28Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.10.3/Precompiled.zip"
@@ -25627,7 +25627,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 2120969,
-                "download_count": 596,
+                "download_count": 597,
                 "created_at": "2020-02-26T12:01:43Z",
                 "updated_at": "2020-02-26T12:02:12Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.10.2/Docs.zip"
@@ -26106,7 +26106,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5333393,
-                "download_count": 60656,
+                "download_count": 60657,
                 "created_at": "2019-11-05T15:36:27Z",
                 "updated_at": "2019-11-05T15:36:53Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.9.4/Precompiled.zip"
@@ -26439,7 +26439,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5322902,
-                "download_count": 36727,
+                "download_count": 36730,
                 "created_at": "2019-07-18T10:37:01Z",
                 "updated_at": "2019-07-18T10:37:48Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.9.1/Precompiled.zip"
@@ -26550,7 +26550,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5319396,
-                "download_count": 10409,
+                "download_count": 10410,
                 "created_at": "2019-06-24T15:23:54Z",
                 "updated_at": "2019-06-24T15:24:19Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.9.0/Precompiled.zip"
@@ -26772,7 +26772,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5156249,
-                "download_count": 39802,
+                "download_count": 39806,
                 "created_at": "2019-05-12T14:49:28Z",
                 "updated_at": "2019-05-12T14:50:17Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.8.2/Precompiled.zip"
@@ -26883,7 +26883,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5154710,
-                "download_count": 53507,
+                "download_count": 53509,
                 "created_at": "2019-01-30T10:47:41Z",
                 "updated_at": "2019-01-30T10:47:56Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.8.1/Precompiled.zip"
@@ -26994,7 +26994,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5153717,
-                "download_count": 15912,
+                "download_count": 15913,
                 "created_at": "2019-01-14T15:03:03Z",
                 "updated_at": "2019-01-14T15:03:44Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.8.0/Precompiled.zip"
@@ -27327,7 +27327,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5344630,
-                "download_count": 40183,
+                "download_count": 40188,
                 "created_at": "2018-10-24T18:18:16Z",
                 "updated_at": "2018-10-24T18:18:58Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.7.4/Precompiled.zip"
@@ -27438,7 +27438,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5342430,
-                "download_count": 30742,
+                "download_count": 30744,
                 "created_at": "2018-08-24T18:52:55Z",
                 "updated_at": "2018-08-24T18:53:14Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.7.3/Precompiled.zip"
@@ -27549,7 +27549,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5341086,
-                "download_count": 12261,
+                "download_count": 12285,
                 "created_at": "2018-08-05T07:20:57Z",
                 "updated_at": "2018-08-05T07:21:14Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.7.2/Precompiled.zip"
@@ -27771,7 +27771,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5337365,
-                "download_count": 2033,
+                "download_count": 2040,
                 "created_at": "2018-07-25T20:43:23Z",
                 "updated_at": "2018-07-25T20:44:28Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.7.0/Precompiled.zip"
@@ -28326,7 +28326,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 5185234,
-                "download_count": 36016,
+                "download_count": 36017,
                 "created_at": "2018-03-16T11:32:20Z",
                 "updated_at": "2018-03-16T11:32:43Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.6.4/Precompiled.zip"
@@ -29734,7 +29734,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 2668758,
-                "download_count": 37,
+                "download_count": 38,
                 "created_at": "2017-06-25T11:21:34Z",
                 "updated_at": "2017-06-25T11:21:53Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.5.0-rc.0/Docs.zip"
@@ -29769,7 +29769,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 4033023,
-                "download_count": 347,
+                "download_count": 348,
                 "created_at": "2017-06-25T11:21:34Z",
                 "updated_at": "2017-06-25T11:21:53Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.5.0-rc.0/Precompiled.zip"
@@ -30213,7 +30213,7 @@
                 "content_type": "application/zip",
                 "state": "uploaded",
                 "size": 3781796,
-                "download_count": 71648,
+                "download_count": 71649,
                 "created_at": "2017-02-16T14:43:03Z",
                 "updated_at": "2017-02-16T14:44:04Z",
                 "browser_download_url": "https://github.com/elixir-lang/elixir/releases/download/v1.4.2/Precompiled.zip"
