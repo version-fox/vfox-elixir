@@ -68,7 +68,7 @@ vfox install elixir@1.16.2
 vfox use -g elixir@1.16.2
 ```
 
-You can reference the E2E test in MacOS 12: [https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml)
+You can reference the E2E test in MacOS 13: [https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml)
 
 ## install Elixir in Windows platform
 
