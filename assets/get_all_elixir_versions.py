@@ -35,11 +35,18 @@ def get_all_version():
                 version_set.add(version)
     return version_set
 
+def parse_version(ver):
+    try:
+        return version.parse(ver)
+    except version.InvalidVersion:
+        print(f"Invalid version: {ver}")
+        return ver
+
 if __name__ == "__main__":
     update_all_version_from_github_api()
     versions = list(get_all_version())
-    versions = sorted(versions, key=lambda v: version.parse(v), reverse=True)
+    versions = sorted(versions, key=parse_version, reverse=True)
     print(versions)
-    with open("versions.txt", 'w') as file:
+    with open("versions.txt", "w", encoding="utf-8") as file:
         for v in versions:
             file.write(v + '\n')
