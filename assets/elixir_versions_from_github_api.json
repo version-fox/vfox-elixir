@@ -1,5 +1,25 @@
 [
     {
+        "name": "v1.18.0-rc.0",
+        "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.18.0-rc.0",
+        "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.18.0-rc.0",
+        "commit": {
+            "sha": "66c5908619f2ee9b4b1113e0302b00b5a59a5abb",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/66c5908619f2ee9b4b1113e0302b00b5a59a5abb"
+        },
+        "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvdjEuMTguMC1yYy4w"
+    },
+    {
+        "name": "v1.18-latest",
+        "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.18-latest",
+        "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.18-latest",
+        "commit": {
+            "sha": "a426520b669efc61bdf4e9807d950e4654feddbc",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/a426520b669efc61bdf4e9807d950e4654feddbc"
+        },
+        "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvdjEuMTgtbGF0ZXN0"
+    },
+    {
         "name": "v1.17.3",
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.17.3",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.17.3",
@@ -1624,8 +1644,8 @@
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/main-latest",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/main-latest",
         "commit": {
-            "sha": "eadbd8bdf3375e6e02f02d78b4c6c998c54b1b64",
-            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/eadbd8bdf3375e6e02f02d78b4c6c998c54b1b64"
+            "sha": "73fed09f66db137cd47de8033ed80562d9ceafbb",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/73fed09f66db137cd47de8033ed80562d9ceafbb"
         },
         "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvbWFpbi1sYXRlc3Q="
     }
