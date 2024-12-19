@@ -37,16 +37,26 @@ def get_all_version():
 
 def parse_version(ver):
     try:
-        return version.parse(ver)
+        return version.parse(ver), True
     except version.InvalidVersion:
         print(f"Invalid version: {ver}")
-        return ver
+        return ver, False
 
 if __name__ == "__main__":
     update_all_version_from_github_api()
     versions = list(get_all_version())
-    versions = sorted(versions, key=parse_version, reverse=True)
-    print(versions)
+    valid_versions = [] # semantic version
+    invalid_versions = []
+    for v in versions:
+        ver, is_valid = parse_version(v)
+        if is_valid:
+            valid_versions.append(ver)
+            continue
+        invalid_versions.append(ver)
+
+    versions = sorted(valid_versions, reverse=True)
     with open("versions.txt", "w", encoding="utf-8") as file:
         for v in versions:
+            file.write(str(v) + '\n')
+        for v in invalid_versions:
             file.write(v + '\n')

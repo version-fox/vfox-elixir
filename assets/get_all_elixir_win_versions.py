@@ -1,6 +1,5 @@
 import json
 import requests
-from packaging import version
 
 # fetch version: -> https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28
 # github api has rate limt
