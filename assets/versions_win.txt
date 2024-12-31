@@ -4,6 +4,7 @@ ain-latest-elixir-otp-26
 1.18.1-elixir-otp-26
 1.18-latest-elixir-otp-27
 1.18-latest-elixir-otp-26
+1.18-latest-elixir-otp-25
 1.17.3-elixir-otp-27
 1.17.3-elixir-otp-26
 1.17.3-elixir-otp-25
