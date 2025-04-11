@@ -32,7 +32,7 @@ Ensure that Elixir and Erlang/OTP versions are compatible -> [Elixir and Erlang/
 
 Here are two examples of installing on Ubuntu 20.04 and MacOS 13.
 
-### install in Linux (Ubuntu 20.04)
+### install in Linux (Ubuntu 20.04/22.04)
 
 ```shell
 # install utilities
@@ -51,7 +51,7 @@ vfox use -g elixir@1.16.2
 
 You can reference the E2E test in Ubuntu 20.04: [https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml)
 
-### install in Darwin (MacOS 12)
+### install in Darwin (MacOS 13)
 
 ```shell
 # install utilities
