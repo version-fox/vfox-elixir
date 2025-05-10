@@ -60,14 +60,14 @@ jobs:
           export MAKEFLAGS=-j4
           vfox install erlang@26.2.3
           vfox use -g erlang@26.2.3
-          eval "$(vfox activate bash)"
+          eval "$(vfox env -s bash)"
           which erl 
           echo "===============PATH==============="
           echo $PATH
           echo "===============PATH==============="
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
-          eval "$(vfox activate bash)"
+          eval "$(vfox env -s bash)"
           elixirc -v
           cd assets
           elixir hello.ex
@@ -79,14 +79,14 @@ jobs:
           export MAKEFLAGS=-j4
           vfox install erlang@26.2.3
           vfox use -g erlang@26.2.3
-          eval "$(vfox activate bash)"
+          eval "$(vfox env -s bash)"
           which erl 
           echo "===============PATH==============="
           echo $PATH
           echo "===============PATH==============="
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
-          eval "$(vfox activate bash)"
+          eval "$(vfox env -s bash)"
           elixirc -v
           cd assets
           elixir hello.ex
@@ -96,14 +96,14 @@ jobs:
         run: |
           vfox install erlang@26.2.3
           vfox use -g erlang@26.2.3
-          Invoke-Expression "$(vfox activate pwsh)"
+          Invoke-Expression "$(vfox env -s pwsh)"
           echo "===============PATH==============="
           echo $env:PATH
           echo "===============PATH==============="
           & erl.exe -eval 'erlang:display({otp_release, erlang:system_info(otp_release)}), halt().' -noshell
           vfox install elixir@1.16.2-elixir-otp-26
           vfox use -g elixir@1.16.2-elixir-otp-26
-          Invoke-Expression "$(vfox activate pwsh)"
+          Invoke-Expression "$(vfox env -s pwsh)"
           Get-Command iex.bat
           echo "===============PATH==============="
           echo $env:PATH
