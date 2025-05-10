@@ -93,13 +93,14 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           vfox install erlang@26.2.3
-          Invoke-Expression "$(vfox env -s pwsh)"
+          $export = &vfox env -s pwsh
+          Invoke-Expression "vfox env -s pwsh"
           echo "===============PATH==============="
           echo $env:PATH
           echo "===============PATH==============="
           & erl.exe -eval 'erlang:display({otp_release, erlang:system_info(otp_release)}), halt().' -noshell
           vfox install elixir@1.16.2-elixir-otp-26
-          Invoke-Expression "$(vfox env -s pwsh)"
+          Invoke-Expression "vfox env -s pwsh"
           vfox use -g elixir@1.16.2-elixir-otp-26
           Get-Command iex.bat
           echo "===============PATH==============="
