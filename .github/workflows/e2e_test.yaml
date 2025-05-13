@@ -92,9 +92,8 @@ jobs:
       - name: install Erlang/OTP & Elixir by vfox-erlang & vfox-elixir plugin (Windows)
         if: runner.os == 'Windows'
         run: |
-          Write-Host "Current PowerShell PID: $PID"
           vfox install erlang@26.2.3
-          vfox --debug use -g erlang@26.2.3  
+          & { Write-Host "Current PowerShell PID: $PID"; vfox --debug use -g erlang@26.2.3 }
           Invoke-Expression "$(vfox activate pwsh)"
           echo "===============PATH==============="
           echo $env:PATH
