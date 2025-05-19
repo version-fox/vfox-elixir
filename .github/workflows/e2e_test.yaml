@@ -35,7 +35,7 @@ jobs:
       - name: install scoop (Windows)
         if: runner.os == 'Windows'
         uses: MinoruSekine/setup-scoop@v3
-    
+
       - name: install vfox (Windows)      
         if: runner.os == 'Windows'
         run: |
@@ -59,14 +59,15 @@ jobs:
           sudo apt-get -y install build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libwxgtk-webview3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
           export MAKEFLAGS=-j4
           vfox install erlang@26.2.3
-          eval "$(vfox env -s bash)"
           vfox use -g erlang@26.2.3
+          eval "$(vfox activate bash)"
           which erl 
           echo "===============PATH==============="
           echo $PATH
           echo "===============PATH==============="
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
+          eval "$(vfox activate bash)"
           elixirc -v
           cd assets
           elixir hello.ex
@@ -77,14 +78,15 @@ jobs:
           brew install autoconf libxslt fop wxwidgets openssl
           export MAKEFLAGS=-j4
           vfox install erlang@26.2.3
-          eval "$(vfox env -s bash)"
           vfox use -g erlang@26.2.3
+          eval "$(vfox activate bash)"
           which erl 
           echo "===============PATH==============="
           echo $PATH
           echo "===============PATH==============="
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
+          eval "$(vfox activate bash)"
           elixirc -v
           cd assets
           elixir hello.ex
@@ -93,7 +95,7 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           vfox install erlang@26.2.3
-          & { Write-Host "Current PowerShell PID: $PID"; vfox --debug use -g erlang@26.2.3 }
+          vfox use -g erlang@26.2.3
           Invoke-Expression "$(vfox activate pwsh)"
           echo "===============PATH==============="
           echo $env:PATH
