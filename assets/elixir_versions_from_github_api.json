@@ -14,8 +14,8 @@
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.19-latest",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.19-latest",
         "commit": {
-            "sha": "502207c9f742b6e4881760d32520ef8212d28679",
-            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/502207c9f742b6e4881760d32520ef8212d28679"
+            "sha": "f4bbf76d0b4833c928f5a0d2ec31aac5072f977d",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/f4bbf76d0b4833c928f5a0d2ec31aac5072f977d"
         },
         "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvdjEuMTktbGF0ZXN0"
     },
@@ -1714,8 +1714,8 @@
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/main-latest",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/main-latest",
         "commit": {
-            "sha": "5946e8bb9d44a18b46c5d030d379b3a35866d790",
-            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/5946e8bb9d44a18b46c5d030d379b3a35866d790"
+            "sha": "dc4c1cf402788e62a995bbf8b4d8ee903000cd08",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/dc4c1cf402788e62a995bbf8b4d8ee903000cd08"
         },
         "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvbWFpbi1sYXRlc3Q="
     }
