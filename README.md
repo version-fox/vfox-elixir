@@ -20,7 +20,20 @@ vfox add --source https://github.com/version-fox/vfox-elixir/archive/refs/heads/
 vfox search elixir
 # or specific version 
 vfox install elixir@1.16.2
+
+# install main/development builds (Linux/macOS only)
+vfox install elixir@main
+vfox install elixir@main-otp-26
 ```
+
+### Available Version Types
+
+- **Stable releases**: Standard semantic versions like `1.16.2`, `1.17.0` etc.
+- **Main builds**: Development versions from the main branch:
+  - `main` - Latest development build with default OTP
+  - `main-otp-24`, `main-otp-25`, `main-otp-26`, `main-otp-27` - Main builds compiled with specific OTP versions
+
+Main builds are fetched from [hex.pm builds](https://builds.hex.pm/builds/elixir/) and provide access to the latest development features.
 
 ## Before install Elixir
 
