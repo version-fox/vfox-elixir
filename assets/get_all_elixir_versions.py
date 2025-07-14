@@ -15,7 +15,10 @@ def fetch_hex_builds():
         for line in response.text.strip().split('\n'):
             line = line.strip()
             if line:
-                builds.append(line)
+                # Each line format: "version commit_hash timestamp checksum"
+                # We only need the version part (first word)
+                version = line.split()[0]
+                builds.append(version)
         
         return builds
     except Exception as e:

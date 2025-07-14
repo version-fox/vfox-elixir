@@ -1,8 +1,11 @@
 main
+main-otp-22
+main-otp-23
 main-otp-24
 main-otp-25
 main-otp-26
 main-otp-27
+main-otp-28
 1.19.0rc0
 1.18.4
 1.18.3
@@ -172,5 +175,5 @@ main-otp-27
 0.7.0
 0.6.0
 0.5.0
-1.19-latest
 1.18-latest
+1.19-latest

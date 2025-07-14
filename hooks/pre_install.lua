@@ -21,7 +21,7 @@ function PLUGIN:PreInstall(ctx)
         -- Check if this is a main build from hex.pm
         if elixirUtils.is_main_build(elixir_version) then
             elixirUtils.check_hex_version_existence(elixir_version)
-            download_url = elixirUtils.get_hex_download_url(elixir_version)
+            download_url = elixirUtils.get_hex_download_url_with_commit(elixir_version)
         else
             elixirUtils.check_version_existence("https://github.com/elixir-lang/elixir/releases/tag/v" .. elixir_version)
             download_url = "https://github.com/elixir-lang/elixir/archive/refs/tags/v" .. elixir_version .. ".tar.gz"
