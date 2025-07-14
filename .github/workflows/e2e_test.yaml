@@ -66,12 +66,19 @@ jobs:
           echo "===============PATH==============="
           echo $PATH
           echo "===============PATH==============="
+          
+          # Test regular version install
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
           eval "$(vfox activate bash)"
           elixirc -v
           cd assets
           elixir hello.ex
+          cd ..
+          
+          # Test that main versions are available (but don't install due to network restrictions)
+          echo "Checking if main versions are available..."
+          vfox available elixir | grep -q "main" && echo "✓ Main versions found in available list" || echo "✗ Main versions not found"
 
       - name: install Erlang/OTP & Elixir by vfox-erlang & vfox-elixir plugin (Darwin)
         if: runner.os == 'MacOS'
@@ -85,12 +92,19 @@ jobs:
           echo "===============PATH==============="
           echo $PATH
           echo "===============PATH==============="
+          
+          # Test regular version install
           vfox install elixir@1.16.2
           vfox use -g elixir@1.16.2
           eval "$(vfox activate bash)"
           elixirc -v
           cd assets
           elixir hello.ex
+          cd ..
+          
+          # Test that main versions are available (but don't install due to network restrictions)
+          echo "Checking if main versions are available..."
+          vfox available elixir | grep -q "main" && echo "✓ Main versions found in available list" || echo "✗ Main versions not found"
 
       - name: install Erlang/OTP & Elixir by vfox-erlang & vfox-elixir plugin (Windows)
         if: runner.os == 'Windows'

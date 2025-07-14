@@ -55,7 +55,24 @@ function elixir_utils.windows_install_exe(version)
     end
 end
 
-function elixir_utils.check_version_existence(url)
+function elixir_utils.is_main_build(version)
+    return string.match(version, "^main") ~= nil
+end
+
+function elixir_utils.get_hex_download_url(version)
+    -- Main builds from hex.pm have the format: https://builds.hex.pm/builds/elixir/{version}.tar.gz
+    return "https://builds.hex.pm/builds/elixir/" .. version .. ".tar.gz"
+end
+
+function elixir_utils.check_hex_version_existence(version)
+    local url = elixir_utils.get_hex_download_url(version)
+    local resp, err = http.get({
+        url = url
+    })
+    if err ~= nil or resp.status_code ~= 200 then
+        error("Please confirm whether the corresponding Elixir main build exists! visit: https://builds.hex.pm/builds/elixir/")
+    end
+end
     local resp, err = http.get({
         url = url
     })
