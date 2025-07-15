@@ -11,12 +11,13 @@ function PLUGIN:PostInstall(ctx)
 
     if RUNTIME.osType == "windows" then
         return elixirUtils.windows_install_exe(sdkInfo.version)
+    elseif os.getenv("VFOX_ELIXIR_MIRROR") == "hex" then
+        return
     else
         install_cmd = "cd " .. path .. " && make"
-    end
-
-    local status = os.execute(install_cmd)
-    if status ~= 0 then
-        error("Elixir install failed, please check the stdout for details.")
+        local status = os.execute(install_cmd)
+        if status ~= 0 then
+            error("Elixir install failed, please check the stdout for details.")
+        end
     end
 end

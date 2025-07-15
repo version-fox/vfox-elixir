@@ -84,3 +84,23 @@ vfox search elixir
 # install an specific version
 vfox install elixir@1.16.2-elixir-otp-26
 ```
+
+## install a pre-built version from hex.pm
+
+You can also download a pre-built version from hex.pm. vfox-elixir will download it from: [https://github.com/hexpm/bob?tab=readme-ov-file#elixir-builds](https://github.com/hexpm/bob?tab=readme-ov-file#elixir-builds)
+
+```shell
+(1) > VFOX_ELIXIR_MIRROR=hex vfox search elixir
+Please select a version of elixir to install [type to search]: 
+->  vmain (pre-built from hex.pm)
+   vmain-otp-22 (pre-built from hex.pm)
+   vmain-otp-23 (pre-built from hex.pm)
+   vmain-otp-24 (pre-built from hex.pm)
+   vmain-otp-25 (pre-built from hex.pm)
+   vmain-otp-26 (pre-built from hex.pm)
+   vmain-otp-27 (pre-built from hex.pm)
+   vmain-otp-28 (pre-built from hex.pm)
+   vmaster (pre-built from hex.pm)
+
+(1) > VFOX_ELIXIR_MIRROR=hex vfox install elixir@main-otp-26
+```
