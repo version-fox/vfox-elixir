@@ -81,8 +81,8 @@ jobs:
           echo "===============PATH==============="
           echo $PATH
           echo "===============PATH==============="
-          vfox install elixir@main-otp-26
-          vfox use -g elixir@main-otp-26
+          VFOX_ELIXIR_MIRROR=hex vfox install elixir@main-otp-26
+          VFOX_ELIXIR_MIRROR=hex vfox use -g elixir@main-otp-26
           eval "$(vfox activate bash)"
           elixirc -v
           cd assets
