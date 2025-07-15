@@ -38,3 +38,10 @@ PLUGIN.manifestUrl = "https://github.com/version-fox/vfox-elixir/releases/downlo
 PLUGIN.notes = {
     "",
 }
+
+PLUGIN.envKeys = {
+    {
+        key = "VFOX_ELIXIR_MIRROR",
+        description = "Set to `hex` to use the hex.pm mirror.",
+    },
+}

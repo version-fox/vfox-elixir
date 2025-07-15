@@ -13,14 +13,20 @@ function PLUGIN:PreInstall(ctx)
 
     local download_url
     print("You will install the elixir version is " .. elixir_version)
-    if RUNTIME.osType == "windows" then
-        return {
-            version = elixir_version,
-        }
+
+    if os.getenv("VFOX_ELIXIR_MIRROR") == "hex" then
+        download_url = elixirUtils.get_hex_prebuild_url(elixir_version)
     else
-        elixirUtils.check_version_existence("https://github.com/elixir-lang/elixir/releases/tag/v" .. elixir_version)
-        download_url = "https://github.com/elixir-lang/elixir/archive/refs/tags/v" .. elixir_version .. ".tar.gz"
+        if RUNTIME.osType == "windows" then
+            return {
+                version = elixir_version,
+            }
+        else
+            elixirUtils.check_version_existence("https://github.com/elixir-lang/elixir/releases/tag/v" .. elixir_version)
+            download_url = "https://github.com/elixir-lang/elixir/archive/refs/tags/v" .. elixir_version .. ".tar.gz"
+        end
     end
+
 
     return {
         version = elixir_version,

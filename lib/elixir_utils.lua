@@ -98,4 +98,40 @@ function elixir_utils.get_elixir_release_verions_in_windows()
     return result
 end
 
+function elixir_utils.get_hex_prebuild_versions()
+    local resp, err = http.get({
+        url = "https://builds.hex.pm/builds/elixir/builds.txt"
+    })
+    if err ~= nil then
+        error("Failed to fetch remote version list, please check your network connection.")
+    end
+
+    local result = {}
+    for line in string.gmatch(resp.body, "[^\n]+") do
+        local version = string.match(line, "^v([%w.-]+)")
+        if version then
+            table.insert(result, {
+                version = version,
+                note = "pre-build from hex.pm"
+            })
+        end
+    end
+    return result
+end
+
+function elixir_utils.get_hex_prebuild_url(version)
+    local os = RUNTIME.osType
+    local arch = RUNTIME.arch
+
+    if os == "darwin" then
+        os = "mac"
+    end
+
+    if arch == "arm64" then
+        arch = "aarch64"
+    end
+
+    return string.format("https://builds.hex.pm/builds/elixir/%s/elixir-%s-%s-%s.zip", version, version, os, arch)
+end
+
 return elixir_utils
