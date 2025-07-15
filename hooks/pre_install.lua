@@ -27,7 +27,7 @@ function PLUGIN:PreInstall(ctx)
         end
     end
 
-
+    print("Download URL: " .. download_url)
     return {
         version = elixir_version,
         url = download_url,

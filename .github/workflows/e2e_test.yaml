@@ -72,6 +72,21 @@ jobs:
           elixirc -v
           cd assets
           elixir hello.ex
+      - name: download a pre-built Elixir version from hex.pm
+        if: runner.os == 'Linux'
+        run: |
+          vfox use -g erlang@26.2.3
+          eval "$(vfox activate bash)"
+          which erl 
+          echo "===============PATH==============="
+          echo $PATH
+          echo "===============PATH==============="
+          vfox install elixir@main-otp-26
+          vfox use -g elixir@main-otp-26
+          eval "$(vfox activate bash)"
+          elixirc -v
+          cd assets
+          elixir hello.ex
 
       - name: install Erlang/OTP & Elixir by vfox-erlang & vfox-elixir plugin (Darwin)
         if: runner.os == 'MacOS'

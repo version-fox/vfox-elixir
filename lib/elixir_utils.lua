@@ -56,6 +56,7 @@ function elixir_utils.windows_install_exe(version)
 end
 
 function elixir_utils.check_version_existence(url)
+    print("Check Elixir release version existence: " .. url)
     local resp, err = http.get({
         url = url
     })
@@ -108,30 +109,32 @@ function elixir_utils.get_hex_prebuild_versions()
 
     local result = {}
     for line in string.gmatch(resp.body, "[^\n]+") do
-        local version = string.match(line, "^v([%w.-]+)")
+        -- Extract the first field (version/branch name) from each line
+        local version = string.match(line, "^([^%s]+)")
         if version then
+            -- Remove 'v' prefix for version numbers to maintain consistency
+            local clean_version = string.match(version, "^v(.+)") or version
             table.insert(result, {
-                version = version,
-                note = "pre-build from hex.pm"
+                version = clean_version,
+                note = "pre-built from hex.pm"
             })
         end
     end
     return result
 end
 
+local function starts_with_digit(str)
+    return string.match(str, "^%d") ~= nil
+end
+
 function elixir_utils.get_hex_prebuild_url(version)
-    local os = RUNTIME.osType
-    local arch = RUNTIME.arch
-
-    if os == "darwin" then
-        os = "mac"
+    -- For branch names like 'main', 'main-otp-22', don't add 'v' prefix
+    -- For version numbers like '1.15.0', add 'v' prefix if not present
+    local url_version = version
+    if starts_with_digit(version) then
+        url_version = "v" .. version
     end
-
-    if arch == "arm64" then
-        arch = "aarch64"
-    end
-
-    return string.format("https://builds.hex.pm/builds/elixir/%s/elixir-%s-%s-%s.zip", version, version, os, arch)
+    return string.format("https://builds.hex.pm/builds/elixir/%s.zip", url_version)
 end
 
 return elixir_utils
