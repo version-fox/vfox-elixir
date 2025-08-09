@@ -1,0 +1,151 @@
+name: Build and Deploy Homepage
+
+on:
+  # Allow manual trigger
+  workflow_dispatch:
+  # Also run on pushes to main branch
+  push:
+    branches: [ main ]
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAGES: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Create homepage directory
+        run: mkdir -p _site
+
+      - name: Generate homepage using iFlow CLI
+        uses: vibe-ideas/iflow-cli-action@main
+        with:
+          prompt: |
+            Please read only the README.md file content from the current repository (do not read any other files), and convert it into a futuristic tech-style documentation website based on Reveal.js and save it as _site/index.html.
+            
+            Requirements:
+            
+            1. Use the Reveal.js framework to build a slideshow presentation, splitting the README content into multiple slide pages according to logical structure;
+            
+            2. Slideshow structure design:
+               - Homepage slide: Project title, subtitle, GitHub link, and project introduction
+               - Feature highlights slide: Showcase main features and characteristics
+               - Installation guide slide: Step-by-step installation process
+               - Usage examples slide: Display code examples and configuration instructions
+               - Advanced features slide: Show advanced usage and best practices
+               - Closing slide: Acknowledgments, contribution guidelines, and contact information;
+            
+            3. Use modern Reveal.js themes and configurations:
+               - Enable horizontal and vertical navigation
+               - Configure slide transition animation effects (such as slide, fade, zoom)
+               - Add progress bar and slide counter
+               - Support keyboard navigation and touch gestures
+               - Enable autoplay functionality (pausable)
+               - Add slide thumbnail overview;
+            
+            4. Visual design using futuristic cyberpunk/neon tech style:
+               - Use neon color palette with electric blue, vibrant purple, and bright pink accents
+               - Create layered visual effects combining text and futuristic graphic elements
+               - Use sleek geometric shapes, transparency, and overlapping effects to create depth
+               - Employ dynamic gradient backgrounds and animated transitions for visual impact
+               - Use circuit board patterns, holographic elements, and digital grid lines as decorative elements
+               - Add subtle particle effects and glowing borders for a high-tech feel
+               - Ensure overall design has a futuristic, cyberpunk aesthetic with high visual appeal;
+            
+            5. Font size and layout optimization (important):
+               - Title font sizes: Main title 2.8em with neon glow effect, subtitle 2.0em, section title 1.7em
+               - Body text font size: Use 1.3em with futuristic font family (Orbitron, Exo 2, or similar), ensure clear readability on all devices
+               - Code font size: Use 1.0em with monospace futuristic font, avoid code blocks being too large causing layout issues
+               - Line height settings: Body text 1.7x line height, titles 1.5x line height
+               - Content area margins: Set appropriate padding for each slide (70px top/bottom, 50px left/right)
+               - Ensure sufficient spacing between text and background with glowing effects
+               - Limit content amount per slide to avoid information overload
+               - Implement vertical scrolling for long code blocks instead of shrinking font;
+            
+            6. Code display optimization:
+               - Use Reveal.js code highlighting plugin with cyberpunk color scheme
+               - Support syntax highlighting (YAML, Bash, Markdown, etc.) using neon colors
+               - Add line numbers and copy buttons with futuristic styling
+               - Use appropriate maximum height (60vh) and scrollbars for code blocks
+               - Implement animated display effects for code snippets with typing animations;
+            
+            7. Interactive features:
+               - Add navigation menu with holographic styling and chapter jumping
+               - Implement fullscreen mode and speaker mode with futuristic UI
+               - Support ESC key to display slide overview with cyberpunk theme
+               - Add sharing and export functionality with modern interface;
+            
+            8. Responsive design:
+               - Ensure good experience on desktop, tablet, and mobile devices
+               - Appropriately reduce font size on mobile devices while maintaining readability
+               - Adapt fonts and layout to different screen sizes with responsive cyberpunk elements
+               - Optimize interaction experience for touch devices with larger touch targets;
+            
+            9. Technical implementation:
+                - Import latest version of Reveal.js from CDN
+                - Configure necessary plugins (highlight.js, notes, zoom, etc.)
+                - Add custom CSS styles to enhance futuristic visual effects
+                - Ensure fast loading and smooth animation performance with optimized assets;
+            
+            10. SEO and accessibility:
+                - Add complete meta tags and structured data
+                - Ensure keyboard navigation accessibility
+                - Add alt text and aria labels
+                - Optimize search engine indexing.
+            
+            Please directly create a complete HTML file using inline CSS and JavaScript, ensuring the file is self-contained and can run directly in browsers. The design should feel like a futuristic tech interface from a sci-fi movie with a cyberpunk aesthetic.
+            
+            Project URL: https://github.com/version-fox/vfox-elixir
+          api_key: ${{ secrets.IFLOW_API_KEY }}
+          # settings_json: ${{ secrets.IFLOW_SETTINGS_JSON }}
+          model: "Qwen3-Coder"
+          timeout: "1800"
+          extra_args: "--debug"
+
+      - name: Verify reveal.js presentation was generated
+        run: |
+          if [ -f "_site/index.html" ]; then
+            echo "Reveal.js presentation generated successfully!"
+            echo "Checking for reveal.js content..."
+            if grep -q "reveal.js" "_site/index.html"; then
+              echo "✓ Reveal.js framework detected"
+            else
+              echo "⚠ Warning: Reveal.js framework not found in generated file"
+            fi
+            ls -la _site/
+          else
+            echo "Error: Presentation was not generated by iFlow"
+            exit 1
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
