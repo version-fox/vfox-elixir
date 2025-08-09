@@ -1,0 +1,83 @@
+name: mise E2E tests
+
+on:
+  push:
+    branches: [main]
+    paths: ['lib']
+  pull_request:
+    paths: ['lib']
+  workflow_dispatch:
+  schedule:
+    # Runs at 12am UTC
+    - cron: '0 0 * * *'
+
+jobs:
+  mise_e2e_tests:
+    strategy:
+      matrix:
+        # ref: https://github.com/actions/runner-images
+        os: [ubuntu-22.04, macos-13]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mise (Unix-like)
+        if: runner.os != 'Windows'
+        run: |
+          curl https://mise.run | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          source ~/.bashrc || true
+
+      - name: Verify mise installation (Unix-like)
+        if: runner.os != 'Windows'
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          mise --version
+
+      - name: Install Erlang/OTP & Elixir via mise (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -y
+          sudo apt-get -y install build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libwxgtk-webview3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
+          export MAKEFLAGS=-j4
+          export PATH="$HOME/.local/bin:$PATH"
+          
+          # Install via mise
+          mise install vfox:version-fox/vfox-erlang@26.2.3
+          mise use -g vfox:version-fox/vfox-erlang@26.2.3
+          eval "$(mise activate bash --shims)"
+          which erl
+          echo "===============PATH==============="
+          echo $PATH
+          echo "===============PATH==============="
+          
+          mise install vfox:version-fox/vfox-elixir@1.16.2
+          mise use -g vfox:version-fox/vfox-elixir@1.16.2
+          eval "$(mise activate bash --shims)"
+          elixirc -v
+          cd assets
+          elixir hello.ex
+
+
+      - name: Install Erlang/OTP & Elixir via mise (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install autoconf libxslt fop wxwidgets openssl
+          export MAKEFLAGS=-j4
+          export PATH="$HOME/.local/bin:$PATH"
+          
+          # Install via mise
+          mise install vfox:version-fox/vfox-erlang@26.2.3
+          mise use -g vfox:version-fox/vfox-erlang@26.2.3
+          eval "$(mise activate bash)"
+          which erl
+          echo "===============PATH==============="
+          echo $PATH
+          echo "===============PATH==============="
+          
+          mise install vfox:version-fox/vfox-elixir@1.16.2
+          mise use -g vfox:version-fox/vfox-elixir@1.16.2
+          eval "$(mise activate bash)"
+          elixirc -v
+          cd assets
+          elixir hello.ex

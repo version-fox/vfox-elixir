@@ -1,9 +1,11 @@
-name: E2E tests
+name: vfox E2E tests
 
 on:
   push:
     branches: [main]
+    paths: ['lib']
   pull_request:
+    paths: ['lib']
   workflow_dispatch:
   schedule:
     # Runs at 12am UTC
