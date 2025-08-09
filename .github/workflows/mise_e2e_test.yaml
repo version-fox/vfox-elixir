@@ -3,6 +3,7 @@ name: Mise E2E tests
 on:
   push:
     branches: [main]
+    paths: ['lib']
   pull_request:
   workflow_dispatch:
   schedule:
@@ -32,14 +33,6 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           mise --version
 
-      - name: Setup vfox plugin for erlang and elixir
-        if: runner.os != 'Windows'
-        run: |
-          export PATH="$HOME/.local/bin:$PATH"
-          # Add vfox plugins for erlang and elixir using the correct syntax
-          mise use -g vfox:version-fox/vfox-erlang
-          mise use -g vfox:version-fox/vfox-elixir
-
       - name: Install Erlang/OTP & Elixir via mise (Linux)
         if: runner.os == 'Linux'
         run: |
@@ -51,7 +44,7 @@ jobs:
           # Install via mise
           mise install vfox:version-fox/vfox-erlang@26.2.3
           mise use -g vfox:version-fox/vfox-erlang@26.2.3
-          eval "$(mise activate bash)"
+          eval "$(mise activate bash --shims)"
           which erl
           echo "===============PATH==============="
           echo $PATH
@@ -59,7 +52,7 @@ jobs:
           
           mise install vfox:version-fox/vfox-elixir@1.16.2
           mise use -g vfox:version-fox/vfox-elixir@1.16.2
-          eval "$(mise activate bash)"
+          eval "$(mise activate bash --shims)"
           elixirc -v
           cd assets
           elixir hello.ex
@@ -69,7 +62,7 @@ jobs:
         run: |
           export PATH="$HOME/.local/bin:$PATH"
           mise use -g vfox:version-fox/vfox-erlang@26.2.3
-          eval "$(mise activate bash)"
+          eval "$(mise activate bash --shims)"
           which erl
           echo "===============PATH==============="
           echo $PATH
@@ -77,7 +70,7 @@ jobs:
           
           VFOX_ELIXIR_MIRROR=hex mise install vfox:version-fox/vfox-elixir@main-otp-26
           VFOX_ELIXIR_MIRROR=hex mise use -g vfox:version-fox/vfox-elixir@main-otp-26
-          eval "$(mise activate bash)"
+          eval "$(mise activate bash --shims)"
           elixirc -v
           cd assets
           elixir hello.ex
