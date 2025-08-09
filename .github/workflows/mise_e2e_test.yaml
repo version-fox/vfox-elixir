@@ -5,7 +5,6 @@ on:
     branches: [main]
     paths: ['lib']
   pull_request:
-    paths: ['lib']
   workflow_dispatch:
   schedule:
     # Runs at 12am UTC
@@ -58,7 +57,7 @@ jobs:
           cd assets
           elixir hello.ex
 
-      
+
       - name: Install Erlang/OTP & Elixir via mise (macOS)
         if: runner.os == 'macOS'
         run: |
