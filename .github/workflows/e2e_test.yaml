@@ -1,4 +1,4 @@
-name: E2E tests
+name: vfox E2E tests
 
 on:
   push:

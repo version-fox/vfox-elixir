@@ -2,8 +2,8 @@
 
 ![logo](./assets/vfox-elixir-logo.png)
 
-[![E2E tests](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml)
-[![Mise E2E tests](https://github.com/version-fox/vfox-elixir/actions/workflows/mise_e2e_test.yaml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/mise_e2e_test.yaml)
+[![vfox E2E tests](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml)
+[![mise E2E tests](https://github.com/version-fox/vfox-elixir/actions/workflows/mise_e2e_test.yaml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/mise_e2e_test.yaml)
 
 </div>
 
@@ -15,7 +15,7 @@ Elixir [vfox](https://github.com/version-fox) plugin. Use the vfox to manage mul
 
 ```shell
 # install plugin
-vfox add --source https://github.com/version-fox/vfox-elixir/archive/refs/heads/main.zip elixir
+vfox add elixir
 
 # install an available version
 vfox search elixir
@@ -40,12 +40,12 @@ Here are two examples of installing on Ubuntu 20.04 and MacOS 13.
 sudo apt-get -y install build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libwxgtk-webview3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
 
 # install Erlang/OTP
-vfox add --source https://github.com/version-fox/vfox-erlang/archive/refs/heads/main.zip erlang
+vfox add erlang
 vfox install erlang@26.2.3
 vfox use -g erlang@26.2.3
 
 # install Elixir
-vfox add --source https://github.com/version-fox/vfox-elixir/archive/refs/heads/main.zip elixir
+vfox add elixir
 vfox install elixir@1.16.2
 vfox use -g elixir@1.16.2
 ```
@@ -59,12 +59,12 @@ You can reference the E2E test in Ubuntu 20.04: [https://github.com/version-fox/
 brew install autoconf libxslt fop wxwidgets openssl
 
 # install Erlang/OTP
-vfox add --source https://github.com/version-fox/vfox-erlang/archive/refs/heads/main.zip erlang
+vfox add erlang
 vfox install erlang@26.2.3
 vfox use -g erlang@26.2.3
 
 # install Elixir
-vfox add --source https://github.com/version-fox/vfox-elixir/archive/refs/heads/main.zip elixir
+vfox add elixir
 vfox install elixir@1.16.2
 vfox use -g elixir@1.16.2
 ```
@@ -111,8 +111,9 @@ Please select a version of elixir to install [type to search]:
 The plugin can also be used with [mise](https://mise.jdx.dev/), a development tool manager:
 
 ```shell
-# Install plugin
-mise use -g vfox:version-fox/vfox-elixir
+# Elixir need Erlang/OTP, so install Erlang/OTP first
+mise install vfox:version-fox/vfox-erlang@26.2.3
+mise use -g vfox:version-fox/vfox-erlang@26.2.3
 
 # Install an available version
 mise install vfox:version-fox/vfox-elixir@1.16.2
