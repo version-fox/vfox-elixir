@@ -58,24 +58,7 @@ jobs:
           cd assets
           elixir hello.ex
 
-      - name: Install pre-built Elixir version from hex.pm via mise
-        if: runner.os == 'Linux'
-        run: |
-          export PATH="$HOME/.local/bin:$PATH"
-          mise use -g vfox:version-fox/vfox-erlang@26.2.3
-          eval "$(mise activate bash --shims)"
-          which erl
-          echo "===============PATH==============="
-          echo $PATH
-          echo "===============PATH==============="
-          
-          VFOX_ELIXIR_MIRROR=hex mise install vfox:version-fox/vfox-elixir@main-otp-26
-          VFOX_ELIXIR_MIRROR=hex mise use -g vfox:version-fox/vfox-elixir@main-otp-26
-          eval "$(mise activate bash --shims)"
-          elixirc -v
-          cd assets
-          elixir hello.ex
-
+      
       - name: Install Erlang/OTP & Elixir via mise (macOS)
         if: runner.os == 'macOS'
         run: |
