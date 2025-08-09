@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths: ['lib']
   pull_request:
+    paths: ['lib']
   workflow_dispatch:
   schedule:
     # Runs at 12am UTC
