@@ -3,6 +3,7 @@
 ![logo](./assets/vfox-elixir-logo.png)
 
 [![E2E tests](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml)
+[![Mise E2E tests](https://github.com/version-fox/vfox-elixir/actions/workflows/mise_e2e_test.yaml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/mise_e2e_test.yaml)
 
 </div>
 
@@ -103,4 +104,16 @@ Please select a version of elixir to install [type to search]:
    vmaster (pre-built from hex.pm)
 
 (1) > VFOX_ELIXIR_MIRROR=hex vfox install elixir@main-otp-26
+```
+
+## Usage with mise
+
+The plugin can also be used with [mise](https://mise.jdx.dev/), a development tool manager:
+
+```shell
+# Install plugin
+mise use -g vfox:version-fox/vfox-elixir
+
+# Install an available version
+mise install vfox:version-fox/vfox-elixir@1.16.2
 ```

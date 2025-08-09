@@ -1,0 +1,131 @@
+name: Mise E2E tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # Runs at 12am UTC
+    - cron: '0 0 * * *'
+
+jobs:
+  mise_e2e_tests:
+    strategy:
+      matrix:
+        # ref: https://github.com/actions/runner-images
+        os: [ubuntu-22.04, macos-13, windows-2022]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mise (Unix-like)
+        if: runner.os != 'Windows'
+        run: |
+          curl https://mise.run | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          mise --version
+
+      - name: Install mise (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          winget install mise
+          echo "$env:USERPROFILE\\.local\\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          mise --version
+
+      - name: Setup vfox plugin for erlang and elixir
+        run: |
+          # Add vfox plugins for erlang and elixir using the correct syntax
+          mise use -g vfox:version-fox/vfox-erlang
+          mise use -g vfox:version-fox/vfox-elixir
+
+      - name: Install Erlang/OTP & Elixir via mise (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -y
+          sudo apt-get -y install build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libwxgtk-webview3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
+          export MAKEFLAGS=-j4
+          
+          # Install via mise
+          mise install vfox:version-fox/vfox-erlang@26.2.3
+          mise use -g vfox:version-fox/vfox-erlang@26.2.3
+          eval "$(mise activate bash)"
+          which erl
+          echo "===============PATH==============="
+          echo $PATH
+          echo "===============PATH==============="
+          
+          mise install vfox:version-fox/vfox-elixir@1.16.2
+          mise use -g vfox:version-fox/vfox-elixir@1.16.2
+          eval "$(mise activate bash)"
+          elixirc -v
+          cd assets
+          elixir hello.ex
+
+      - name: Install pre-built Elixir version from hex.pm via mise
+        if: runner.os == 'Linux'
+        run: |
+          mise use -g vfox:version-fox/vfox-erlang@26.2.3
+          eval "$(mise activate bash)"
+          which erl
+          echo "===============PATH==============="
+          echo $PATH
+          echo "===============PATH==============="
+          
+          VFOX_ELIXIR_MIRROR=hex mise install vfox:version-fox/vfox-elixir@main-otp-26
+          VFOX_ELIXIR_MIRROR=hex mise use -g vfox:version-fox/vfox-elixir@main-otp-26
+          eval "$(mise activate bash)"
+          elixirc -v
+          cd assets
+          elixir hello.ex
+
+      - name: Install Erlang/OTP & Elixir via mise (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install autoconf libxslt fop wxwidgets openssl
+          export MAKEFLAGS=-j4
+          
+          # Install via mise
+          mise install vfox:version-fox/vfox-erlang@26.2.3
+          mise use -g vfox:version-fox/vfox-erlang@26.2.3
+          eval "$(mise activate bash)"
+          which erl
+          echo "===============PATH==============="
+          echo $PATH
+          echo "===============PATH==============="
+          
+          mise install vfox:version-fox/vfox-elixir@1.16.2
+          mise use -g vfox:version-fox/vfox-elixir@1.16.2
+          eval "$(mise activate bash)"
+          elixirc -v
+          cd assets
+          elixir hello.ex
+
+      - name: Install Erlang/OTP & Elixir via mise (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          # Install via mise
+          mise install vfox:version-fox/vfox-erlang@26.2.3
+          mise use -g vfox:version-fox/vfox-erlang@26.2.3
+          Invoke-Expression "$(mise activate pwsh)"
+          echo "===============PATH==============="
+          echo $env:PATH
+          echo "===============PATH==============="
+          & erl.exe -eval 'erlang:display({otp_release, erlang:system_info(otp_release)}), halt().' -noshell
+          
+          # For Windows, we need to use the specific version format
+          mise install vfox:version-fox/vfox-elixir@1.16.2-elixir-otp-26
+          mise use -g vfox:version-fox/vfox-elixir@1.16.2-elixir-otp-26
+          Invoke-Expression "$(mise activate pwsh)"
+          Get-Command iex.bat
+          echo "===============PATH==============="
+          echo $env:PATH
+          echo "===============PATH==============="
+          cd assets
+          $result = elixirc.bat hello.ex
+          if ($result -match "Hello world") {
+              Write-Output "elixir installed successfully!"
+          } else {
+              Write-Output "elixir installed failed!"
+              exit 1
+          }
