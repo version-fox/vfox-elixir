@@ -69,14 +69,17 @@ jobs:
                - Ensure overall design has a futuristic, cyberpunk aesthetic with high visual appeal;
             
             5. Font size and layout optimization (important):
-               - Title font sizes: Main title 2.8em with neon glow effect, subtitle 2.0em, section title 1.7em
-               - Body text font size: Use 1.3em with futuristic font family (Orbitron, Exo 2, or similar), ensure clear readability on all devices
-               - Code font size: Use 1.0em with monospace futuristic font, avoid code blocks being too large causing layout issues
-               - Line height settings: Body text 1.7x line height, titles 1.5x line height
-               - Content area margins: Set appropriate padding for each slide (70px top/bottom, 50px left/right)
+               - Title font sizes: Main title 2.2em with neon glow effect, subtitle 1.6em, section title 1.4em
+               - Body text font size: Use 1.1em with futuristic font family (Orbitron, Exo 2, or similar), ensure clear readability on all devices
+               - Code font size: Use 0.9em with monospace futuristic font, avoid code blocks being too large causing layout issues
+               - Line height settings: Body text 1.6x line height, titles 1.4x line height
+               - Content area margins: Set appropriate padding for each slide (80px top/bottom, 60px left/right)
                - Ensure sufficient spacing between text and background with glowing effects
                - Limit content amount per slide to avoid information overload
-               - Implement vertical scrolling for long code blocks instead of shrinking font;
+               - Implement vertical scrolling for long code blocks instead of shrinking font
+               - Add z-index management to prevent text from being obscured by background elements
+               - Use text shadows with appropriate contrast to ensure text stands out against any background
+               - Implement proper layering with CSS to ensure fonts are always on top of decorative elements;
             
             6. Code display optimization:
                - Use Reveal.js code highlighting plugin with cyberpunk color scheme
