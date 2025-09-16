@@ -14,8 +14,8 @@
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.19-latest",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.19-latest",
         "commit": {
-            "sha": "51ac9bc324cdbcafce789a08c8fd0c5dadcf6984",
-            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/51ac9bc324cdbcafce789a08c8fd0c5dadcf6984"
+            "sha": "7be008c1b0198708b7e150ce77d620c1e647a50b",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/7be008c1b0198708b7e150ce77d620c1e647a50b"
         },
         "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvdjEuMTktbGF0ZXN0"
     },
@@ -84,8 +84,8 @@
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.18-latest",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.18-latest",
         "commit": {
-            "sha": "66bb6da84707213c13c07338f26fbdde8806bd01",
-            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/66bb6da84707213c13c07338f26fbdde8806bd01"
+            "sha": "a622a8ef92f58a861b9e0872d3dc669756a0ee0e",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/a622a8ef92f58a861b9e0872d3dc669756a0ee0e"
         },
         "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvdjEuMTgtbGF0ZXN0"
     },
@@ -1714,8 +1714,8 @@
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/main-latest",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/main-latest",
         "commit": {
-            "sha": "f9dbdb88c994d0a1e0e367af273c981b23482371",
-            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/f9dbdb88c994d0a1e0e367af273c981b23482371"
+            "sha": "2ee1d0eb78512b04a101e1d402bac542477b7f3d",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/2ee1d0eb78512b04a101e1d402bac542477b7f3d"
         },
         "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvbWFpbi1sYXRlc3Q="
     }
