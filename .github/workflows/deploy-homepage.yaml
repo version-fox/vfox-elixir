@@ -119,7 +119,7 @@ jobs:
           # settings_json: ${{ secrets.IFLOW_SETTINGS_JSON }}
           model: "Qwen3-Coder"
           timeout: "1800"
-          extra_args: "--debug"
+          debug: "true"
 
       - name: Verify reveal.js presentation was generated
         run: |
