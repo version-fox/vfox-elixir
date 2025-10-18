@@ -1,12 +1,13 @@
 import json
 import requests
 
+
 # fetch version: -> https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28
 # github api has rate limt
 # prefer use local version file
 def update_all_version_from_github_api():
     all_version = []
-    for page in range(1,10):
+    for page in range(1, 10):
         url = f"https://api.github.com/repos/elixir-lang/elixir/releases?page={page}&per_page=100"
         response = requests.get(url)
         if response.status_code != 200:
@@ -18,13 +19,17 @@ def update_all_version_from_github_api():
         data = response.json()
         all_version = all_version + data
 
-
-    with open("elixir_windows_versions_from_github_api.json", 'w', encoding="utf-8") as file:
+    with open(
+        "elixir_windows_versions_from_github_api.json", "w", encoding="utf-8"
+    ) as file:
         json.dump(all_version, file, indent=4)
+
 
 def get_all_version():
     version_set = set()
-    with open("elixir_windows_versions_from_github_api.json", 'r', encoding="utf-8") as file:
+    with open(
+        "elixir_windows_versions_from_github_api.json", "r", encoding="utf-8"
+    ) as file:
         data = json.load(file)
         for item in data:
             for asset in item["assets"]:
@@ -35,11 +40,12 @@ def get_all_version():
                 version_set.add(fix_version.replace(".exe", "")[1:])
     return version_set
 
+
 if __name__ == "__main__":
     update_all_version_from_github_api()
     versions = list(get_all_version())
     versions = sorted(versions, reverse=True)
     print(versions)
-    with open("versions_win.txt", 'w') as file:
+    with open("versions_win.txt", "w") as file:
         for v in versions:
-            file.write(v + '\n')
+            file.write(v + "\n")

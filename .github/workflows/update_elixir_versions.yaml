@@ -1,3 +1,4 @@
+# for vfox search
 name: update_elixir_versions
 
 on:
@@ -35,6 +36,9 @@ jobs:
             git add .
             git commit -m "chore(versions.txt): update Elixir version file"
             git push https://github-actions[bot]:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+            curl https://purge.jsdelivr.net/gh/version-fox/vfox-elixir@main/assets/versions.txt
+            curl https://purge.jsdelivr.net/gh/version-fox/vfox-elixir@main/assets/versions_win.txt
+            echo "refreshed jsdelivr cache."
           else
             echo "never updated."
           fi
