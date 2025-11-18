@@ -1,5 +1,15 @@
 [
     {
+        "name": "v1.19.3",
+        "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.19.3",
+        "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.19.3",
+        "commit": {
+            "sha": "427d21e410d1846c232d0a0b0e87cce629884dfa",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/427d21e410d1846c232d0a0b0e87cce629884dfa"
+        },
+        "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvdjEuMTkuMw=="
+    },
+    {
         "name": "v1.19.2",
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.19.2",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.19.2",
@@ -64,8 +74,8 @@
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.19-latest",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.19-latest",
         "commit": {
-            "sha": "d4d5da2ccfb5d3eb2a8a40ea863d03395d09cb5d",
-            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/d4d5da2ccfb5d3eb2a8a40ea863d03395d09cb5d"
+            "sha": "7758084211983d3fbd7a25ba25d819a55c7cf277",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/7758084211983d3fbd7a25ba25d819a55c7cf277"
         },
         "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvdjEuMTktbGF0ZXN0"
     },
@@ -1764,8 +1774,8 @@
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/main-latest",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/main-latest",
         "commit": {
-            "sha": "06619c2fcc57619bfac356a3238476704846cb68",
-            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/06619c2fcc57619bfac356a3238476704846cb68"
+            "sha": "e56b730c8cf383db653303489daacbcde679d8cf",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/e56b730c8cf383db653303489daacbcde679d8cf"
         },
         "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvbWFpbi1sYXRlc3Q="
     }
