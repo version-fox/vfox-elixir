@@ -1,6 +1,6 @@
-ain-latest-elixir-otp-28
-ain-latest-elixir-otp-27
-ain-latest-elixir-otp-26
+1.19.4-elixir-otp-28
+1.19.4-elixir-otp-27
+1.19.4-elixir-otp-26
 1.19.3-elixir-otp-28
 1.19.3-elixir-otp-27
 1.19.3-elixir-otp-26
