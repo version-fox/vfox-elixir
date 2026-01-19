@@ -4,14 +4,10 @@
 --- @param ctx table Context information
 function PLUGIN:PreUse(ctx)
     --- user input version
-    local input_version = ctx.version
-
-    --- installed sdks
-    local sdkInfo = ctx.installedSdks[input_version]
-    local used_version = sdkInfo.version
+    local version = ctx.version
 
     --- return the version information
     return {
-        version = used_version
+        version = version
     }
 end
