@@ -117,7 +117,6 @@ jobs:
             Project URL: https://github.com/version-fox/vfox-elixir
           api_key: ${{ secrets.IFLOW_API_KEY }}
           # settings_json: ${{ secrets.IFLOW_SETTINGS_JSON }}
-          model: "Qwen3-Coder"
           timeout: "1800"
           debug: "true"
 
