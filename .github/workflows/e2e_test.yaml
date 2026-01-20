@@ -62,6 +62,7 @@ jobs:
           sudo apt-get -y install build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libwxgtk-webview3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
           export MAKEFLAGS=-j4
           vfox install erlang@26.2.3
+          eval "$(vfox activate bash)"
           vfox use -g erlang@26.2.3
           eval "$(vfox activate bash)"
           which erl 
@@ -69,6 +70,7 @@ jobs:
           echo $PATH
           echo "===============PATH==============="
           vfox install elixir@1.16.2
+          eval "$(vfox activate bash)"
           vfox use -g elixir@1.16.2
           eval "$(vfox activate bash)"
           elixirc -v
@@ -77,6 +79,7 @@ jobs:
       - name: download a pre-built Elixir version from hex.pm
         if: runner.os == 'Linux'
         run: |
+          eval "$(vfox activate bash)"
           vfox use -g erlang@26.2.3
           eval "$(vfox activate bash)"
           which erl 
@@ -96,6 +99,7 @@ jobs:
           brew install autoconf libxslt fop wxwidgets openssl
           export MAKEFLAGS=-j4
           vfox install erlang@26.2.3
+          eval "$(vfox activate bash)"
           vfox use -g erlang@26.2.3
           eval "$(vfox activate bash)"
           which erl 
@@ -113,6 +117,7 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           vfox install erlang@26.2.3
+          eval "$(vfox activate bash)"
           vfox use -g erlang@26.2.3
           Invoke-Expression "$(vfox activate pwsh)"
           echo "===============PATH==============="
