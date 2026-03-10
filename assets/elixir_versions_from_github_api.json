@@ -1,5 +1,25 @@
 [
     {
+        "name": "v1.20.0-rc.3",
+        "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.20.0-rc.3",
+        "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.20.0-rc.3",
+        "commit": {
+            "sha": "2db87ebc70ec3787602444800ecf8372b1571b12",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/2db87ebc70ec3787602444800ecf8372b1571b12"
+        },
+        "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvdjEuMjAuMC1yYy4z"
+    },
+    {
+        "name": "v1.20.0-rc.2",
+        "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.20.0-rc.2",
+        "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.20.0-rc.2",
+        "commit": {
+            "sha": "0df45fdba16e6ab8f59a30e9f0c1e281a24c7ef2",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/0df45fdba16e6ab8f59a30e9f0c1e281a24c7ef2"
+        },
+        "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvdjEuMjAuMC1yYy4y"
+    },
+    {
         "name": "v1.20.0-rc.1",
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/v1.20.0-rc.1",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/v1.20.0-rc.1",
@@ -1814,8 +1834,8 @@
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/main-latest",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/main-latest",
         "commit": {
-            "sha": "f7c4047d30f158b388bced18bacba9bed9aa909b",
-            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/f7c4047d30f158b388bced18bacba9bed9aa909b"
+            "sha": "526d00f94923306673e9f6d777b9fc1ba963e999",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/526d00f94923306673e9f6d777b9fc1ba963e999"
         },
         "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvbWFpbi1sYXRlc3Q="
     }
