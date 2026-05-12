@@ -1844,8 +1844,8 @@
         "zipball_url": "https://api.github.com/repos/elixir-lang/elixir/zipball/refs/tags/main-latest",
         "tarball_url": "https://api.github.com/repos/elixir-lang/elixir/tarball/refs/tags/main-latest",
         "commit": {
-            "sha": "46ebf7cc83f99395e4ec0e2e97942ac64048cb41",
-            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/46ebf7cc83f99395e4ec0e2e97942ac64048cb41"
+            "sha": "b0db1a26e1326a8aa1ea199bed7e80b76741cce6",
+            "url": "https://api.github.com/repos/elixir-lang/elixir/commits/b0db1a26e1326a8aa1ea199bed7e80b76741cce6"
         },
         "node_id": "MDM6UmVmMTIzNDcxNDpyZWZzL3RhZ3MvbWFpbi1sYXRlc3Q="
     }
