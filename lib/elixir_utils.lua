@@ -65,12 +65,30 @@ function elixir_utils.check_version_existence(url)
     end
 end
 
+function elixir_utils.find_erlang_bin()
+    local handle = io.popen("which erlc 2>/dev/null")
+    local result = handle:read("*l")
+    handle:close()
+    if result and result ~= "" then
+        return result:match("(.+)/")
+    end
+    local home = os.getenv("HOME") or ""
+    local mise_dir = os.getenv("MISE_DATA_DIR") or (home .. "/.local/share/mise")
+    handle = io.popen("find '" .. mise_dir .. "/installs' -name erlc -type f 2>/dev/null | head -1")
+    result = handle:read("*l")
+    handle:close()
+    if result and result ~= "" then
+        return result:match("(.+)/")
+    end
+    return nil
+end
+
 function elixir_utils.check_erlang_existence()
     print("Check Erlang/OTP existence...")
-    local status = os.execute("which erlc")
-    if status ~= 0 then
-        error("Please install Erlang/OTP before you install Elixir.")
+    if elixir_utils.find_erlang_bin() then
+        return
     end
+    error("Please install Erlang/OTP before you install Elixir.")
 end
 
 function elixir_utils.get_elixir_release_verions_in_linux()

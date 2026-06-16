@@ -14,7 +14,12 @@ function PLUGIN:PostInstall(ctx)
     elseif os.getenv("VFOX_ELIXIR_MIRROR") == "hex" then
         return
     else
-        install_cmd = "cd " .. path .. " && make"
+        local erlang_bin = elixirUtils.find_erlang_bin()
+        if erlang_bin then
+            install_cmd = "cd " .. path .. " && PATH=" .. erlang_bin .. ":$PATH make"
+        else
+            install_cmd = "cd " .. path .. " && make"
+        end
         local status = os.execute(install_cmd)
         if status ~= 0 then
             error("Elixir install failed, please check the stdout for details.")
