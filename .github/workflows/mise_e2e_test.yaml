@@ -38,7 +38,7 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           export PATH="$HOME/.local/bin:$PATH"
-          mise plugin add vfox-elixir-ci "$GITHUB_WORKSPACE"
+          mise plugins link vfox-elixir-ci "$GITHUB_WORKSPACE"
 
       - name: Install Erlang/OTP & Elixir via mise (Linux)
         if: runner.os == 'Linux'
