@@ -3,9 +3,9 @@ name: mise E2E tests
 on:
   push:
     branches: [main]
-    paths: ['lib']
+    paths: ['lib', '.github/workflows/mise_e2e_test.yaml']
   pull_request:
-    paths: ['lib']
+    paths: ['lib', '.github/workflows/mise_e2e_test.yaml']
   workflow_dispatch:
   schedule:
     # Runs at 12am UTC
