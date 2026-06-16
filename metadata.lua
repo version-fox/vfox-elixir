@@ -14,6 +14,9 @@ PLUGIN.license = "Apache 2.0"
 PLUGIN.description = "Elixir vfox plugin, support for managing multiple Elixir language versions in Windows & Uinx-like system."
 
 
+--- Erlang/OTP must be on PATH when compiling Elixir from source.
+PLUGIN.depends = { "erlang" }
+
 --- !!! OPTIONAL !!!
 --[[
 NOTE:
