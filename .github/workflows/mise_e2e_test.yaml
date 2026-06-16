@@ -34,6 +34,12 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           mise --version
 
+      - name: Add local Elixir plugin for mise E2E
+        if: runner.os != 'Windows'
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          mise plugin add vfox-elixir-ci "$GITHUB_WORKSPACE"
+
       - name: Install Erlang/OTP & Elixir via mise (Linux)
         if: runner.os == 'Linux'
         run: |
@@ -51,8 +57,8 @@ jobs:
           echo $PATH
           echo "===============PATH==============="
           
-          mise install vfox:version-fox/vfox-elixir@1.16.2
-          mise use -g vfox:version-fox/vfox-elixir@1.16.2
+          mise install vfox-elixir-ci@1.16.2
+          mise use -g vfox-elixir-ci@1.16.2
           eval "$(mise activate bash --shims)"
           elixirc -v
           cd assets
@@ -75,8 +81,8 @@ jobs:
           echo $PATH
           echo "===============PATH==============="
           
-          mise install vfox:version-fox/vfox-elixir@1.16.2
-          mise use -g vfox:version-fox/vfox-elixir@1.16.2
+          mise install vfox-elixir-ci@1.16.2
+          mise use -g vfox-elixir-ci@1.16.2
           eval "$(mise activate bash --shims)"
           elixirc -v
           cd assets
