@@ -3,9 +3,17 @@ name: vfox E2E tests
 on:
   push:
     branches: [main]
-    paths: ['lib']
+    paths:
+      - '.github/workflows/e2e_test.yaml'
+      - 'metadata.lua'
+      - 'hooks/**'
+      - 'lib/**'
   pull_request:
-    paths: ['lib']
+    paths:
+      - '.github/workflows/e2e_test.yaml'
+      - 'metadata.lua'
+      - 'hooks/**'
+      - 'lib/**'
   workflow_dispatch:
   schedule:
     # Runs at 12am UTC
@@ -14,10 +22,13 @@ on:
 jobs:
   e2e_tests:
     strategy:
+      fail-fast: false
       matrix:
         # ref: https://github.com/actions/runner-images
         os: [ubuntu-22.04, macos-latest, windows-2022]
     runs-on: ${{ matrix.os }}
+    env:
+      ELIXIR_PLUGIN_REF: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@v4
 
@@ -47,13 +58,13 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           vfox add --source https://github.com/version-fox/vfox-erlang/archive/refs/heads/main.zip erlang
-          vfox add --source https://github.com/version-fox/vfox-elixir/archive/${GITHUB_REF}.zip elixir
+          vfox add --source https://github.com/version-fox/vfox-elixir/archive/${ELIXIR_PLUGIN_REF}.zip elixir
 
       - name: add vfox-erlang & vfox-elixir plugin
         if: runner.os == 'Windows'
         run: |
           vfox add --source https://github.com/version-fox/vfox-erlang/archive/refs/heads/main.zip erlang
-          vfox add --source https://github.com/version-fox/vfox-elixir/archive/$env:GITHUB_REF.zip elixir
+          vfox add --source https://github.com/version-fox/vfox-elixir/archive/$env:ELIXIR_PLUGIN_REF.zip elixir
 
       - name: install Erlang/OTP & Elixir by vfox-erlang & vfox-elixir plugin (Linux)
         if: runner.os == 'Linux'
@@ -94,7 +105,7 @@ jobs:
           elixir hello.ex
 
       - name: install Erlang/OTP & Elixir by vfox-erlang & vfox-elixir plugin (Darwin)
-        if: runner.os == 'MacOS'
+        if: runner.os == 'macOS'
         run: |
           brew install autoconf libxslt fop wxwidgets openssl
           export MAKEFLAGS=-j4

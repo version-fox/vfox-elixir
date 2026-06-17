@@ -3,9 +3,17 @@ name: mise E2E tests
 on:
   push:
     branches: [main]
-    paths: ['lib']
+    paths:
+      - '.github/workflows/mise_e2e_test.yaml'
+      - 'metadata.lua'
+      - 'hooks/**'
+      - 'lib/**'
   pull_request:
-    paths: ['lib']
+    paths:
+      - '.github/workflows/mise_e2e_test.yaml'
+      - 'metadata.lua'
+      - 'hooks/**'
+      - 'lib/**'
   workflow_dispatch:
   schedule:
     # Runs at 12am UTC
@@ -14,6 +22,7 @@ on:
 jobs:
   mise_e2e_tests:
     strategy:
+      fail-fast: false
       matrix:
         # ref: https://github.com/actions/runner-images
         os: [ubuntu-22.04, macos-latest]
@@ -34,6 +43,12 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           mise --version
 
+      - name: Link local Elixir plugin for PR validation
+        if: runner.os != 'Windows'
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          mise plugins link vfox-elixir-ci "$GITHUB_WORKSPACE"
+
       - name: Install Erlang/OTP & Elixir via mise (Linux)
         if: runner.os == 'Linux'
         run: |
@@ -42,18 +57,15 @@ jobs:
           export MAKEFLAGS=-j4
           export PATH="$HOME/.local/bin:$PATH"
           
-          # Install via mise
           mise install vfox:version-fox/vfox-erlang@26.2.3
           mise use -g vfox:version-fox/vfox-erlang@26.2.3
-          eval "$(mise activate bash --shims)"
+          eval "$(mise env)"
           which erl
-          echo "===============PATH==============="
-          echo $PATH
-          echo "===============PATH==============="
-          
-          mise install vfox:version-fox/vfox-elixir@1.16.2
-          mise use -g vfox:version-fox/vfox-elixir@1.16.2
-          eval "$(mise activate bash --shims)"
+          which erlc
+
+          mise install vfox-elixir-ci@1.16.2
+          mise use -g vfox-elixir-ci@1.16.2
+          eval "$(mise env)"
           elixirc -v
           cd assets
           elixir hello.ex
@@ -66,18 +78,15 @@ jobs:
           export MAKEFLAGS=-j4
           export PATH="$HOME/.local/bin:$PATH"
           
-          # Install via mise
           mise install vfox:version-fox/vfox-erlang@26.2.3
           mise use -g vfox:version-fox/vfox-erlang@26.2.3
-          eval "$(mise activate bash)"
+          eval "$(mise env)"
           which erl
-          echo "===============PATH==============="
-          echo $PATH
-          echo "===============PATH==============="
-          
-          mise install vfox:version-fox/vfox-elixir@1.16.2
-          mise use -g vfox:version-fox/vfox-elixir@1.16.2
-          eval "$(mise activate bash)"
+          which erlc
+
+          mise install vfox-elixir-ci@1.16.2
+          mise use -g vfox-elixir-ci@1.16.2
+          eval "$(mise env)"
           elixirc -v
           cd assets
           elixir hello.ex
