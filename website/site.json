@@ -1,0 +1,22 @@
+{
+  "plugin_title": "vfox-elixir",
+  "product": "Elixir",
+  "repo_url": "https://github.com/version-fox/vfox-elixir",
+  "official_url": "https://elixir-lang.org/",
+  "official_name": "Elixir",
+  "example_version": "1.16.2",
+  "site_url": "https://version-fox.github.io/vfox-elixir",
+  "vfox_add_code": "vfox add erlang\nvfox add elixir\nvfox install erlang@26.2.3\neval \"$(vfox activate bash)\"\nvfox use -g erlang@26.2.3",
+  "vfox_install_code": "vfox install elixir@1.16.2",
+  "vfox_run_code": "vfox exec elixir@1.16.2 -- elixir --version",
+  "mise_prepare_code": "mise use -g vfox:version-fox/vfox-erlang@26.2.3",
+  "mise_install_code": "mise use -g vfox:version-fox/vfox-elixir@1.16.2",
+  "mise_run_code": "mise exec -- elixir --version",
+  "project_code": "eval \"$(vfox activate bash)\"\nvfox use -p elixir@1.16.2\nvfox exec elixir -- elixir --version",
+  "extra_code": "VFOX_ELIXIR_MIRROR=hex vfox search elixir\nVFOX_ELIXIR_MIRROR=hex vfox install elixir@main-otp-26",
+  "special_code": "Invoke-Expression \"$(vfox activate pwsh)\"\nvfox use -g erlang@26.2.3\nvfox install elixir@1.16.2-elixir-otp-26\nvfox exec elixir@1.16.2-elixir-otp-26 -- elixir --version",
+  "special_shell": "PowerShell",
+  "linux_hint": "Erlang/OTP · Make",
+  "macos_hint": "Erlang/OTP · Make",
+  "terminal_code": "$ vfox install elixir@1.16.2\n$ vfox exec elixir@1.16.2 -- elixir --version"
+}
