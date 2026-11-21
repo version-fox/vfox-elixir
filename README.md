@@ -1,110 +1,73 @@
+[中文](README_CN.md) | [English](README.md)
+
 <div align="center">
 
 ![logo](./assets/vfox-elixir-logo.png)
 
-[![vfox E2E tests](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml)
+[![lint](https://github.com/version-fox/vfox-elixir/actions/workflows/lint.yml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/lint.yml)
+[![test](https://github.com/version-fox/vfox-elixir/actions/workflows/test.yml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/test.yml)
+[![license](https://github.com/version-fox/vfox-elixir/actions/workflows/license.yml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/license.yml)
+[![vfox E2E tests](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e.yml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e.yml)
 [![mise E2E tests](https://github.com/version-fox/vfox-elixir/actions/workflows/mise_e2e_test.yaml/badge.svg)](https://github.com/version-fox/vfox-elixir/actions/workflows/mise_e2e_test.yaml)
 
 </div>
 
 # vfox-elixir plugin
 
-Elixir [vfox](https://github.com/version-fox) plugin. Use the vfox to manage multiple Elixir versions in Linux/Darwin MacOS/Windows. all platform~
+A [vfox](https://vfox.dev/) plugin for Elixir. It installs and switches between Elixir versions on Linux, macOS and Windows, and it manages the Erlang/OTP that each version needs.
+
+## Before you install
+
+Elixir runs on Erlang/OTP, which the plugin does not install for you. Install an Erlang/OTP version that Elixir supports first, see [Erlang/OTP](docs/erlang.md).
+
+```bash
+vfox add erlang
+vfox install erlang@26.2.3
+vfox use -g erlang@26.2.3
+```
 
 ## Usage
 
-```shell
-# install plugin
+```bash
+# install the plugin
 vfox add elixir
 
-# install an available version
+# list the versions you can install
 vfox search elixir
-# or specific version 
+
+# install and select a version
 vfox install elixir@1.16.2
+vfox use -g elixir@1.16.2
+elixir --version
 ```
 
-## Before install Elixir
+Linux and macOS build Elixir from source with `make`. On Windows, the plugin runs the official installer, and the names end in the OTP version, such as `1.16.2-elixir-otp-26`. See [platforms.md](docs/platforms.md) for the requirements of each platform, and [versions.md](docs/versions.md) for the names.
 
-vfox-elixir plugin would install Elixir through the [Elixir](https://elixir-lang.org/install.html#compiling-from-source) source code compilation. So you must have the utilities mentioned in the document -> [Compiling from source](https://elixir-lang.org/install.html#compiling-from-source).
+## Windows
 
-The installation of Elixir relies on Erlang/OTP. You can use the [vfox-erlang](https://github.com/version-fox/vfox-erlang) plugin to manage your Erlang/OTP versions.
-
-Ensure that Elixir and Erlang/OTP versions are compatible -> [Elixir and Erlang/OTP compatibility](https://hexdocs.pm/elixir/1.16.2/compatibility-and-deprecations.html#between-elixir-and-erlang-otp). 
-
-Here are two examples of installing on Ubuntu 20.04 and MacOS 13.
-
-### install in Linux (Ubuntu 20.04/22.04)
-
-```shell
-# install utilities
-sudo apt-get -y install build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libwxgtk-webview3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
-
-# install Erlang/OTP
+```powershell
 vfox add erlang
 vfox install erlang@26.2.3
 vfox use -g erlang@26.2.3
-
-# install Elixir
 vfox add elixir
-vfox install elixir@1.16.2
-vfox use -g elixir@1.16.2
-```
-
-You can reference the E2E test in Ubuntu 20.04: [https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml)
-
-### install in Darwin (MacOS 13)
-
-```shell
-# install utilities
-brew install autoconf libxslt fop wxwidgets openssl
-
-# install Erlang/OTP
-vfox add erlang
-vfox install erlang@26.2.3
-vfox use -g erlang@26.2.3
-
-# install Elixir
-vfox add elixir
-vfox install elixir@1.16.2
-vfox use -g elixir@1.16.2
-```
-
-You can reference the E2E test in MacOS 13: [https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml](https://github.com/version-fox/vfox-elixir/actions/workflows/e2e_test.yaml)
-
-## install Elixir in Windows platform
-
-You should use vfox 0.5.3+ to add vfox-elixir plugin in Windows platform. **Only support install Elixir versions after v1.15**, Elixir versions before v1.15 can also be installed using the deprecated [Online Elixir Installer](https://github.com/elixir-lang/elixir-windows-setup/releases/tag/v2.4).
-
-```shell
-# make sure an Erlang/OTP version is installed.
-vfox use -g erlang@26.2.3
-
-# Get avaliable version
-vfox search elixir
-
-# install an specific version
 vfox install elixir@1.16.2-elixir-otp-26
+vfox use -g elixir@1.16.2-elixir-otp-26
 ```
 
-## install a pre-built version from hex.pm
+Windows needs vfox 0.5.3 or later. Versions before 1.15 are not listed for Windows. See [platforms.md](docs/platforms.md#windows).
 
-You can also download a pre-built version from hex.pm. vfox-elixir will download it from: [https://github.com/hexpm/bob?tab=readme-ov-file#elixir-builds](https://github.com/hexpm/bob?tab=readme-ov-file#elixir-builds)
+## Hex prebuilt packages
 
-```shell
-(1) > VFOX_ELIXIR_MIRROR=hex vfox search elixir
-Please select a version of elixir to install [type to search]: 
-->  vmain (pre-built from hex.pm)
-   vmain-otp-22 (pre-built from hex.pm)
-   vmain-otp-23 (pre-built from hex.pm)
-   vmain-otp-24 (pre-built from hex.pm)
-   vmain-otp-25 (pre-built from hex.pm)
-   vmain-otp-26 (pre-built from hex.pm)
-   vmain-otp-27 (pre-built from hex.pm)
-   vmain-otp-28 (pre-built from hex.pm)
-   vmaster (pre-built from hex.pm)
+With `VFOX_ELIXIR_MIRROR=hex`, Linux and macOS install prebuilt Elixir from builds.hex.pm instead of compiling it. Windows does not support this. See [mirror.md](docs/mirror.md).
 
-(1) > VFOX_ELIXIR_MIRROR=hex vfox install elixir@main-otp-26
+```bash
+VFOX_ELIXIR_MIRROR=hex vfox search elixir
+VFOX_ELIXIR_MIRROR=hex vfox install elixir@1.16.2-otp-26
 ```
+
+## Elixir already on the machine
+
+`vfox link --detect elixir` links an Elixir that is already installed, from asdf, mise, Homebrew, Scoop, the system or the official installer, instead of installing another copy. It needs vfox 1.1.0 or later. See [link.md](docs/link.md).
 
 ## Usage with mise
 
@@ -118,6 +81,24 @@ mise use -g vfox:version-fox/vfox-erlang@26.2.3
 # Install an available version
 mise install vfox:version-fox/vfox-elixir@1.16.2
 ```
+
+## Documentation
+
+**Using the plugin**
+
+- [Versions and names](docs/versions.md): how to write a version, and how the names of installed versions are chosen
+- [Platforms](docs/platforms.md): the install method, requirements and limits of Linux, macOS and Windows
+- [Erlang/OTP](docs/erlang.md): the versions to pick, how the plugin finds `erlc`, and installing Erlang/OTP with vfox-erlang
+- [Hex prebuilt packages](docs/mirror.md): installing Elixir from builds.hex.pm with `VFOX_ELIXIR_MIRROR=hex`
+- [Elixir already on the machine](docs/link.md): adopting an Elixir that is installed elsewhere with `vfox link --detect elixir`
+- [Troubleshooting](docs/troubleshooting.md): the messages the plugin prints and what to do about them
+- [Changes](docs/changes.md): what each release changed
+
+**Working on the plugin**
+
+- [Install from source](docs/install-from-source.md): trying `main` before the next release
+- [Development](docs/development.md): how the plugin works, how to change it, and how to release it
+- [E2E tests](docs/e2e.md): the end-to-end tests on Linux, macOS and Windows
 
 ## Releasing this plugin
 
@@ -139,3 +120,7 @@ for the package contract and first-rollout requirements.
 [中文](https://version-fox.github.io/vfox-elixir/) · [English](https://version-fox.github.io/vfox-elixir/en/)
 
 The bilingual site is maintained under `website/`. See [website/README.md](website/README.md) for local build and deployment instructions.
+
+## License
+
+Apache 2.0. See [LICENSE](LICENSE).
