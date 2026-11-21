@@ -110,3 +110,12 @@ func (s *suite) installHexMirror(t *testing.T) {
 	s.downloadVfox(t, map[string]string{"VFOX_ELIXIR_MIRROR": "hex"}, "install", "-y", spec)
 	s.runHello(t, spec)
 }
+
+// installSpacedHome is the Windows step that installs Elixir into a home with a
+// space in its path. Unix has no official installer that runs into such a path,
+// and its home may not contain a space at all, so the step is skipped here.
+func (s *suite) installSpacedHome(t *testing.T) {
+	t.Helper()
+
+	t.Skip("the step with a space in the vfox home runs on Windows only")
+}

@@ -113,13 +113,14 @@ func TestIsolatedEnvWindows(t *testing.T) {
 	}
 }
 
-// TestHomeOnWindowsHasSpace checks that the default Windows home has a space in
-// its path, which covers the quoting of the installer path (fix 1).
-func TestHomeOnWindowsHasSpace(t *testing.T) {
-	if !homeMayContainSpace {
-		t.Error("homeMayContainSpace is false on Windows")
+// TestHomeOnWindowsHasNoSpace checks that the default Windows home has no space
+// in its path: the Erlang/OTP steps need one, see homeMayContainSpace. The space
+// case is covered by installSpacedHome.
+func TestHomeOnWindowsHasNoSpace(t *testing.T) {
+	if homeMayContainSpace {
+		t.Error("homeMayContainSpace is true on Windows")
 	}
-	if !strings.Contains(homePattern, " ") {
-		t.Errorf("homePattern %q has no space", homePattern)
+	if strings.Contains(homePattern, " ") {
+		t.Errorf("homePattern %q has a space", homePattern)
 	}
 }

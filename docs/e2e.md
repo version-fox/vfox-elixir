@@ -41,12 +41,12 @@ The named volume keeps the vfox home between runs, so an Erlang/OTP that is alre
 | Variable | Default | Meaning |
 | --- | --- | --- |
 | `VFOX_BIN` | `vfox` on `PATH` | the vfox binary to test |
-| `E2E_VFOX_HOME` | a new temporary directory, removed at the end | the vfox home (`VFOX_HOME`). When it is set, the directory is used as it is and kept, so a cache volume can hold Erlang/OTP. On Linux and macOS the path must not contain a space, and the suite refuses one: OTP's `configure` does not quote its paths and fails with a space in them |
+| `E2E_VFOX_HOME` | a new temporary directory, removed at the end | the vfox home (`VFOX_HOME`). When it is set, the directory is used as it is and kept, so a cache volume can hold Erlang/OTP. The path must not contain a space, and the suite refuses one: OTP's `configure` does not quote its paths on Linux and macOS, and on Windows the official Erlang/OTP installer left `erl.exe` out of reach of `vfox exec` in CI |
 | `E2E_ERLANG_VERSION` | `26.2.3` | the Erlang/OTP version to install. Its major version is the OTP release that the suite checks for |
 | `E2E_ELIXIR_VERSION` | `1.16.2` | the Elixir version of the source and hex installs |
 | `E2E_ERLANG_SOURCE` | `https://github.com/version-fox/vfox-erlang/archive/refs/heads/main.zip` | where `vfox add` gets the `erlang` plugin |
 
-The default home is named `vfox-home-…` on Linux and macOS. On Windows it is named `vfox home-…`, with a space on purpose: the path of the Windows installer has to work with a space, and that case broke before.
+The default home is named `vfox-home-…` on every platform, and its path has no space. On Windows the space case is checked by the step `installer in a spaced home`, which installs Elixir into a home named `vfox home-…`. That step needs no Erlang/OTP.
 
 Each vfox process starts without the variables whose names begin with `VFOX_` or `__VFOX_`, so the vfox settings of your shell do not change the run. Each process also gets `HOME` and `USERPROFILE` set to temporary directories that the suite creates, so your real home directory is never read or written.
 
@@ -56,16 +56,17 @@ The steps below run in order, and each one logs its commands and their output. A
 
 1. **vfox version** prints the version of vfox under test. It asserts nothing.
 2. **add plugins** removes an Elixir plugin left by an earlier run in the same home, together with its installs, then adds `elixir` from a zip of `metadata.lua`, `hooks/*.lua` and `lib/*.lua` in the working tree. It adds `erlang` from `E2E_ERLANG_SOURCE`, unless the home already has that plugin.
-3. **erlang** installs `erlang@<E2E_ERLANG_VERSION>`. If the home already has it and `erl` reports the OTP major version, the install is skipped. Otherwise it is installed again. Then the suite checks that `erl` reports that major version.
-4. **elixir** installs Elixir and runs `hello.ex` with it:
+3. **installer in a spaced home** (Windows only) installs Elixir into a new home whose path has a space, from the same zip, and checks that the installer wrote `VERSION` and `bin\elixir.bat` under the install directory. It needs no Erlang/OTP. The step is skipped on Linux and macOS.
+4. **erlang** installs `erlang@<E2E_ERLANG_VERSION>`. If the home already has it and `erl` reports the OTP major version, the install is skipped. Otherwise it is installed again. Then the suite checks that `erl` reports that major version.
+5. **elixir** installs Elixir and runs `hello.ex` with it:
    - Linux and macOS: `vfox install elixir@1.16.2`, then `vfox exec erlang@26.2.3 elixir@1.16.2 -- elixir hello.ex`.
    - Windows: `vfox install elixir@1.16.2-elixir-otp-26`, then the same program with that name.
 
    `hello.ex` is a copy of `assets/hello.ex`, made in a new directory. The output must contain `Hello world from Elixir`.
-5. **hex mirror**:
+6. **hex mirror**:
    - Linux and macOS: `VFOX_ELIXIR_MIRROR=hex vfox install elixir@1.16.2-otp-26`, then the program runs as in step 4.
    - Windows: the same install must fail, and its output must mention Windows.
-6. **detect** creates a fake Elixir installation in the suite's home directory. It has a launcher that prints `Elixir 1.99.0 (fake)`, and a `VERSION` file that says `1.99.0`.
+7. **detect** creates a fake Elixir installation in the suite's home directory. It has a launcher that prints `Elixir 1.99.0 (fake)`, and a `VERSION` file that says `1.99.0`.
    - Linux and macOS: `bin/elixir` under `$HOME/.asdf/installs/elixir/1.99.0-otp-26`. asdf names an installation after its directory, so the name is `1.99.0-otp-26`.
    - Windows: `bin\elixir.bat` under `%USERPROFILE%\scoop\apps\elixir\1.99.0`. Scoop names an installation after `VERSION`, so the name is `1.99.0`.
 

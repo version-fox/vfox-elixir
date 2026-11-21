@@ -27,13 +27,14 @@ import (
 const elixirProgram = "elixir"
 
 // homePattern is the name pattern of the VFOX_HOME that a Windows run creates
-// when E2E_VFOX_HOME is unset. The path has a space on purpose: the installer
-// path must be quoted when it is run, and this is the case that broke before.
-const homePattern = "vfox home-"
+// when E2E_VFOX_HOME is unset. The path has no space, see homeMayContainSpace.
+const homePattern = "vfox-home-"
 
-// homeMayContainSpace is true on Windows: the Erlang/OTP install runs the
-// official installer, which does not build from source.
-const homeMayContainSpace = true
+// homeMayContainSpace is false on Windows too. In CI, after the official
+// Erlang/OTP installer had run into a home whose path had a space, vfox exec
+// found no erl.exe, so the steps that install Erlang/OTP use a home without one.
+// installSpacedHome checks the space case of the Elixir installer on its own.
+const homeMayContainSpace = false
 
 // fakeWindowsElixir is bin\elixir.bat of a fake installation. Batch files need
 // CRLF line endings, and the banner is printed for any arguments.
@@ -121,5 +122,40 @@ func (s *suite) installHexMirror(t *testing.T) {
 	if !strings.Contains(result.output(), "Windows") {
 		t.Fatalf("the failure should say that hex.pm builds are not available on Windows\n--- output ---\n%s",
 			result.output())
+	}
+}
+
+// installSpacedHome installs an official Elixir build into a vfox home whose path
+// has a space, as the home of a Windows account with a space in its name would
+// be, and checks the files that the installer writes. It needs no Erlang/OTP: the
+// step checks the command line that the installer runs with, whose paths must be
+// quoted for a space to survive.
+func (s *suite) installSpacedHome(t *testing.T) {
+	t.Helper()
+
+	version := officialVersion(s.elixirVersion, s.otp)
+	installer, ok := windowsInstallerURL(version)
+	if !ok {
+		t.Fatalf("%q is not a Windows version name", version)
+	}
+	home := tempDir(t, "vfox home-")
+	if !strings.Contains(home, " ") {
+		t.Fatalf("the temporary home %q has no space", home)
+	}
+	// The home reaches vfox through the environment of each command, so the
+	// shared home of the suite is left alone.
+	extra := map[string]string{"VFOX_HOME": home}
+	s.downloadVfox(t, extra, "add", "--source", s.pluginZip, "elixir")
+	result := s.downloadVfox(t, extra, "install", "-y", "elixir@"+version)
+	if !strings.Contains(result.output(), installer) {
+		t.Fatalf("the install output does not name the installer %s\n--- output ---\n%s",
+			installer, result.output())
+	}
+	sdk := filepath.Join(home, "cache", "elixir", "v-"+version, "elixir-"+version)
+	for _, file := range []string{"VERSION", filepath.Join("bin", "elixir.bat")} {
+		if !pathExists(filepath.Join(sdk, file)) {
+			t.Fatalf("the installer wrote no %s under %s\n--- output ---\n%s",
+				file, sdk, result.output())
+		}
 	}
 }

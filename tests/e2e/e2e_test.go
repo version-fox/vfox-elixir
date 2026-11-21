@@ -15,7 +15,9 @@
 package e2e
 
 import (
+	"io/fs"
 	"path/filepath"
+	"slices"
 	"strings"
 	"testing"
 )
@@ -40,6 +42,8 @@ func TestE2E(t *testing.T) {
 	if !t.Run("add plugins", s.addPlugins) {
 		t.Fatal("the plugins are needed by every later step")
 	}
+	// Needs no Erlang/OTP, so it runs before the Erlang/OTP steps.
+	t.Run("installer in a spaced home", s.installSpacedHome)
 	if !t.Run("erlang", s.installErlang) {
 		t.Fatal("Erlang/OTP is needed by the Elixir steps")
 	}
@@ -101,8 +105,11 @@ func (s *suite) installErlang(t *testing.T) {
 
 	probe := s.probeErlang(t)
 	if !s.erlangReports(probe) {
-		t.Fatalf("erl does not report OTP %s after installing %s\n--- output ---\n%s",
-			s.otp, spec, probe.output())
+		// Where the installer put erl, for the failure message: vfox exec looks
+		// only where EnvKeys says.
+		where := strings.Join(findNamed(s.sdkRoot("erlang"), "erl", "erl.exe"), "\n")
+		t.Fatalf("erl does not report OTP %s after installing %s\n--- erl under the cache ---\n%s\n--- output ---\n%s",
+			s.otp, spec, where, probe.output())
 	}
 }
 
@@ -166,4 +173,21 @@ func (s *suite) detectFakeInstall(t *testing.T) {
 // of separator.
 func containsPath(output, path string) bool {
 	return strings.Contains(output, path) || strings.Contains(output, filepath.ToSlash(path))
+}
+
+// findNamed lists the files under root whose names are among names, so that a
+// failure can say where an installer put a program. It lists one line saying
+// none when there is none.
+func findNamed(root string, names ...string) []string {
+	var found []string
+	_ = filepath.WalkDir(root, func(path string, entry fs.DirEntry, err error) error {
+		if err == nil && !entry.IsDir() && slices.Contains(names, entry.Name()) {
+			found = append(found, path)
+		}
+		return nil
+	})
+	if len(found) == 0 {
+		return []string{"(none under " + root + ")"}
+	}
+	return found
 }
