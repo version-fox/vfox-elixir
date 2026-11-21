@@ -1,3 +1,17 @@
+# Copyright 2026 vfox-elixir contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 name: mise E2E tests
 
 on:
@@ -25,7 +39,7 @@ jobs:
       fail-fast: false
       matrix:
         # ref: https://github.com/actions/runner-images
-        os: [ubuntu-22.04, macos-latest]
+        os: [ubuntu-24.04, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -34,8 +48,7 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           curl https://mise.run | sh
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-          source ~/.bashrc || true
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Verify mise installation (Unix-like)
         if: runner.os != 'Windows'
@@ -53,7 +66,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update -y
-          sudo apt-get -y install build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libwxgtk-webview3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
+          sudo apt-get -y install build-essential autoconf m4 libncurses-dev libssl-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils openjdk-11-jdk
           export MAKEFLAGS=-j4
           export PATH="$HOME/.local/bin:$PATH"
           

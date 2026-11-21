@@ -1,68 +1,62 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file gives guidance to coding agents working in this repository.
 
-## Project Overview
+## Project overview
 
-This is a vfox plugin for managing multiple Elixir versions across Windows, Linux, and macOS platforms. The plugin integrates with vfox (version-fox), a universal SDK version management tool.
+vfox-elixir is a [vfox](https://vfox.dev) plugin that installs and selects Elixir
+versions on Linux, macOS and Windows. Elixir is compiled from source on Unix-like
+systems (it needs Erlang/OTP), installed from the official installer on Windows,
+or taken as a prebuilt zip from hex.pm with `VFOX_ELIXIR_MIRROR=hex`. The plugin
+also finds Elixir installations that are already on the machine (`vfox link --detect elixir`).
 
-## Code Architecture and Structure
+The user-facing documentation is in `README.md` and `docs/`; the Chinese versions are
+`README_CN.md` and `docs/zh-CN/`. Keep both languages in step.
 
-- **Plugin Entry Point**: `metadata.lua` - Contains plugin metadata like name, version, and compatibility requirements
-- **Core Logic**: `lib/elixir_utils.lua` - Utility functions for version management, HTTP requests, and platform-specific operations
-- **Hook System**: The `hooks/` directory contains Lua files that implement the vfox plugin interface:
-  - `available.lua` - Lists available Elixir versions
-  - `pre_install.lua` - Handles version validation and download URL generation
-  - `post_install.lua` - Performs post-installation tasks like compilation
-  - `pre_use.lua` - Validates version before activation
-  - `env_keys.lua` - Configures environment variables for installed versions
+## Layout
 
-## Common Development Commands
+- `metadata.lua`: plugin name, version, dependencies and notes. Do not rename it.
+- `hooks/`: the vfox hooks. `available.lua`, `pre_install.lua`, `post_install.lua`,
+  `pre_use.lua`, `env_keys.lua`, `detect.lua` (for `vfox link --detect`).
+- `lib/`: shared modules. `platform.lua` (paths, shell quoting, command output),
+  `elixir_utils.lua` (version lists, URLs, build and installer commands, Erlang/OTP lookup),
+  `installed_version.lua` (matching a typed version against installed names),
+  `detect_elixir.lua` (finding installations that vfox did not install).
+- `tests/*_test.lua`: offline hook tests, run by `vfox plugin test .` (vfox 1.1.0).
+  `tests/post_install_layouts.lua` runs the real PostInstall shell under glua.
+- `tests/e2e/`: the end-to-end suite, a Go program using only the standard library. It drives
+  vfox on the host; see `docs/e2e.md`.
+- `assets/`: version lists updated weekly by `update_elixir_versions.yaml`, and `hello.ex`,
+  the program the E2E suite runs.
+- `website/`: the bilingual GitHub Pages site, built by `website/build.py`.
+- `Injection.lua`: type hints for what vfox injects. Never loaded.
 
-### Testing
-
-```bash
-# The project uses GitHub Actions for E2E testing across platforms
-# Tests are defined in .github/workflows/e2e_test.yaml
-
-# Mise E2E tests are defined in .github/workflows/mise_e2e_test.yaml
-
-# To run tests locally, you would need to:
-# 1. Install vfox or mise
-# 2. Add the plugin
-# 3. Install and test Elixir versions
-```
-
-### Version Management
+## Local checks
 
 ```bash
-# Update Elixir versions list
-# Done via GitHub Actions workflow in .github/workflows/update_elixir_versions.yaml
-
-# The versions are stored in assets/versions.txt (Unix) and assets/versions_win.txt (Windows)
+stylua --check .                                   # Lua formatting (stylua.toml)
+lua-language-server --check . --checklevel=Warning # Lua types
+vfox plugin test .                                 # offline hook tests, with vfox 1.1.0
+go run github.com/yuin/gopher-lua/cmd/glua@v1.1.1 tests/post_install_layouts.lua
+(cd tests/e2e && gofmt -l . && go vet ./... && GOOS=windows go vet ./... && go test -short ./...)
+ruff format --check assets website && ruff check assets website   # Python
+license-eye header check -c .licenserc.yaml        # license headers
 ```
 
-## Key Implementation Details
+Run the E2E suite (`tests/e2e`, `-run TestE2E`) only when the change can affect an install:
+it compiles Erlang/OTP, which takes a long time. `docs/e2e.md` has the commands, including
+one for a temporary Ubuntu container.
 
-1. **Multi-platform Support**: The plugin handles different installation methods for Windows (pre-built installers) and Unix-like systems (source compilation)
+## Conventions
 
-2. **Mirror Support**: Can install from official Elixir releases or pre-built versions from hex.pm (controlled by VFOX_ELIXIR_MIRROR environment variable)
-
-3. **Dependency Management**: Requires Erlang/OTP to be installed before Elixir installation
-
-4. **Installation Process**:
-   - Unix/Linux: Downloads source code and compiles with `make`
-   - Windows: Downloads and executes official installer
-   - Hex mirror: Downloads pre-built binaries
-
-## Plugin Interface
-
-The plugin implements the standard vfox plugin interface through the hook files:
-
-- `PLUGIN:Available()` - Returns list of available versions
-- `PLUGIN:PreInstall()` - Prepares for installation
-- `PLUGIN:PostInstall()` - Performs post-installation tasks
-- `PLUGIN:PreUse()` - Validates before version activation
-- `PLUGIN:EnvKeys()` - Sets up environment variables
-
-This architecture allows the plugin to integrate seamlessly with vfox's version management system while handling the specific requirements of Elixir installation across different platforms.
+- Every source file carries the Apache-2.0 header from `.licenserc.yaml`. Documentation,
+  JSON, TXT and PNG files are exempt.
+- Lua runs under vfox's Lua 5.1 (gopher-lua). Use `platform.lua` for paths and shell
+  commands; quote every path that goes into a shell command.
+- A test that calls `pcall` must come last in its file: gopher-lua closures stop seeing
+  later assignments to the locals around them once `pcall` has caught an error.
+- Version names: source builds `1.16.2`, hex.pm builds `1.16.2-otp-26`, Windows installers
+  `1.16.2-elixir-otp-26`. A release typed without its OTP release selects the newest build of it.
+- `vfox` tests and hooks must not assume the real HOME or USERPROFILE: tests set them.
+- Do not add Windows installer logic that depends on Erlang/OTP being registered in the registry;
+  the silent installer does not need it.

@@ -1,0 +1,147 @@
+# Copyright 2026 vfox-elixir contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: E2E
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/e2e.yml'
+      - 'metadata.lua'
+      - 'hooks/**'
+      - 'lib/**'
+      - 'assets/hello.ex'
+      - 'tests/e2e/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/e2e.yml'
+      - 'metadata.lua'
+      - 'hooks/**'
+      - 'lib/**'
+      - 'assets/hello.ex'
+      - 'tests/e2e/**'
+  workflow_dispatch:
+  schedule:
+    # Runs at 12am UTC
+    - cron: '0 0 * * *'
+
+permissions:
+  contents: read
+
+# A new push to a pull request replaces the run of the push before it. Every
+# commit on main gets a group of its own, so a newer commit never cancels the
+# run of an older one.
+concurrency:
+  group: e2e-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  e2e:
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # ref: https://github.com/actions/runner-images
+        include:
+          - name: Linux (x86_64)
+            os: ubuntu-24.04
+          - name: Linux (arm64)
+            os: ubuntu-24.04-arm
+          - name: macOS
+            os: macos-latest
+          - name: Windows
+            os: windows-latest
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 120
+    env:
+      # Erlang/OTP is compiled from source, which takes the most time of the run.
+      MAKEFLAGS: -j4
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.27.1'
+          cache: false
+
+      # The vfox releases are pinned by version and checksum, as in test.yml.
+      - name: Install vfox (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          case "$(uname -m)" in
+            x86_64) arch=x86_64; sha256=3b33c3c468b27bc17aecf0d6d3af24fe49fe204972984904a136a47b402a0ee4 ;;
+            aarch64) arch=aarch64; sha256=e702e057dfe588200727dfb3cf786d181b13f015cbcc9e13679a3edcfd07e430 ;;
+            *) echo "unsupported architecture: $(uname -m)" >&2; exit 1 ;;
+          esac
+          archive="$RUNNER_TEMP/vfox.tar.gz"
+          curl --fail --silent --show-error --location --output "$archive" \
+            "https://github.com/version-fox/vfox/releases/download/v1.1.0/vfox_1.1.0_linux_${arch}.tar.gz"
+          echo "$sha256  $archive" | sha256sum --check
+          mkdir "$RUNNER_TEMP/vfox"
+          tar --extract --gzip --file "$archive" --directory "$RUNNER_TEMP/vfox" --strip-components=1 \
+            "vfox_1.1.0_linux_${arch}/vfox"
+          echo "$RUNNER_TEMP/vfox" >> "$GITHUB_PATH"
+
+      - name: Install vfox (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          case "$(uname -m)" in
+            arm64) arch=aarch64; sha256=9beb733ad636966c6d410c768407c63ffb350106eb23a8151d6fc80b9e84248e ;;
+            x86_64) arch=x86_64; sha256=ac4bcda2224a0f8aedf35e3ae22454dc97cf79b69899f43ef6519255a0feb7f6 ;;
+            *) echo "unsupported architecture: $(uname -m)" >&2; exit 1 ;;
+          esac
+          archive="$RUNNER_TEMP/vfox.tar.gz"
+          curl --fail --silent --show-error --location --output "$archive" \
+            "https://github.com/version-fox/vfox/releases/download/v1.1.0/vfox_1.1.0_macos_${arch}.tar.gz"
+          echo "$sha256  $archive" | shasum --algorithm 256 --check
+          mkdir "$RUNNER_TEMP/vfox"
+          tar --extract --gzip --file "$archive" --directory "$RUNNER_TEMP/vfox" --strip-components=1 \
+            "vfox_1.1.0_macos_${arch}/vfox"
+          echo "$RUNNER_TEMP/vfox" >> "$GITHUB_PATH"
+
+      - name: Install vfox (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $archive = Join-Path $env:RUNNER_TEMP "vfox.zip"
+          Invoke-WebRequest -Uri "https://github.com/version-fox/vfox/releases/download/v1.1.0/vfox_1.1.0_windows_x86_64.zip" -OutFile $archive
+          $sha256 = (Get-FileHash -Algorithm SHA256 -Path $archive).Hash.ToLower()
+          if ($sha256 -ne "1bbec8fffddbb62de0d93030c3f6203c69680662bc65257ca4a5e611cb607d0a") {
+              throw "vfox checksum mismatch: $sha256"
+          }
+          $dir = Join-Path $env:RUNNER_TEMP "vfox"
+          Expand-Archive -Path $archive -DestinationPath $dir -Force
+          Add-Content -Path $env:GITHUB_PATH -Value (Join-Path $dir "vfox_1.1.0_windows_x86_64")
+
+      # Erlang/OTP's build needs these; wx is left out on Linux, where the
+      # packages of the older releases are gone, and Erlang builds without it.
+      - name: Install Erlang/OTP build dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y build-essential autoconf m4 libncurses-dev libssl-dev libssh-dev \
+            unixodbc-dev xsltproc fop libxml2-utils openjdk-11-jdk
+
+      - name: Install Erlang/OTP build dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: brew install autoconf libxslt fop wxwidgets openssl
+
+      # The suite drives vfox on this host: it adds the plugin from the working
+      # tree, installs Erlang/OTP and Elixir, and checks each install by running
+      # a program. See docs/e2e.md.
+      - name: Run the E2E suite
+        working-directory: tests/e2e
+        run: go test -v -timeout 110m -run TestE2E ./...
