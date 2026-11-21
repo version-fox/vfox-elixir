@@ -1,0 +1,12 @@
+{
+  "name": "vfox-elixir (Linux)",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["golang.go", "sumneko.lua"]
+    }
+  }
+}
