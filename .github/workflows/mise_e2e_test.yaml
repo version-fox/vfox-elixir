@@ -48,8 +48,7 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           curl https://mise.run | sh
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-          source ~/.bashrc || true
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Verify mise installation (Unix-like)
         if: runner.os != 'Windows'
