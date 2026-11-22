@@ -54,7 +54,7 @@ The vfox documentation describes the other fields of these hooks.
 
 `vfox plugin test .` runs the offline hook tests in `tests/*_test.lua`. It needs vfox 1.1.0 or later. Run it from the repository root.
 
-`tests/post_install_layouts.lua` runs the shell commands of `PostInstall` in real directories, one of them with a space in its path, with a fake `make` and a fake `erlc` in the vfox cache. It is not a `*_test.lua` file, because vfox's test VM disables `os.execute` and `io.popen`. It runs under `gopher-lua`, the Lua interpreter that vfox embeds:
+`tests/post_install_layouts.lua` runs the shell commands of `PostInstall` in a real directory, with a fake `make` and a fake `erlc` in the vfox cache, and checks that a path with a space or another shell character is refused before `make` runs. It is not a `*_test.lua` file, because vfox's test VM disables `os.execute` and `io.popen`. It runs under `gopher-lua`, the Lua interpreter that vfox embeds:
 
 ```bash
 go run github.com/yuin/gopher-lua/cmd/glua@v1.1.1 tests/post_install_layouts.lua

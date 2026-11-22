@@ -6,6 +6,19 @@ What changed in each release, as a user notices it.
 
 ## Unreleased
 
+### Fixed
+
+- Linux and macOS: a source build stops before `make` when the vfox home path holds a space or another character that the shell reads. Elixir's Makefile cannot build in such a path, and the build used to fail inside `make`. The docs said that Elixir's installs handle a space in the vfox home on every platform; that was not true for source builds (#31).
+- With `VFOX_ELIXIR_MIRROR=hex`, `latest` resolved to `1.20-latest`, which has no pre-built build, and the install failed on the download. The install now stops before the download and names a build to install instead (#27).
+- `vfox search elixir hex` lists only the builds whose name has an OTP suffix, such as `1.16.2-otp-26`. A build without one, such as `1.20.5`, can refuse to run under another Erlang/OTP, so it is no longer listed (#28).
+- With `VFOX_ELIXIR_MIRROR=hex`, the hint about `vfox search elixir hex` goes to standard error, not into the version list (#29).
+- A version list that a server sends as plain text with status 200, such as `Error code: 404`, is no longer listed or cached as versions. The search and the install stop with the same message as for an error page (#30).
+- The README said that the plugin manages the Erlang/OTP that each version needs. The plugin does not install Erlang/OTP, and the README now says so (#32).
+
+### Changed
+
+- With `VFOX_ELIXIR_MIRROR=hex`, `vfox install` prints the Erlang/OTP that a build needs. It warns when the name has no OTP suffix, because the build may then refuse to run under another Erlang/OTP (#28).
+
 ## 1.0.1 - 2026-11-22
 
 ### Added

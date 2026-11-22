@@ -31,8 +31,17 @@ function PLUGIN:PreInstall(ctx)
 
     if elixirUtils.use_hex_mirror() then
         elixirUtils.check_hex_mirror_platform()
+        local otp_release = elixirUtils.check_hex_build(elixir_version)
         local hex_url = elixirUtils.get_hex_prebuild_url(elixir_version)
         print("Download URL: " .. hex_url)
+        if otp_release then
+            print("This build needs Erlang/OTP " .. otp_release .. ".")
+        else
+            print(
+                "Warning: this name has no -otp-N suffix, so hex.pm does not say which Erlang/OTP the build is for. "
+                    .. "If elixir then refuses to run, install a name with -otp-N (see vfox search elixir hex)."
+            )
+        end
         return {
             version = elixir_version,
             url = hex_url,

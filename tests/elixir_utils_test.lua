@@ -159,3 +159,27 @@ local ok, err = pcall(function()
     elixir_utils.require_erlang_bin("/home/u/.version-fox/cache")
 end)
 assert(not ok and tostring(err):find("vfox install erlang@26.2.3", 1, true), "missing erlang: " .. tostring(err))
+
+-- The Erlang/OTP release a hex.pm name names, and the names latest is refused for.
+check(elixir_utils.hex_otp_release("1.16.2-otp-26"), "26", "release with OTP")
+check(elixir_utils.hex_otp_release("main-otp-26"), "26", "branch with OTP")
+check(elixir_utils.hex_otp_release("1.20.5"), nil, "no OTP suffix")
+check(elixir_utils.check_hex_build("1.16.2-otp-26"), "26", "named build")
+check(elixir_utils.check_hex_build("1.20.5"), nil, "unnamed build")
+ok, err = pcall(function()
+    elixir_utils.check_hex_build("1.20-latest")
+end)
+assert(not ok and tostring(err):find("has no pre-built build on hex.pm", 1, true), "latest: " .. tostring(err))
+
+-- A source directory with a space or another character the shell reads is refused,
+-- because Elixir's Makefile expands it without quotes (issue #31). A plain path is not.
+for _, path in ipairs({ "/home/u/vfox home/cache", "/home/u/it's/cache", "/home/u/cost$5", "/home/u/a(b)" }) do
+    ok, err = pcall(function()
+        elixir_utils.check_build_path(path)
+    end)
+    assert(not ok and tostring(err):find("cannot run in", 1, true), "refuse " .. path .. ": " .. tostring(err))
+end
+ok, err = pcall(function()
+    elixir_utils.check_build_path("/home/u/.version-fox/cache/elixir/v-1.16.2/elixir-1.16.2")
+end)
+assert(ok, "a plain path is refused: " .. tostring(err))

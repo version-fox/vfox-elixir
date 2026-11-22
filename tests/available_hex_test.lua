@@ -36,8 +36,8 @@ end
 
 local BUILDS = "https://builds.hex.pm/builds/elixir/builds.txt"
 
--- The builds of hex.pm: the first word of each line is the name. A release
--- loses its v, a branch keeps its name.
+-- The builds of hex.pm: the first word of each line is the name, and the second
+-- is the commit of the build. A release loses its v, a branch keeps its name.
 answers[BUILDS] = {
     status_code = 200,
     body = table.concat({
@@ -48,13 +48,13 @@ answers[BUILDS] = {
         "",
     }, "\n"),
 }
+-- Only the names with an OTP suffix are listed: the builds without one do not
+-- say which Erlang/OTP they were built with (issue #28).
 local list = plugin:Available({ args = { "hex" } })
-check(#list, 4, "count")
-check(list[1].version, "main", "branch")
+check(#list, 2, "count")
+check(list[1].version, "main-otp-26", "branch with OTP")
 check(list[1].note, "pre-built from hex.pm", "note")
-check(list[2].version, "main-otp-26", "branch with OTP")
-check(list[3].version, "1.16.2-otp-26", "release with OTP")
-check(list[4].version, "1.20.5", "release")
+check(list[2].version, "1.16.2-otp-26", "release with OTP")
 
 -- The checks that expect an error come last in the file.
 -- An empty builds.txt is not a list either: the search stops, and lists nothing.
@@ -63,6 +63,14 @@ local ok, err = pcall(function()
     plugin:Available({ args = { "hex" } })
 end)
 assert(not ok and tostring(err):find("not a list of versions", 1, true), "empty builds.txt: " .. tostring(err))
+
+-- A plain-text error page with status 200 is no list either: its lines hold no
+-- builds, so nothing is listed or cached (issue #30).
+answers[BUILDS] = { status_code = 200, body = "Error code: 404\nMessage: File not found\n" }
+ok, err = pcall(function()
+    plugin:Available({ args = { "hex" } })
+end)
+assert(not ok and tostring(err):find("not a list of versions", 1, true), "plain text builds.txt: " .. tostring(err))
 
 -- Only hex is a search argument, and only one of them.
 ok, err = pcall(function()

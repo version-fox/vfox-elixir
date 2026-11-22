@@ -106,9 +106,9 @@ vfox 1.1.0 只按写出的名字在 SDK 的 PATH 中查找命令，不会尝试 
 
 名字中的 OTP 编号必须与运行 Elixir 的 Erlang/OTP 一致。`1.16.2-otp-26` 需要 Erlang/OTP 26。用 [erlang.md](erlang.md#windows) 中的命令检查版本。
 
-### 路径含空格时失败
+### 路径含空格或其他 Shell 字符时失败
 
-Elixir 的安装在所有平台上都能处理 vfox 主目录中的空格，见 [变更记录](changes.md)。但 Erlang/OTP 的源码构建不能：它的 `configure` 步骤不会给路径加引号。在 Linux 和 macOS 上，从源码构建 Erlang/OTP 时请让 vfox 主目录的路径不含空格。如果 Elixir 的安装在路径含空格时仍然失败，请连同输出一起报告，见下文。
+在 Linux 和 macOS 上，Elixir 的源码构建在 vfox 主目录（`VFOX_HOME`）含有空格、引号或其他会被 Shell 解释的字符（例如 `$`、`;`、`&`、`(` 或 `*`）时，会在调用 `make` 之前停止，并指出该路径。Elixir 的 Makefile 会把目录不加引号地放进命令里，所以 `make` 无法在这样的路径上构建。请让 vfox 主目录的路径不含这些字符，然后重新安装。预编译包（`VFOX_ELIXIR_MIRROR=hex`）不运行 `make`，因此不受此限制。Erlang/OTP 的源码构建也有同样的限制，因为它的 `configure` 步骤不会给路径加引号：在 Linux 和 macOS 上，从源码构建 Erlang/OTP 时请让 vfox 主目录的路径不含空格，见 [erlang.md](erlang.md)。
 
 ### `vfox link --detect` 找不到 Elixir 安装
 
