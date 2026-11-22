@@ -2,7 +2,7 @@
 
 # Install from source
 
-`vfox add elixir` installs the latest release. To try the `main` branch before the next release, or a change you are working on, add the plugin from source. A plugin is `metadata.lua` plus the `hooks` and `lib` directories, and vfox can add one from a zip file or a zip URL.
+`vfox add elixir` adds the plugin from its latest release. To try the `main` branch before the next release, or a change you are working on, add the plugin from source. A plugin is `metadata.lua` plus the `hooks` and `lib` directories, and vfox can add one from a zip file or a zip URL.
 
 ## Add the main branch
 

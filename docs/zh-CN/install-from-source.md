@@ -2,7 +2,7 @@
 
 # 从源码安装
 
-`vfox add elixir` 安装的是最新发布的版本。要在下一个版本发布之前试用 `main` 分支，或者试用你正在修改的代码，请从源码添加插件。插件就是 `metadata.lua` 加上 `hooks` 和 `lib` 目录，vfox 可以从 zip 文件或 zip 的 URL 添加它。
+`vfox add elixir` 添加的是插件的最新发布版本。要在下一个版本发布之前试用 `main` 分支，或者试用你正在修改的代码，请从源码添加插件。插件就是 `metadata.lua` 加上 `hooks` 和 `lib` 目录，vfox 可以从 zip 文件或 zip 的 URL 添加它。
 
 ## 添加 main 分支
 

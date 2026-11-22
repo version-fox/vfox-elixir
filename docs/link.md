@@ -47,7 +47,7 @@ The name is:
 - For asdf and mise, the directory name, such as `1.16.2-otp-26`.
 - Otherwise the content of `VERSION`, or the version in `lib/elixir/ebin/elixir.app` when there is no `VERSION` file.
 
-A name must contain only letters, digits, `.`, `_`, `+` and `-`, and it cannot be `latest`. Other installations are skipped.
+A name must start with a letter or digit, contain only letters, digits, `.`, `_`, `+` and `-`, and it cannot be `latest`. Other installations are skipped.
 
 The plugin never reports vfox's own installs under `.vfox` or `.version-fox`, or under `VFOX_HOME`, because vfox already manages them. The same path is reported once, and so is the same name. The first one found wins. The list is sorted by name.
 
