@@ -80,7 +80,7 @@ The workflows in `.github/workflows/` run these checks. Run the same commands be
 
 A maintainer publishes from **Actions → Plugin → Run workflow** on the default branch, entering a stable plugin version without the `v` prefix. The shared workflow, [plugin-manifest-action](https://github.com/version-fox/plugin-manifest-action), updates `metadata.lua`, creates the version commit and the tag, and publishes the ZIP and the manifest in this repository. No local tag or extra release token is needed. Pull requests run the checks only.
 
-Pushing a version tag publishes too, when `PLUGIN.version` already matches the tag. If publication fails, re-run the failed job to resume it. `metadata.lua` keeps `PLUGIN.version = "1.0.0"` in the repository; the release workflow changes it.
+Pushing a version tag publishes too, when `PLUGIN.version` already matches the tag. If publication fails, re-run the failed job to resume it. The release workflow changes `PLUGIN.version` in `metadata.lua`, so do not edit that line by hand.
 
 ## Website
 

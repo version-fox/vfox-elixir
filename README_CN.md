@@ -14,7 +14,7 @@
 
 # vfox-elixir 插件
 
-[vfox](https://vfox.dev/) 的 Elixir 插件。它可以在 Linux、macOS 和 Windows 上安装并切换 Elixir 版本，并管理每个版本所需的 Erlang/OTP。
+[vfox](https://vfox.dev/) 的 Elixir 插件。它可以在 Linux、macOS 和 Windows 上安装并切换 Elixir 版本。插件不会安装 Erlang/OTP，而 Elixir 需要它，见[安装前的准备](#安装前的准备)。
 
 ## 安装前的准备
 

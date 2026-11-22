@@ -80,7 +80,7 @@ go run github.com/yuin/gopher-lua/cmd/glua@v1.1.1 tests/post_install_layouts.lua
 
 维护者在默认分支上运行 **Actions → Plugin → Run workflow**，输入不带 `v` 前缀的稳定插件版本号即可发布。共享的工作流 [plugin-manifest-action](https://github.com/version-fox/plugin-manifest-action) 会更新 `metadata.lua`，创建版本提交和标签，并在本仓库发布 ZIP 和 manifest。不需要本地打标签，也不需要额外的发布令牌。Pull Request 只运行检查。
 
-当 `PLUGIN.version` 已与标签一致时，推送版本标签也会发布。发布失败时，重新运行失败的任务即可继续。仓库中的 `metadata.lua` 保持 `PLUGIN.version = "1.0.0"`，由发布工作流修改它。
+当 `PLUGIN.version` 已与标签一致时，推送版本标签也会发布。发布失败时，重新运行失败的任务即可继续。`metadata.lua` 中的 `PLUGIN.version` 由发布工作流修改，请不要手动改这一行。
 
 ## 网站
 

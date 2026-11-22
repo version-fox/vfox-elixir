@@ -58,7 +58,7 @@ A source build needs an `erlc`. The plugin looks in this order and uses the firs
 
 1. `erlc` on `PATH`. This includes the Erlang/OTP that `vfox use -g` put on `PATH`, and any other `erlc` on `PATH`.
 2. vfox's own Erlang cache: `erlc` inside `<VFOX_HOME>/cache/erlang`, searched up to six directories deep. `vfox install erlang@26.2.3` stores Erlang/OTP there. A source build keeps its `erlc` in `release/bin`, which is taken first; then `bin` and `lib/erlang/bin`, where a prebuilt install keeps it. OTP's `bootstrap` directory is never used, because its Erlang/OTP has no `make` module. `<VFOX_HOME>` is vfox's home directory.
-3. mise's Erlang/OTP installs: `$MISE_DATA_DIR/installs/erlang`, or `~/.local/share/mise/installs/erlang` when `MISE_DATA_DIR` is not set, searched up to five directories deep.
+3. mise's Erlang/OTP installs: `$MISE_DATA_DIR/installs/erlang`, or `~/.local/share/mise/installs/erlang` when `MISE_DATA_DIR` is not set, searched up to six directories deep.
 
 The directory of the `erlc` that was found is put first on `PATH` while `make` runs. If none is found, the install stops with an error, see [troubleshooting.md](troubleshooting.md).
 

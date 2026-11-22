@@ -6,6 +6,8 @@
 
 ## 未发布
 
+## 1.0.1 - 2026-11-22
+
 ### 新增
 
 - `vfox link --detect elixir` 可以找到已由系统、asdf、mise、Homebrew、Scoop 或官方安装器装在本机的 Elixir，并链接它，而不是再安装一份。需要 vfox 1.1.0 或更高版本。见 [link.md](link.md)。

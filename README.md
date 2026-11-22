@@ -14,7 +14,7 @@
 
 # vfox-elixir plugin
 
-A [vfox](https://vfox.dev/) plugin for Elixir. It installs and switches between Elixir versions on Linux, macOS and Windows, and it manages the Erlang/OTP that each version needs.
+A [vfox](https://vfox.dev/) plugin for Elixir. It installs and switches between Elixir versions on Linux, macOS and Windows. The plugin does not install Erlang/OTP, which Elixir needs; see [Before you install](#before-you-install).
 
 ## Before you install
 
