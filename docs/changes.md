@@ -6,6 +6,8 @@ What changed in each release, as a user notices it.
 
 ## Unreleased
 
+## 1.0.1 - 2026-11-22
+
 ### Added
 
 - `vfox link --detect elixir` finds the Elixir already installed by the system, asdf, mise, Homebrew, Scoop or the official installer, and links it instead of installing another copy. It needs vfox 1.1.0 or later. See [link.md](link.md).

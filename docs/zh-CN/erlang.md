@@ -58,7 +58,7 @@ Elixir 名字中的 OTP 编号（`-otp-26`、`-elixir-otp-26`）必须与你运�
 
 1. `PATH` 上的 `erlc`。这包括 `vfox use -g` 放到 `PATH` 上的 Erlang/OTP，以及 `PATH` 上其他的 `erlc`。
 2. vfox 自己的 Erlang 缓存：`<VFOX_HOME>/cache/erlang` 下的 `erlc`，最多查找六层目录。`vfox install erlang@26.2.3` 把 Erlang/OTP 装在这里。源码构建的 `erlc` 在 `release/bin` 中，优先使用；然后是 `bin` 和 `lib/erlang/bin`，预编译安装把它放在那里。OTP 的 `bootstrap` 目录从不使用，因为它的 Erlang/OTP 没有 `make` 模块。`<VFOX_HOME>` 是 vfox 的主目录。
-3. mise 的 Erlang/OTP 安装：`$MISE_DATA_DIR/installs/erlang`；未设置 `MISE_DATA_DIR` 时为 `~/.local/share/mise/installs/erlang`，最多查找五层目录。
+3. mise 的 Erlang/OTP 安装：`$MISE_DATA_DIR/installs/erlang`；未设置 `MISE_DATA_DIR` 时为 `~/.local/share/mise/installs/erlang`，最多查找六层目录。
 
 找到的 `erlc` 所在目录会在运行 `make` 时放到 `PATH` 最前面。如果都找不到，安装会报错停止，见 [troubleshooting.md](troubleshooting.md)。
 

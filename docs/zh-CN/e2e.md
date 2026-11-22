@@ -12,6 +12,8 @@
 
 运行它的工作流是 `.github/workflows/e2e.yml`。测试从工作区添加插件，所以测试的是你推送的代码。
 
+`.github/workflows/mise_e2e_test.yaml` 通过 [mise](https://mise.jdx.dev/) 在 Ubuntu 24.04 和 macOS 上运行插件。它把工作区链接为 mise 插件 `vfox-elixir-ci`，用已发布的 vfox-erlang 插件安装 Erlang/OTP，再从链接的插件安装 Elixir，并运行 `hello.ex`。它不在 Windows 上运行，也不测试 Hex 镜像。
+
 ## 本地运行
 
 需要 vfox 1.1.0 或更高版本，以及 Go 1.27.1。在 `tests/e2e` 中运行：

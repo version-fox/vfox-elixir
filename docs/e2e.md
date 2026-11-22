@@ -12,6 +12,8 @@ The end-to-end suite in `tests/e2e` uses the real `vfox` on the host to install 
 
 The workflow is `.github/workflows/e2e.yml`. The suite adds the plugin from the working tree, so the tests check the code that you push.
 
+`.github/workflows/mise_e2e_test.yaml` runs the plugin through [mise](https://mise.jdx.dev/) on Ubuntu 24.04 and macOS. It links the working tree as the mise plugin `vfox-elixir-ci`, installs Erlang/OTP with the published vfox-erlang plugin, then installs Elixir from the linked plugin and runs `hello.ex`. It does not run on Windows, and it does not test the hex mirror.
+
 ## Run it locally
 
 You need vfox 1.1.0 or later and Go 1.27.1. In `tests/e2e`:
