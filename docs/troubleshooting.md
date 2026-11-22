@@ -34,7 +34,7 @@ No answer came from the server. See [Network](#network).
 
 The server answered with status 200, but the body is an error page, an empty body, or plain text with no version names, such as `Error code: 404`. The plugin lists and caches nothing from such an answer, so the search or the install stops with this message. Check the proxy settings, see [Network](#network), and run the command again.
 
-### `Elixir build failed with exit code <code>`
+### `Elixir build failed: make stopped with an error`
 
 `make` stopped. Read the output above this message. `vfox --debug install elixir@<version>` prints more. Common causes:
 
@@ -48,7 +48,7 @@ If vfox still lists the version after the failure, run `vfox uninstall elixir@<v
 
 A source build on Linux and macOS stops before `make` when the vfox home (`VFOX_HOME`) has a space, a quote or another character that the shell reads. The message names the path. Keep those characters out of the vfox home and install again. See [A path with spaces or other shell characters fails](#a-path-with-spaces-or-other-shell-characters-fails).
 
-### `Elixir installer failed with exit code <code>`
+### `Elixir installer failed: the installer stopped with an error`
 
 Windows only. The official installer ran and returned an error. Read the output above this message. The installer is run as `"<installer>" /S /D=<install directory>`, and it is removed after it runs. To look at it yourself, download `https://github.com/elixir-lang/elixir/releases/download/v<version>/elixir-otp-<N>.exe`.
 

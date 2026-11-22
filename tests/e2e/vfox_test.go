@@ -30,7 +30,7 @@ func TestIsNetworkFailure(t *testing.T) {
 	}
 
 	other := []string{
-		"plugin [PostInstall] method error: post_install.lua:39: Elixir build failed with exit code 1.",
+		"plugin [PostInstall] method error: post_install.lua:43: Elixir build failed: make stopped with an error. Check the output above for the cause; see https://github.com/version-fox/vfox-elixir/blob/main/docs/troubleshooting.md",
 		"Elixir 1.99.0 was not found. Please confirm that the version exists",
 		"Install elixir@1.16.2-otp-26 success!",
 		"",

@@ -293,13 +293,12 @@ function elixir_utils.windows_install_exe(version, dir)
 
     local command = elixir_utils.windows_install_command(installer, dir)
     print("install cmd: " .. command)
+    -- The value of os.execute is not the installer's exit status (issue #37), so the message prints no number.
     local status = os.execute(command)
     os.remove(installer)
     if status ~= 0 then
         error(
-            "Elixir installer failed with exit code "
-                .. tostring(status)
-                .. ". Check the output above; see https://github.com/version-fox/vfox-elixir/blob/main/docs/troubleshooting.md"
+            "Elixir installer failed: the installer stopped with an error. Check the output above for the cause; see https://github.com/version-fox/vfox-elixir/blob/main/docs/troubleshooting.md"
         )
     end
 end

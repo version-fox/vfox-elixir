@@ -134,6 +134,9 @@ else
         PLUGIN:PostInstall(ctx)
     end)
     assert(not ok and tostring(err):find("Elixir build failed", 1, true), "failing make: " .. tostring(err))
+    -- The fake make exits with 2. The message must not print a status, because the
+    -- value of os.execute is not make's exit status (issue #37).
+    assert(not tostring(err):find("exit code", 1, true), "the message names an exit code: " .. tostring(err))
 end
 
 command("rm -rf " .. quote(root))

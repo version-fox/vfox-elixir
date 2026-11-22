@@ -4,6 +4,13 @@
 
 What changed in each release, as a user notices it.
 
+## Unreleased
+
+### Fixed
+
+- When a source build fails in `make`, the message no longer prints an exit code. The number it printed was the value of `os.execute`, which is not the exit status of `make`. The message now says that `make` stopped with an error and points to the output above (#37).
+- On Windows, when the official installer fails, the message no longer prints an exit code. The number it printed was the value of `os.execute`, which is not the exit status of the installer. The message now says that the installer stopped with an error and points to the output above (#37).
+
 ## 1.0.3 - 2026-11-22
 
 ### Fixed
