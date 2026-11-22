@@ -9,6 +9,8 @@ Two steps need it:
 - A source build (Linux and macOS) compiles Elixir with the `erlc` of an Erlang/OTP install.
 - Running `elixir`, `iex` or `mix` on any platform needs `erl`.
 
+`vfox exec` adds only the directory of the Elixir it runs to `PATH`, so name Erlang/OTP in the same command: `vfox exec erlang@26.2.3 elixir@1.16.2 -- elixir --version`.
+
 ## Install Erlang/OTP with vfox-erlang
 
 [vfox-erlang](https://github.com/version-fox/vfox-erlang) installs Erlang/OTP from source:

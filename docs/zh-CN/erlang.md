@@ -9,6 +9,8 @@ Elixir 运行在 Erlang 虚拟机上，所以必须先安装 Erlang/OTP。插件
 - 源码构建（Linux 和 macOS）用某个 Erlang/OTP 安装中的 `erlc` 编译 Elixir。
 - 在任何平台上运行 `elixir`、`iex` 或 `mix` 都需要 `erl`。
 
+`vfox exec` 只把所运行的 Elixir 的目录加入 `PATH`，所以请在同一条命令中写出 Erlang/OTP：`vfox exec erlang@26.2.3 elixir@1.16.2 -- elixir --version`。
+
 ## 用 vfox-erlang 安装 Erlang/OTP
 
 [vfox-erlang](https://github.com/version-fox/vfox-erlang) 从源码安装 Erlang/OTP：

@@ -98,6 +98,10 @@ vfox 不会重新下载已经安装的名字。要重新安装，请先运行 `v
 
 vfox 1.1.0 只按写出的名字在 SDK 的 PATH 中查找命令，不会尝试 PATHEXT 中的扩展名。因此即使 `erl.exe` 已经安装，`vfox exec erlang@26.2.3 -- erl` 也会失败，报 `command not found: erl`。请带上扩展名：`vfox exec erlang@26.2.3 -- erl.exe`，以及 `vfox exec elixir@1.16.2-elixir-otp-26 -- elixir.bat`。在已加载钩子（`vfox activate pwsh`）的 Shell 中，`erl` 和 `elixir` 无需扩展名即可运行。
 
+### 运行 Elixir 时出现 `exec: erl: not found`
+
+`elixir` 会启动 `erl`，所以 `erl` 必须在 `PATH` 上。`vfox exec elixir@<版本> -- elixir` 只把 Elixir 的目录加入 `PATH`，如果 Erlang/OTP 还不在 `PATH` 上，它就会失败。请在同一条命令中写出 Erlang/OTP：`vfox exec erlang@26.2.3 elixir@1.16.2 -- elixir --version`。从 Hex 安装的预编译包（见 [mirror.md](mirror.md)）也一样，因为它的压缩包中不含 Erlang/OTP。也可以在已挂载钩子的 Shell 中用 `vfox use` 选中两者，然后直接运行 `elixir`。
+
 ### 安装预编译包后运行时出现错误
 
 名字中的 OTP 编号必须与运行 Elixir 的 Erlang/OTP 一致。`1.16.2-otp-26` 需要 Erlang/OTP 26。用 [erlang.md](erlang.md#windows) 中的命令检查版本。
@@ -114,7 +118,7 @@ Elixir 的安装在所有平台上都能处理 vfox 主目录中的空格，见 
 
 ### 版本列表过时
 
-`vfox search` 会保存 12 小时的结果。可以等待，或者用 `vfox config cache.availableHookDuration` 缩短缓存时间。
+`vfox search` 会把结果保存 12 小时，保存在 `<VFOX_HOME>/plugin/elixir/.available.cache` 中。缓存不区分 `VFOX_ELIXIR_MIRROR`，因此用一种镜像设置搜索之后，马上用另一种设置搜索，可能仍然列出第一个列表。删除该文件即可刷新。要为所有插件关闭缓存，请运行 `vfox config cache.availableHookDuration 0s`。
 
 ## 网络
 

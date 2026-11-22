@@ -98,6 +98,10 @@ Erlang/OTP is not selected. Run `vfox use -g erlang@26.2.3`, load the hook again
 
 vfox 1.1.0 finds a command in the PATH of the SDKs only by the name as typed, and it does not try the extensions of PATHEXT there. So `vfox exec erlang@26.2.3 -- erl` fails with `command not found: erl`, although `erl.exe` is installed. Give the extension: `vfox exec erlang@26.2.3 -- erl.exe`, and `vfox exec elixir@1.16.2-elixir-otp-26 -- elixir.bat`. In a shell with the hook loaded (`vfox activate pwsh`), `erl` and `elixir` run without it.
 
+### `exec: erl: not found` when Elixir runs
+
+`elixir` starts `erl`, which must be on `PATH`. `vfox exec elixir@<version> -- elixir` adds only Elixir's directory to `PATH`, so it fails when Erlang/OTP is not already on `PATH`. Name Erlang/OTP in the same command: `vfox exec erlang@26.2.3 elixir@1.16.2 -- elixir --version`. A prebuilt install from hex (see [mirror.md](mirror.md)) needs the same, because its zip does not contain Erlang/OTP. Or select both with `vfox use` in a shell with the hook loaded, and run `elixir` directly.
+
 ### Runtime errors after installing a prebuilt build
 
 The OTP number in the name must match the Erlang/OTP that runs Elixir. `1.16.2-otp-26` needs Erlang/OTP 26. Check the version with the command in [erlang.md](erlang.md#windows).
@@ -114,7 +118,7 @@ Elixir's installs handle a space in the vfox home on every platform, see [change
 
 ### The version list is out of date
 
-`vfox search` keeps its result for 12 hours. Wait, or shorten the cache with `vfox config cache.availableHookDuration`.
+`vfox search` keeps its result for 12 hours, in `<VFOX_HOME>/plugin/elixir/.available.cache`. The cache is not split by `VFOX_ELIXIR_MIRROR`, so right after a search with one mirror setting, a search with the other can list the first list. To refresh it, delete that file. To turn the cache off for all plugins, run `vfox config cache.availableHookDuration 0s`.
 
 ## Network
 

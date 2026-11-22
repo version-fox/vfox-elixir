@@ -53,7 +53,7 @@ Hex 和 Windows 的版本名以 `-otp-<N>` 或 `-elixir-otp-<N>` 结尾。`<N>` 
 
 作用域用 `vfox use` 的参数选择：`-g`（全局）、`-p`（项目，写入 `.vfox.toml`）。不写参数时作用于当前 Shell，这需要已挂载 vfox 的 Shell 钩子，见 `vfox activate`。
 
-`vfox exec` 不做这种映射，它只按已安装的完整名字查找。因此 `vfox exec elixir@1.16.2 -- elixir --version` 会去安装源码版 `1.16.2`，而不是运行 `1.16.2-otp-26`。用 `exec` 时请写完整名字，例如 `vfox exec elixir@1.16.2-otp-26 -- elixir --version`，或者先运行 `vfox use`。Windows 上程序名需要带扩展名 `elixir.bat`，见 [troubleshooting.md](troubleshooting.md#vfox-exec-在-windows-上找不到-erl-或-elixir)。
+`vfox exec` 不做这种映射，它只按已安装的完整名字查找。因此 `vfox exec elixir@1.16.2 -- elixir --version` 会去安装源码版 `1.16.2`，而不是运行 `1.16.2-otp-26`。用 `exec` 时请写完整名字，例如 `vfox exec erlang@26.2.3 elixir@1.16.2-otp-26 -- elixir --version`：`elixir` 还需要 Erlang/OTP，而 `exec` 只把 Elixir 的目录加入 `PATH`。也可以在已挂载钩子的 Shell 中用 `vfox use` 选中两者，然后直接运行 `elixir`。Windows 上程序名需要带扩展名 `elixir.bat`，见 [troubleshooting.md](troubleshooting.md#vfox-exec-在-windows-上找不到-erl-或-elixir)。
 
 ## 预发布版本
 
