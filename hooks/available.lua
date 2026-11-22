@@ -34,10 +34,8 @@ function PLUGIN:Available(ctx)
     if choice ~= nil then
         error('unknown argument "' .. choice .. '": vfox search elixir takes hex, for the hex.pm builds, or nothing')
     end
-    if elixirUtils.use_hex_mirror() then
-        io.stderr:write(
-            "VFOX_ELIXIR_MIRROR=hex does not change this list. For the hex.pm builds, run: vfox search elixir hex\n"
-        )
-    end
+    -- Nothing is printed here, not even under VFOX_ELIXIR_MIRROR=hex: vfox calls
+    -- this hook without arguments for `vfox install elixir@latest` too, so a hint
+    -- here would show during an install (issue #35).
     return elixirUtils.get_release_versions()
 end

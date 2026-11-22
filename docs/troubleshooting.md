@@ -70,7 +70,7 @@ With `VFOX_ELIXIR_MIRROR=hex`, `latest` resolves to a release line such as `1.20
 
 ### `Warning: this name has no -otp-N suffix, so hex.pm does not say which Erlang/OTP the build is for. ...`
 
-Printed by `vfox install` with `VFOX_ELIXIR_MIRROR=hex` for a name such as `main` or `1.16.2`. The install goes on. For a name with a suffix, `vfox install` prints `This build needs Erlang/OTP <N>.` instead. If `elixir` then refuses to run, install a name with `-otp-N`, see [mirror.md](mirror.md#names).
+Printed by `vfox install` with `VFOX_ELIXIR_MIRROR=hex`, after the build is downloaded, for a name such as `main` or `1.16.2`. The install goes on. A name that hex.pm does not have fails at the download, and gets no warning. For a name with a suffix, `vfox install` prints `This build needs Erlang/OTP <N>.` instead. If `elixir` then refuses to run, install a name with `-otp-N`, see [mirror.md](mirror.md#names).
 
 ### `You must provide a version number for Elixir, eg: vfox install elixir@1.16.2`
 
