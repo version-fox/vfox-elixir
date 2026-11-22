@@ -197,6 +197,18 @@ function elixir_utils.check_hex_build(version)
     return elixir_utils.hex_otp_release(version)
 end
 
+--- Prints a warning for a hex.pm build whose name has no -otp-N suffix, which does
+--- not say which Erlang/OTP the build is for. It is called once the build is
+--- downloaded, so a name that hex.pm does not have gets no warning (issue #35).
+function elixir_utils.warn_hex_build_without_otp(version)
+    if elixir_utils.hex_otp_release(version) == nil then
+        print(
+            "Warning: this name has no -otp-N suffix, so hex.pm does not say which Erlang/OTP the build is for. "
+                .. "If elixir then refuses to run, install a name with -otp-N (see vfox search elixir hex)."
+        )
+    end
+end
+
 --- Fails unless the Elixir release exists on GitHub. A network error is told
 --- apart from a release that is not there.
 function elixir_utils.check_version_existence(version)

@@ -70,7 +70,7 @@
 
 ### `Warning: this name has no -otp-N suffix, so hex.pm does not say which Erlang/OTP the build is for. ...`
 
-`VFOX_ELIXIR_MIRROR=hex` 时，名字没有 OTP 后缀（例如 `main` 或 `1.16.2`），`vfox install` 会打印这条警告，但安装照常进行。名字带后缀时，`vfox install` 会改为打印 `This build needs Erlang/OTP <N>.`。如果之后 `elixir` 拒绝运行，请安装带 `-otp-N` 的名字，见 [Hex 预编译包](mirror.md#名字)。
+`VFOX_ELIXIR_MIRROR=hex` 时，名字没有 OTP 后缀（例如 `main` 或 `1.16.2`），`vfox install` 会在下载构建之后打印这条警告，但安装照常进行。hex.pm 没有的名字会在下载时失败，不会打印这条警告。名字带后缀时，`vfox install` 会改为打印 `This build needs Erlang/OTP <N>.`。如果之后 `elixir` 拒绝运行，请安装带 `-otp-N` 的名字，见 [Hex 预编译包](mirror.md#名字)。
 
 ### `You must provide a version number for Elixir, eg: vfox install elixir@1.16.2`
 

@@ -4,6 +4,13 @@
 
 每个版本的变化，按用户能察觉到的方式记录。
 
+## 未发布
+
+### 修复
+
+- `VFOX_ELIXIR_MIRROR=hex` 时，`vfox install elixir@latest` 不再打印 `vfox search elixir hex` 的提示。vfox 对 `vfox search elixir` 和 `latest` 使用同样的方式调用这个钩子，钩子无法只在搜索时打印提示，因此搜索也不再打印它。`vfox search elixir hex` 仍会列出 hex.pm 构建（#35）。
+- `VFOX_ELIXIR_MIRROR=hex` 时，名字没有 `-otp-N` 后缀的警告改为在构建下载之后打印，而不是之前。hex.pm 没有的名字只会得到下载错误（#35）。
+
 ## 1.0.2 - 2026-11-22
 
 ### 修复

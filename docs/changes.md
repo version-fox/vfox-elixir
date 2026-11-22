@@ -4,6 +4,13 @@
 
 What changed in each release, as a user notices it.
 
+## Unreleased
+
+### Fixed
+
+- With `VFOX_ELIXIR_MIRROR=hex`, `vfox install elixir@latest` no longer prints the hint about `vfox search elixir hex`. vfox calls the same hook for `vfox search elixir` and for `latest`, so the hook cannot print the hint for the search alone, and the search no longer prints it either. `vfox search elixir hex` still lists the hex.pm builds (#35).
+- With `VFOX_ELIXIR_MIRROR=hex`, the warning about a name without an `-otp-N` suffix is printed after the build is downloaded, not before. A name that hex.pm does not have gets only the download error (#35).
+
 ## 1.0.2 - 2026-11-22
 
 ### Fixed

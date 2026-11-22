@@ -19,13 +19,15 @@ local platform = require("platform")
 --- such as file operations for the SDK installation directory or compile source code.
 --- Source builds run make in the SDK directory, with the Erlang/OTP that
 --- erlc is found in first on PATH. The Windows installer is run into the
---- SDK directory. A prebuilt hex.pm zip needs nothing more.
+--- SDK directory. A prebuilt hex.pm zip needs no build. Once the zip is downloaded,
+--- it gets only the warning about a name without an OTP suffix.
 --- @param ctx table ctx.sdkInfo['elixir'] holds the install path and version
 function PLUGIN:PostInstall(ctx)
     local sdkInfo = ctx.sdkInfo["elixir"]
     local path = sdkInfo.path
 
     if elixirUtils.use_hex_mirror() then
+        elixirUtils.warn_hex_build_without_otp(sdkInfo.version)
         return
     end
 

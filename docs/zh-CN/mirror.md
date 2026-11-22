@@ -22,11 +22,11 @@ vfox use -g elixir@1.16.2-otp-26
 | `main-otp-26` | 面向 Erlang/OTP 26 的 `main` 分支 |
 
 - 带 OTP 后缀的名字写明了构建面向的 Erlang/OTP 版本，`vfox install` 会打印它。优先使用它们。
-- `builds.txt` 还有不带后缀的名字，例如 `main`、`master` 和 `1.16.2`。`builds.txt` 没有写明它们是用哪个 Erlang/OTP 构建的，其中一些可能拒绝在另一个 Erlang/OTP 下运行，所以不会列出。你指定它们时，`vfox install` 仍会安装，并先打印警告。
+- `builds.txt` 还有不带后缀的名字，例如 `main`、`master` 和 `1.16.2`。`builds.txt` 没有写明它们是用哪个 Erlang/OTP 构建的，其中一些可能拒绝在另一个 Erlang/OTP 下运行，所以不会列出。你指定它们时，`vfox install` 仍会安装，并在下载之后打印警告。
 - `main` 构建会更新。过一段时间再安装同一个名字，可能得到更新的构建。
 - `latest` 不是 hex.pm 的名字。设置 `VFOX_ELIXIR_MIRROR=hex` 后，`latest` 会解析为 `1.20-latest` 这样的发布线，它没有预编译构建，所以 `vfox install` 会在下载前停止。请改用 `vfox search elixir hex` 列出的名字。
 
-`vfox search elixir hex` 会输出当前的列表。`vfox search elixir` 不带参数时列出源码版本，与 `VFOX_ELIXIR_MIRROR` 的设置无关。设置了 `VFOX_ELIXIR_MIRROR=hex` 时，它在读取列表（而不是读取缓存）时会在标准错误输出一条提示，指向 `vfox search elixir hex`。vfox 按搜索参数分别缓存结果，因此两种列表不会互相显示。
+`vfox search elixir hex` 会输出当前的列表。`vfox search elixir` 不带参数时列出源码版本，与 `VFOX_ELIXIR_MIRROR` 的设置无关，并且不输出其他内容。vfox 按搜索参数分别缓存结果，因此两种列表不会互相显示。
 
 ## 与源码构建的区别
 
