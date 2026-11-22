@@ -49,7 +49,31 @@ func TestE2E(t *testing.T) {
 	}
 	t.Run("elixir", s.installOfficialElixir)
 	t.Run("hex mirror", s.installHexMirror)
+	t.Run("use not installed", s.useNotInstalled)
 	t.Run("detect", s.detectFakeInstall)
+}
+
+// useNotInstalled checks that vfox use refuses a version that is not installed,
+// with its own message, for a full name and for a partial one. The PreUse hook
+// used to fail with a Lua error for such a name, which was issue #21.
+//
+// vfox use needs the shell hook: without it vfox says "requires hook support".
+// The suite strips the vfox variables of the caller, so this step sets the one
+// that an activated shell sets, __VFOX_SHELL.
+func (s *suite) useNotInstalled(t *testing.T) {
+	t.Helper()
+
+	hook := map[string]string{"__VFOX_SHELL": "bash"}
+	for _, spec := range []string{"elixir@9.9.9", "elixir@9.9"} {
+		result := s.runVfox(t, "", hook, "use", "-g", spec)
+		out := result.output()
+		if result.err == nil || !strings.Contains(out, spec+" is not installed") {
+			t.Fatalf("%s must fail with %q\n--- output ---\n%s", result.command, spec+" is not installed", out)
+		}
+		if strings.Contains(out, "traceback") {
+			t.Fatalf("%s printed a Lua traceback\n--- output ---\n%s", result.command, out)
+		}
+	}
 }
 
 // printVersion logs the version of vfox under test. It asserts nothing: the

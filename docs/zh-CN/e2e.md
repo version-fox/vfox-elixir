@@ -66,7 +66,8 @@ docker run --rm -v "$PWD:/src:ro" -v vfox-elixir-e2e-cache:/cache -e E2E_VFOX_HO
 6. **hex mirror**：
    - Linux 和 macOS：`VFOX_ELIXIR_MIRROR=hex vfox install elixir@1.16.2-otp-26`，然后像第 4 步那样运行程序。
    - Windows：同一条安装命令必须失败，并且输出中要提到 Windows。
-7. **detect** 在测试的主目录中创建一个假的 Elixir 安装。它有一个启动脚本，输出 `Elixir 1.99.0 (fake)`，还有一个内容为 `1.99.0` 的 `VERSION` 文件。
+7. **use not installed**：对 `elixir@9.9.9` 和 `elixir@9.9`（均未安装）运行 `vfox use -g`。两者都必须失败，并输出 `is not installed`，且不能输出 Lua 堆栈。
+8. **detect** 在测试的主目录中创建一个假的 Elixir 安装。它有一个启动脚本，输出 `Elixir 1.99.0 (fake)`，还有一个内容为 `1.99.0` 的 `VERSION` 文件。
    - Linux 和 macOS：`$HOME/.asdf/installs/elixir/1.99.0-otp-26` 下的 `bin/elixir`。asdf 以目录名命名安装，所以名字是 `1.99.0-otp-26`。
    - Windows：`%USERPROFILE%\scoop\apps\elixir\1.99.0` 下的 `bin\elixir.bat`。Scoop 以 `VERSION` 命名安装，所以名字是 `1.99.0`。
 

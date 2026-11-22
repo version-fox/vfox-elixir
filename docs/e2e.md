@@ -66,7 +66,8 @@ The steps below run in order, and each one logs its commands and their output. A
 6. **hex mirror**:
    - Linux and macOS: `VFOX_ELIXIR_MIRROR=hex vfox install elixir@1.16.2-otp-26`, then the program runs as in step 4.
    - Windows: the same install must fail, and its output must mention Windows.
-7. **detect** creates a fake Elixir installation in the suite's home directory. It has a launcher that prints `Elixir 1.99.0 (fake)`, and a `VERSION` file that says `1.99.0`.
+7. **use not installed** runs `vfox use -g` with `elixir@9.9.9` and `elixir@9.9`, neither of which is installed. Each must fail with `is not installed`, and print no Lua traceback.
+8. **detect** creates a fake Elixir installation in the suite's home directory. It has a launcher that prints `Elixir 1.99.0 (fake)`, and a `VERSION` file that says `1.99.0`.
    - Linux and macOS: `bin/elixir` under `$HOME/.asdf/installs/elixir/1.99.0-otp-26`. asdf names an installation after its directory, so the name is `1.99.0-otp-26`.
    - Windows: `bin\elixir.bat` under `%USERPROFILE%\scoop\apps\elixir\1.99.0`. Scoop names an installation after `VERSION`, so the name is `1.99.0`.
 
