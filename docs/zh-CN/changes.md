@@ -22,17 +22,18 @@
 - Windows：安装器运行失败时报的是 `Erlang/OTP install failed`，现在改为提示 Elixir。
 - Windows：安装成功后，安装包残留在插件目录中。现在安装器运行之后会被删除。
 - Windows：安装命令把只属于 PowerShell 的选项（`-Wait -PassThru`）传给了安装器。现已删除。
-- Linux 和 macOS：安装路径含空格时，源码构建失败。
-- 获取版本列表时如果网络出错，插件会崩溃。现在会报告错误。
+- Linux 和 macOS：安装路径含空格时，源码构建失败，或者在错误的目录中运行 `make` 并报告成功（#20）。
+- 获取版本列表时如果网络出错，插件会崩溃。现在会报告错误。服务器返回的错误页或空的应答曾被列为版本并写入缓存；现在插件会以状态码或错误信息停止（#22）。
 - 更新工作流中的版本列表脚本在 GitHub API 失败时仍以成功退出，于是保留了旧数据。现在会以失败退出。
 - 更新工作流设置的 git 用户名格式错误（`github-actions[bot]` 被重复写了一遍）。
 - 删除了永远不会执行的代码：一处对 vfox 不会设置的变量的检查，以及一个没有被使用的辅助函数。
 - `vfox add` 显示的插件描述把 "Unix" 写成了 "Uinx"，现已更正。
+- 网站和文档中的 `vfox exec` 示例在运行 `elixir` 时没有带上 Erlang/OTP，结果报 `exec: erl: not found`。现在示例中写出了 Erlang/OTP（#24）。
 
 ### 变更
 
 - Windows：`VFOX_ELIXIR_MIRROR=hex` 会在下载任何内容之前直接报错，说明 Windows 不支持。之前插件会尝试下载安装器并失败。
 - Windows：版本名不以 `-elixir-otp-<N>` 结尾时，会在下载之前被拒绝，并提示运行 `vfox search elixir`。
-- `vfox use` 选择的版本未安装时，报告 `is not installed`。之前它会以 Lua 错误停止。
+- `vfox use` 选择的版本未安装时，报告 `is not installed`。之前它会以 Lua 错误停止（#21）。
 - 不带 OTP 后缀的名字会选中 OTP 编号最大的已安装构建。`vfox use elixir@1.16.2` 选中 `1.16.2-otp-26` 而不是 `1.16.2-otp-25`；安装了 `main-otp-26` 时，`vfox use elixir@main` 选中它。
-- 源码构建时查找 `erlc`，也会搜索 vfox 自己的 Erlang 缓存。找不到 `erlc` 时，报错会说明需要安装什么。
+- 源码构建时查找 `erlc`，也会搜索 vfox 自己的 Erlang 缓存。找不到 `erlc` 时，报错会说明需要安装什么（#23）。
