@@ -34,14 +34,14 @@ docker build -f tests/e2e/linux/Dockerfile -t vfox-elixir-e2e:ubuntu-24.04 tests
 docker run --rm -v "$PWD:/src:ro" -v vfox-elixir-e2e-cache:/cache -e E2E_VFOX_HOME=/cache/vfox-home -w /src/tests/e2e vfox-elixir-e2e:ubuntu-24.04 go test -v -timeout 90m -run TestE2E ./...
 ```
 
-命名卷会在两次运行之间保留 vfox 主目录，因此已经编译好的 Erlang/OTP 会被复用。这里的主目录路径不含空格，因为 Linux 上测试会拒绝含空格的路径，见下文。
+命名卷会在两次运行之间保留 vfox 主目录，因此已经编译好的 Erlang/OTP 会被复用。这里的主目录路径不含空格，因为测试会拒绝含空格的路径，见下文。
 
 ## 环境变量
 
 | 变量 | 默认值 | 含义 |
 | --- | --- | --- |
 | `VFOX_BIN` | `PATH` 上的 `vfox` | 要测试的 vfox 可执行文件 |
-| `E2E_VFOX_HOME` | 新建的临时目录，结束时删除 | vfox 主目录（`VFOX_HOME`）。设置之后，该目录按原样使用并保留，因此缓存卷可以保存 Erlang/OTP。路径不能含空格，测试会拒绝含空格的路径：Linux 和 macOS 上 OTP 的 `configure` 不会给路径加引号；Windows 上，CI 中官方 Erlang/OTP 安装器装到含空格的主目录后，`vfox exec` 找不到 `erl.exe` |
+| `E2E_VFOX_HOME` | 新建的临时目录，结束时删除 | vfox 主目录（`VFOX_HOME`）。设置之后，该目录按原样使用并保留，因此缓存卷可以保存 Erlang/OTP。路径不能含空格，测试会拒绝含空格的路径：Linux 和 macOS 上 OTP 的 `configure` 不会给路径加引号；Windows 上，Erlang/OTP 和 Elixir 的步骤不会在含空格的路径中运行 `erl.exe` 或 `elixir.bat` |
 | `E2E_ERLANG_VERSION` | `26.2.3` | 要安装的 Erlang/OTP 版本。它的主版本号就是测试检查的 OTP 版本 |
 | `E2E_ELIXIR_VERSION` | `1.16.2` | 源码安装和 Hex 安装所用的 Elixir 版本 |
 | `E2E_ERLANG_SOURCE` | `https://github.com/version-fox/vfox-erlang/archive/refs/heads/main.zip` | `vfox add` 获取 `erlang` 插件的来源 |
@@ -60,7 +60,7 @@ docker run --rm -v "$PWD:/src:ro" -v vfox-elixir-e2e-cache:/cache -e E2E_VFOX_HO
 4. **erlang** 安装 `erlang@<E2E_ERLANG_VERSION>`。如果主目录中已经有它，并且 `erl` 报告的 OTP 主版本号正确，则跳过安装；否则重新安装。然后检查 `erl` 报告的是该主版本号。
 5. **elixir** 安装 Elixir，并用它运行 `hello.ex`：
    - Linux 和 macOS：`vfox install elixir@1.16.2`，然后运行 `vfox exec erlang@26.2.3 elixir@1.16.2 -- elixir hello.ex`。
-   - Windows：`vfox install elixir@1.16.2-elixir-otp-26`，然后用这个名字运行同样的程序。
+   - Windows：`vfox install elixir@1.16.2-elixir-otp-26`，然后运行 `vfox exec erlang@26.2.3 elixir@1.16.2-elixir-otp-26 -- elixir.bat hello.ex`。
 
    `hello.ex` 是 `assets/hello.ex` 在新目录中的副本。输出必须包含 `Hello world from Elixir`。
 6. **hex mirror**：
@@ -70,9 +70,9 @@ docker run --rm -v "$PWD:/src:ro" -v vfox-elixir-e2e-cache:/cache -e E2E_VFOX_HO
    - Linux 和 macOS：`$HOME/.asdf/installs/elixir/1.99.0-otp-26` 下的 `bin/elixir`。asdf 以目录名命名安装，所以名字是 `1.99.0-otp-26`。
    - Windows：`%USERPROFILE%\scoop\apps\elixir\1.99.0` 下的 `bin\elixir.bat`。Scoop 以 `VERSION` 命名安装，所以名字是 `1.99.0`。
 
-   `vfox link --detect -y elixir` 必须列出这个安装，并且 `vfox exec elixir@<名字> -- elixir --version` 必须输出 `Elixir 1.99.0 (fake)`。
+   `vfox link --detect -y elixir` 必须列出这个安装，并且 `vfox exec elixir@<名字> -- elixir --version` 必须输出 `Elixir 1.99.0 (fake)`。Windows 上程序名为 `elixir.bat`。
 
-`platform_unix.go` 和 `platform_windows.go` 保存了各平台之间不同的部分：假安装的目录结构和启动脚本、官方安装和 Hex 安装所用的名字，以及主目录是否允许含空格。
+`platform_unix.go` 和 `platform_windows.go` 保存了各平台之间不同的部分：假安装的目录结构和启动脚本、官方安装和 Hex 安装所用的名字、经 `vfox exec` 运行的程序名，以及主目录是否允许含空格。Windows 上程序名带扩展名（`erl.exe`、`elixir.bat`），因为 vfox 1.1.0 只按写出的名字在 SDK 的 PATH 中查找命令。
 
 ## 需要多长时间
 

@@ -34,14 +34,14 @@ docker build -f tests/e2e/linux/Dockerfile -t vfox-elixir-e2e:ubuntu-24.04 tests
 docker run --rm -v "$PWD:/src:ro" -v vfox-elixir-e2e-cache:/cache -e E2E_VFOX_HOME=/cache/vfox-home -w /src/tests/e2e vfox-elixir-e2e:ubuntu-24.04 go test -v -timeout 90m -run TestE2E ./...
 ```
 
-The named volume keeps the vfox home between runs, so an Erlang/OTP that is already built is reused. The home path has no space, because the suite refuses one on Linux, see below.
+The named volume keeps the vfox home between runs, so an Erlang/OTP that is already built is reused. The home path has no space, because the suite refuses one, see below.
 
 ## Environment variables
 
 | Variable | Default | Meaning |
 | --- | --- | --- |
 | `VFOX_BIN` | `vfox` on `PATH` | the vfox binary to test |
-| `E2E_VFOX_HOME` | a new temporary directory, removed at the end | the vfox home (`VFOX_HOME`). When it is set, the directory is used as it is and kept, so a cache volume can hold Erlang/OTP. The path must not contain a space, and the suite refuses one: OTP's `configure` does not quote its paths on Linux and macOS, and on Windows the official Erlang/OTP installer left `erl.exe` out of reach of `vfox exec` in CI |
+| `E2E_VFOX_HOME` | a new temporary directory, removed at the end | the vfox home (`VFOX_HOME`). When it is set, the directory is used as it is and kept, so a cache volume can hold Erlang/OTP. The path must not contain a space, and the suite refuses one: on Linux and macOS, OTP's `configure` does not quote its paths, and on Windows the Erlang/OTP and Elixir steps do not run `erl.exe` or `elixir.bat` from such a path |
 | `E2E_ERLANG_VERSION` | `26.2.3` | the Erlang/OTP version to install. Its major version is the OTP release that the suite checks for |
 | `E2E_ELIXIR_VERSION` | `1.16.2` | the Elixir version of the source and hex installs |
 | `E2E_ERLANG_SOURCE` | `https://github.com/version-fox/vfox-erlang/archive/refs/heads/main.zip` | where `vfox add` gets the `erlang` plugin |
@@ -60,7 +60,7 @@ The steps below run in order, and each one logs its commands and their output. A
 4. **erlang** installs `erlang@<E2E_ERLANG_VERSION>`. If the home already has it and `erl` reports the OTP major version, the install is skipped. Otherwise it is installed again. Then the suite checks that `erl` reports that major version.
 5. **elixir** installs Elixir and runs `hello.ex` with it:
    - Linux and macOS: `vfox install elixir@1.16.2`, then `vfox exec erlang@26.2.3 elixir@1.16.2 -- elixir hello.ex`.
-   - Windows: `vfox install elixir@1.16.2-elixir-otp-26`, then the same program with that name.
+   - Windows: `vfox install elixir@1.16.2-elixir-otp-26`, then `vfox exec erlang@26.2.3 elixir@1.16.2-elixir-otp-26 -- elixir.bat hello.ex`.
 
    `hello.ex` is a copy of `assets/hello.ex`, made in a new directory. The output must contain `Hello world from Elixir`.
 6. **hex mirror**:
@@ -70,9 +70,9 @@ The steps below run in order, and each one logs its commands and their output. A
    - Linux and macOS: `bin/elixir` under `$HOME/.asdf/installs/elixir/1.99.0-otp-26`. asdf names an installation after its directory, so the name is `1.99.0-otp-26`.
    - Windows: `bin\elixir.bat` under `%USERPROFILE%\scoop\apps\elixir\1.99.0`. Scoop names an installation after `VERSION`, so the name is `1.99.0`.
 
-   `vfox link --detect -y elixir` must list the installation, and `vfox exec elixir@<name> -- elixir --version` must print `Elixir 1.99.0 (fake)`.
+   `vfox link --detect -y elixir` must list the installation, and `vfox exec elixir@<name> -- elixir --version` must print `Elixir 1.99.0 (fake)`. On Windows the program is `elixir.bat`.
 
-The files `platform_unix.go` and `platform_windows.go` hold what differs between the platforms: the layout and launcher of the fake installation, the names of the official and hex installs, and whether the home may hold a space.
+The files `platform_unix.go` and `platform_windows.go` hold what differs between the platforms: the layout and launcher of the fake installation, the names of the official and hex installs, the names of the programs that run through `vfox exec`, and whether the home may hold a space. On Windows those names keep their extension (`erl.exe`, `elixir.bat`), because vfox 1.1.0 finds a command in the PATH of the SDKs only by the name as typed.
 
 ## How long it takes
 

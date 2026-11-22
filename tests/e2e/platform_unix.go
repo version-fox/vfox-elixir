@@ -22,6 +22,10 @@ import (
 	"testing"
 )
 
+// erlProgram is the command that runs erl from an installed Erlang/OTP: the
+// bin/erl script.
+const erlProgram = "erl"
+
 // elixirProgram is the command that runs Elixir from an installed version: the
 // bin/elixir script.
 const elixirProgram = "elixir"
@@ -33,8 +37,7 @@ const homePattern = "vfox-home-"
 // homeMayContainSpace is false on Unix. The Erlang/OTP source build, which every
 // Unix run needs, runs OTP's erts/configure on the source tree, which lies under
 // VFOX_HOME. That configure does not quote its paths: with a space in the path
-// it fails with "cd: too many arguments" and then "cannot build emulator". The
-// Windows installer does not build anything, so Windows keeps the space.
+// it fails with "cd: too many arguments" and then "cannot build emulator".
 const homeMayContainSpace = false
 
 // fakeUnixElixir is bin/elixir of a fake installation: a shell script that

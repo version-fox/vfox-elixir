@@ -81,9 +81,9 @@ func newSuite(t *testing.T) *suite {
 		t.Fatalf("resolve E2E_VFOX_HOME: %v", err)
 	}
 	if !homeMayContainSpace && strings.Contains(home, " ") {
-		// Checked here, not at the Erlang/OTP install: that takes a long time and
-		// then fails, or leaves erl where vfox exec does not look.
-		t.Fatalf("E2E_VFOX_HOME %q has a space in its path; the Erlang/OTP steps cannot use such a path, so use one without spaces (see docs/e2e.md)", home)
+		// Checked here, before the Erlang/OTP install, which takes a long time.
+		// See homeMayContainSpace for the platforms that refuse a space.
+		t.Fatalf("E2E_VFOX_HOME %q has a space in its path; this platform's suite needs a path without spaces (see docs/e2e.md)", home)
 	}
 	// vfox 1.1.0 creates plugin/ and cache/ inside VFOX_HOME with os.Mkdir, so
 	// the home itself must exist before the first vfox command. Without it,

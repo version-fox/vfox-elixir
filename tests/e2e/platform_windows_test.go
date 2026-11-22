@@ -23,6 +23,18 @@ import (
 	"testing"
 )
 
+// TestWindowsProgramsHaveExtensions checks that the programs the steps run
+// through vfox exec carry their extension. vfox 1.1.0 looks a command up in the
+// PATH of the SDKs by the name as typed, without PATHEXT, so a bare name is not
+// found on Windows.
+func TestWindowsProgramsHaveExtensions(t *testing.T) {
+	for _, program := range []string{erlProgram, elixirProgram} {
+		if filepath.Ext(program) == "" {
+			t.Errorf("%q has no extension, so vfox exec does not find it on Windows", program)
+		}
+	}
+}
+
 // TestFakeWindowsElixirScript checks the batch file of the fake installation.
 // cmd needs CRLF line endings, so no bare LF may appear in it.
 func TestFakeWindowsElixirScript(t *testing.T) {

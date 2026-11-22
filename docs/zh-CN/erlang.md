@@ -34,7 +34,7 @@ brew install autoconf libxslt fop wxwidgets openssl
 
 不同发行版的包名不同，请以 vfox-erlang 的文档为准。
 
-在 Linux 和 macOS 上，请让 vfox 主目录的路径不含空格。Erlang/OTP 的 `configure` 步骤不会给路径加引号，路径中有空格时源码构建会失败。在 Windows 上，安装 Erlang/OTP 的主目录同样不要含空格：在 E2E 测试中，主目录含空格时，官方 Erlang/OTP 安装器没有把 `erl.exe` 放到 `vfox exec` 查找的位置。
+在 Linux 和 macOS 上，请让 vfox 主目录的路径不含空格。Erlang/OTP 的 `configure` 步骤不会给路径加引号，路径中有空格时源码构建会失败。Windows 上的官方安装器不做编译，因此上面 `configure` 的规则不适用于 Windows。
 
 ## 选择兼容的版本
 

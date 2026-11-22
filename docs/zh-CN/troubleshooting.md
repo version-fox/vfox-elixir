@@ -94,13 +94,17 @@ vfox 不会重新下载已经安装的名字。要重新安装，请先运行 `v
 
 说明没有选中 Erlang/OTP。运行 `vfox use -g erlang@26.2.3`，再加载一次钩子，然后用 [erlang.md](erlang.md#windows) 中的命令检查。
 
+### `vfox exec` 在 Windows 上找不到 `erl` 或 `elixir`
+
+vfox 1.1.0 只按写出的名字在 SDK 的 PATH 中查找命令，不会尝试 PATHEXT 中的扩展名。因此即使 `erl.exe` 已经安装，`vfox exec erlang@26.2.3 -- erl` 也会失败，报 `command not found: erl`。请带上扩展名：`vfox exec erlang@26.2.3 -- erl.exe`，以及 `vfox exec elixir@1.16.2-elixir-otp-26 -- elixir.bat`。在已加载钩子（`vfox activate pwsh`）的 Shell 中，`erl` 和 `elixir` 无需扩展名即可运行。
+
 ### 安装预编译包后运行时出现错误
 
 名字中的 OTP 编号必须与运行 Elixir 的 Erlang/OTP 一致。`1.16.2-otp-26` 需要 Erlang/OTP 26。用 [erlang.md](erlang.md#windows) 中的命令检查版本。
 
 ### 路径含空格时失败
 
-Elixir 的安装在所有平台上都能处理 vfox 主目录中的空格，见 [变更记录](changes.md)。但 Erlang/OTP 不能：它的 `configure` 步骤不会给路径加引号。在 Linux 和 macOS 上，从源码构建 Erlang/OTP 时请让 vfox 主目录的路径不含空格。如果 Elixir 的安装在路径含空格时仍然失败，请连同输出一起报告，见下文。
+Elixir 的安装在所有平台上都能处理 vfox 主目录中的空格，见 [变更记录](changes.md)。但 Erlang/OTP 的源码构建不能：它的 `configure` 步骤不会给路径加引号。在 Linux 和 macOS 上，从源码构建 Erlang/OTP 时请让 vfox 主目录的路径不含空格。如果 Elixir 的安装在路径含空格时仍然失败，请连同输出一起报告，见下文。
 
 ### `vfox link --detect` 找不到 Elixir 安装
 

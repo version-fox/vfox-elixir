@@ -22,18 +22,26 @@ import (
 	"testing"
 )
 
-// elixirProgram is the command that runs Elixir from an installed version. On
-// Windows it is bin\elixir.bat, which vfox exec finds through PATHEXT.
-const elixirProgram = "elixir"
+// erlProgram is the command that runs erl from an installed Erlang/OTP: the
+// erl.exe in its bin directory. The extension is part of the name, see
+// elixirProgram.
+const erlProgram = "erl.exe"
+
+// elixirProgram is the command that runs Elixir from an installed version: the
+// bin\elixir.bat launcher. The extension is part of the name because vfox 1.1.0
+// looks a command up in the PATH that EnvKeys sets by the name as typed, and it
+// does not try the extensions of PATHEXT there. A bare "elixir" or "erl" is not
+// found, and vfox exec then fails with "executable file not found in %PATH%".
+const elixirProgram = "elixir.bat"
 
 // homePattern is the name pattern of the VFOX_HOME that a Windows run creates
 // when E2E_VFOX_HOME is unset. The path has no space, see homeMayContainSpace.
 const homePattern = "vfox-home-"
 
-// homeMayContainSpace is false on Windows too. In CI, after the official
-// Erlang/OTP installer had run into a home whose path had a space, vfox exec
-// found no erl.exe, so the steps that install Erlang/OTP use a home without one.
-// installSpacedHome checks the space case of the Elixir installer on its own.
+// homeMayContainSpace is false on Windows too. The Erlang/OTP and Elixir steps
+// run erl.exe and elixir.bat through vfox exec, and no step runs them from a
+// path with a space. installSpacedHome checks the space case of the official
+// installer on its own.
 const homeMayContainSpace = false
 
 // fakeWindowsElixir is bin\elixir.bat of a fake installation. Batch files need

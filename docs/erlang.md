@@ -34,7 +34,7 @@ brew install autoconf libxslt fop wxwidgets openssl
 
 The package names differ between distributions, so check the vfox-erlang documentation for your system.
 
-On Linux and macOS, keep spaces out of the vfox home. Erlang/OTP's `configure` step does not quote paths, so a space in the path makes its source build fail. On Windows, keep spaces out of the vfox home that holds Erlang/OTP too: in the E2E suite, with a space in the home, the official Erlang/OTP installer did not leave `erl.exe` where `vfox exec` looks.
+On Linux and macOS, keep spaces out of the vfox home. Erlang/OTP's `configure` step does not quote paths, so a space in the path makes its source build fail. On Windows the official installer does not build anything, so the `configure` rule does not apply there.
 
 ## Choose a compatible version
 

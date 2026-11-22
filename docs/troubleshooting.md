@@ -94,13 +94,17 @@ vfox does not download an installed name again. To reinstall, run `vfox uninstal
 
 Erlang/OTP is not selected. Run `vfox use -g erlang@26.2.3`, load the hook again, and check with the command in [erlang.md](erlang.md#windows).
 
+### `vfox exec` does not find `erl` or `elixir` on Windows
+
+vfox 1.1.0 finds a command in the PATH of the SDKs only by the name as typed, and it does not try the extensions of PATHEXT there. So `vfox exec erlang@26.2.3 -- erl` fails with `command not found: erl`, although `erl.exe` is installed. Give the extension: `vfox exec erlang@26.2.3 -- erl.exe`, and `vfox exec elixir@1.16.2-elixir-otp-26 -- elixir.bat`. In a shell with the hook loaded (`vfox activate pwsh`), `erl` and `elixir` run without it.
+
 ### Runtime errors after installing a prebuilt build
 
 The OTP number in the name must match the Erlang/OTP that runs Elixir. `1.16.2-otp-26` needs Erlang/OTP 26. Check the version with the command in [erlang.md](erlang.md#windows).
 
 ### A path with spaces fails
 
-Elixir's installs handle a space in the vfox home on every platform, see [changes.md](changes.md). Erlang/OTP does not: its `configure` step does not quote paths. On Linux and macOS, keep spaces out of the vfox home when you build Erlang/OTP from source. If an Elixir install still fails with a space in the path, report it with the output, see below.
+Elixir's installs handle a space in the vfox home on every platform, see [changes.md](changes.md). Erlang/OTP's source build does not: its `configure` step does not quote paths. On Linux and macOS, keep spaces out of the vfox home when you build Erlang/OTP from source. If an Elixir install still fails with a space in the path, report it with the output, see below.
 
 ### `vfox link --detect` does not find the Elixir installation
 

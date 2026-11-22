@@ -53,7 +53,7 @@ The two files in this repository are refreshed by a scheduled workflow every wee
 
 The scope is set with the flags of `vfox use`: `-g` (global), `-p` (project, writes `.vfox.toml`), or none (the current shell, which needs vfox's shell hook, see `vfox activate`).
 
-`vfox exec` does not do this mapping. It looks for the name as it is installed, so `vfox exec elixir@1.16.2 -- elixir --version` installs the source release `1.16.2` instead of running `1.16.2-otp-26`. Give the complete name to `exec`, as in `vfox exec elixir@1.16.2-otp-26 -- elixir --version`, or run `vfox use` first.
+`vfox exec` does not do this mapping. It looks for the name as it is installed, so `vfox exec elixir@1.16.2 -- elixir --version` installs the source release `1.16.2` instead of running `1.16.2-otp-26`. Give the complete name to `exec`, as in `vfox exec elixir@1.16.2-otp-26 -- elixir --version`, or run `vfox use` first. On Windows the program needs its extension, `elixir.bat`, see [troubleshooting.md](troubleshooting.md#vfox-exec-does-not-find-erl-or-elixir-on-windows).
 
 ## Pre-releases
 

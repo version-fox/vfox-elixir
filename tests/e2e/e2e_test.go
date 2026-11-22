@@ -107,7 +107,7 @@ func (s *suite) installErlang(t *testing.T) {
 	if !s.erlangReports(probe) {
 		// Where the installer put erl, for the failure message: vfox exec looks
 		// only where EnvKeys says.
-		where := strings.Join(findNamed(s.sdkRoot("erlang"), "erl", "erl.exe"), "\n")
+		where := strings.Join(findNamed(s.sdkRoot("erlang"), erlProgram), "\n")
 		t.Fatalf("erl does not report OTP %s after installing %s\n--- erl under the cache ---\n%s\n--- output ---\n%s",
 			s.otp, spec, where, probe.output())
 	}
@@ -118,7 +118,7 @@ func (s *suite) probeErlang(t *testing.T) vfoxResult {
 	t.Helper()
 
 	return s.runVfox(t, "", nil, "exec", "erlang@"+s.erlangVersion, "--",
-		"erl", "-noshell", "-eval", erlangProbe)
+		erlProgram, "-noshell", "-eval", erlangProbe)
 }
 
 // erlangReports reports whether a probe succeeded and printed the expected OTP
