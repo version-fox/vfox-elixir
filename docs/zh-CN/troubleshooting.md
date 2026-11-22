@@ -130,7 +130,7 @@ vfox 1.1.0 只按写出的名字在 SDK 的 PATH 中查找命令，不会尝试 
 
 ### `vfox link --detect` 找不到 Elixir 安装
 
-- 目录中必须有 `bin/elixir`（Windows 上为 `bin\elixir.bat`），并且有 `VERSION` 文件或 `lib/elixir/ebin/elixir.app` 之一。
+- 目录中必须有可执行的 `bin/elixir`（Windows 上为 `bin\elixir.bat`），并且有 `VERSION` 文件或 `lib/elixir/ebin/elixir.app` 之一。没有执行权限的启动器会被跳过；对 `bin/elixir` 执行 `chmod +x` 即可让该安装重新成为候选。
 - 位于 `.vfox`、`.version-fox` 下，或位于 `VFOX_HOME` 下的安装永远不会被列出，因为它们由 vfox 管理。
 - 手动链接：`vfox link elixir@<名字> <路径>`，见 [使用本机已有的 Elixir](link.md#手动链接)。
 

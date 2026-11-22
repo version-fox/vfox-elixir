@@ -4,6 +4,12 @@
 
 What changed in each release, as a user notices it.
 
+## Unreleased
+
+### Fixed
+
+- `vfox link --detect` no longer lists an installation whose `bin/elixir` has no execute bit. vfox cannot link such an installation: `vfox link --detect -y` failed on it and exited with status 1, even when the other installations were linked (#41).
+
 ## 1.0.4 - 2026-11-22
 
 ### Fixed

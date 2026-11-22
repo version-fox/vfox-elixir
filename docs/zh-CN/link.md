@@ -40,7 +40,7 @@ Windows：
 - `%ProgramFiles%\Elixir`、`%ProgramFiles(x86)%\Elixir` 和 `%LOCALAPPDATA%\Programs\Elixir`：它们本身就是安装目录。名字取自 `VERSION`。
 - `where elixir` 输出的每一行。
 
-目录是否为安装目录，取决于它是否包含 `bin/elixir`（Windows 为 `bin\elixir.bat`），并且包含 `VERSION` 文件或 `lib/elixir/ebin/elixir.app` 之一。
+目录是否为安装目录，取决于它是否包含可执行的 `bin/elixir`（Windows 为 `bin\elixir.bat`），并且包含 `VERSION` 文件或 `lib/elixir/ebin/elixir.app` 之一。
 
 名字的规则是：
 

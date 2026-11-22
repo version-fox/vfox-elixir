@@ -40,7 +40,7 @@ On Windows:
 - `%ProgramFiles%\Elixir`, `%ProgramFiles(x86)%\Elixir` and `%LOCALAPPDATA%\Programs\Elixir`: each is an install root itself. The name comes from `VERSION`.
 - Every line of `where elixir`.
 
-A directory is an install root when it contains `bin/elixir` (Windows: `bin\elixir.bat`), and either a `VERSION` file or `lib/elixir/ebin/elixir.app`.
+A directory is an install root when it contains an executable `bin/elixir` (Windows: `bin\elixir.bat`), and either a `VERSION` file or `lib/elixir/ebin/elixir.app`.
 
 The name is:
 

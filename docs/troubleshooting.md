@@ -130,7 +130,7 @@ A source build of Elixir on Linux and macOS stops before `make` when the vfox ho
 
 ### `vfox link --detect` does not find the Elixir installation
 
-- The directory must contain `bin/elixir` (on Windows `bin\elixir.bat`) and either a `VERSION` file or `lib/elixir/ebin/elixir.app`.
+- The directory must contain an executable `bin/elixir` (on Windows `bin\elixir.bat`) and either a `VERSION` file or `lib/elixir/ebin/elixir.app`. A launcher without the execute bit is skipped; `chmod +x bin/elixir` makes the install a candidate again.
 - Installs under `.vfox`, `.version-fox`, or under `VFOX_HOME` are never listed, because vfox manages them.
 - Link it by hand: `vfox link elixir@<name> <path>`, see [link.md](link.md#linking-by-hand).
 
