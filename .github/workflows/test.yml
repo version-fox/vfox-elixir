@@ -1,0 +1,76 @@
+# Copyright 2026 vfox-elixir contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: Test Plugin
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.27.1'
+          cache: false
+      # vfox 1.1.0 is the first release with the Detect hook, which tests/detect_test.lua
+      # exercises through `vfox link --detect`. The release is pinned and its checksum
+      # checked; change the version and the checksum together to move to another release.
+      - name: Install vfox
+        env:
+          VFOX_VERSION: 1.1.0
+          VFOX_SHA256: 3b33c3c468b27bc17aecf0d6d3af24fe49fe204972984904a136a47b402a0ee4
+        run: |
+          archive="$RUNNER_TEMP/vfox.tar.gz"
+          curl --fail --silent --show-error --location --output "$archive" \
+            "https://github.com/version-fox/vfox/releases/download/v${VFOX_VERSION}/vfox_${VFOX_VERSION}_linux_x86_64.tar.gz"
+          echo "$VFOX_SHA256  $archive" | sha256sum --check
+          mkdir "$RUNNER_TEMP/vfox"
+          tar --extract --gzip --file "$archive" --directory "$RUNNER_TEMP/vfox" --strip-components=1 \
+            "vfox_${VFOX_VERSION}_linux_x86_64/vfox"
+          echo "$RUNNER_TEMP/vfox" >> "$GITHUB_PATH"
+      # It finds tests/**/*_test.lua and runs each file in a VM of its own. A file
+      # that does not call test.load() from vfox.test fails, and so does a run
+      # that finds no test file.
+      - name: Run the offline hook tests with vfox
+        run: vfox plugin test .
+      # PostInstall's shell command runs for real here, in a directory whose path
+      # holds a space, with a fake make and erlc. vfox plugin test disables
+      # os.execute, so this file is not a *_test.lua; it runs under glua, as on
+      # macOS below.
+      - name: Test the PostInstall shell command with vfox's Lua interpreter
+        run: go run github.com/yuin/gopher-lua/cmd/glua@v1.1.1 tests/post_install_layouts.lua
+
+  shell-layout-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.27.1'
+          cache: false
+      - name: Test the PostInstall shell command on macOS
+        run: go run github.com/yuin/gopher-lua/cmd/glua@v1.1.1 tests/post_install_layouts.lua

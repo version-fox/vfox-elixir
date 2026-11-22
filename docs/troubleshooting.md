@@ -1,0 +1,136 @@
+[中文](zh-CN/troubleshooting.md) | [English](troubleshooting.md)
+
+# Troubleshooting
+
+Each heading below is the start of a message. Some messages end with a detail, such as a URL or an error code, shown here in angle brackets.
+
+## Messages from the plugin
+
+### `Erlang/OTP was not found, and Elixir is compiled with it`
+
+A source build (Linux or macOS) found no `erlc`: not on `PATH`, not in vfox's Erlang cache, and not in mise's installs. Install Erlang/OTP with `vfox install erlang@26.2.3`, then `vfox use -g erlang@26.2.3`, or put `erlc` on `PATH`. Check with `which erlc`. The search order is in [erlang.md](erlang.md).
+
+A prebuilt install from hex does not look for `erlc`, see [mirror.md](mirror.md).
+
+### `Elixir <version> was not found. Please confirm that the version exists`
+
+A source build needs a GitHub release tag `v<version>`. Write the version as `vfox search elixir` lists it, such as `1.16.2`, not `v1.16.2`.
+
+The plugin shows this message for any answer from GitHub other than `200 OK`, including rate limits and outages. If the version is listed and you are sure it exists, check your network and try again later. The release list is at https://github.com/elixir-lang/elixir/releases.
+
+### `Failed to check https://github.com/elixir-lang/elixir/releases/tag/v<version>: <error>. Please check your network connection.`
+
+The plugin could not reach GitHub. See [Network](#network).
+
+### `Failed to fetch <list> from <url>: <error>. Please check your network connection.`
+
+### `Failed to fetch <list> from <url>: HTTP status <code>.`
+
+`<list>` is `the Elixir versions`, `the Windows Elixir versions` or `the hex.pm builds`. The plugin reads these lists to answer `vfox search elixir`, and it reads them again for an install. The first form means no answer came, the second means the server answered with an error. See [Network](#network).
+
+### `Elixir build failed with exit code <code>`
+
+`make` stopped. Read the output above this message. `vfox --debug install elixir@<version>` prints more. Common causes:
+
+- Erlang/OTP does not match the Elixir version. Check the table in [erlang.md](erlang.md).
+- The Erlang/OTP install is incomplete. Check that `erl` and `erlc` both run, for example `erl -noshell -eval 'io:format("~s~n", [erlang:system_info(otp_release)]), halt().'`.
+- `make` is missing. On Ubuntu it comes with `build-essential`. On macOS it comes with `xcode-select --install`.
+
+If vfox still lists the version after the failure, run `vfox uninstall elixir@<version>` before you install it again.
+
+### `Elixir installer failed with exit code <code>`
+
+Windows only. The official installer ran and returned an error. Read the output above this message. The installer is run as `"<installer>" /S /D=<install directory>`, and it is removed after it runs. To look at it yourself, download `https://github.com/elixir-lang/elixir/releases/download/v<version>/elixir-otp-<N>.exe`.
+
+### `Downloading the installer failed: <url>: <error>`
+
+Windows only. The installer could not be downloaded from github.com. See [Network](#network).
+
+### `On Windows Elixir comes from the official installer, so name the version it ships with ... does not match`
+
+On Windows a version name must end in `-elixir-otp-<N>`, for example `1.16.2-elixir-otp-26`. `1.16.2` alone is refused before anything is downloaded. Run `vfox search elixir` to see the names.
+
+### The hex.pm builds are not available on Windows
+
+The hex.pm builds, which `VFOX_ELIXIR_MIRROR=hex` and `vfox search elixir hex` use, are for Linux and macOS. Install a name from the official installer, such as `1.16.2-elixir-otp-26`. See [platforms.md](platforms.md#windows).
+
+### `You must provide a version number for Elixir, eg: vfox install elixir@1.16.2`
+
+The install command had no version. Write the name after `@`.
+
+## Messages from vfox
+
+### `elixir@<version> is not installed`
+
+`vfox use` and `vfox uninstall` only know installed names. Run `vfox list elixir` and write the whole name, such as `1.16.2-otp-26`. A partial version does not match: `1.16` does not select `1.16.2-otp-26`. See [versions.md](versions.md#using-a-version).
+
+### `elixir@<version> is already installed`
+
+vfox does not download an installed name again. To reinstall, run `vfox uninstall elixir@<version>` first.
+
+### `plugin named elixir already exists`
+
+`vfox add elixir` was run when the plugin is already added. See [install-from-source.md](install-from-source.md#when-elixir-is-already-added).
+
+### `No new elixir installations found.`
+
+`vfox link --detect elixir` found nothing it can link. The plugin skips installs that are managed by vfox, and installs that are already linked or already installed under the same name. See [link.md](link.md).
+
+### `Use the -y flag to link what was found in non-interactive environments`
+
+`vfox link --detect` asks before it links. Without a terminal, such as in CI, add `-y`: `vfox link --detect -y elixir`.
+
+### `vfox link` rejects `--detect`
+
+`vfox link --detect` needs vfox 1.1.0 or later. Check with `vfox --version`.
+
+## Other problems
+
+### `elixir: command not found`, or the wrong version runs
+
+`vfox use -g` sets the default for new shells, but the current shell needs vfox's hook to pick up changes. Load the hook once: `eval "$(vfox activate bash)"` in Bash, `Invoke-Expression "$(vfox activate pwsh)"` in PowerShell. Check the selected version with `vfox current elixir`.
+
+### `erl` is not found, or `elixir.bat` stops on Windows
+
+Erlang/OTP is not selected. Run `vfox use -g erlang@26.2.3`, load the hook again, and check with the command in [erlang.md](erlang.md#windows).
+
+### `vfox exec` does not find `erl` or `elixir` on Windows
+
+vfox 1.1.0 finds a command in the PATH of the SDKs only by the name as typed, and it does not try the extensions of PATHEXT there. So `vfox exec erlang@26.2.3 -- erl` fails with `command not found: erl`, although `erl.exe` is installed. Give the extension: `vfox exec erlang@26.2.3 -- erl.exe`, and `vfox exec elixir@1.16.2-elixir-otp-26 -- elixir.bat`. In a shell with the hook loaded (`vfox activate pwsh`), `erl` and `elixir` run without it.
+
+### `exec: erl: not found` when Elixir runs
+
+`elixir` starts `erl`, which must be on `PATH`. `vfox exec elixir@<version> -- elixir` adds only Elixir's directory to `PATH`, so it fails when Erlang/OTP is not already on `PATH`. Name Erlang/OTP in the same command: `vfox exec erlang@26.2.3 elixir@1.16.2 -- elixir --version`. A prebuilt install from hex (see [mirror.md](mirror.md)) needs the same, because its zip does not contain Erlang/OTP. Or select both with `vfox use` in a shell with the hook loaded, and run `elixir` directly.
+
+### Runtime errors after installing a prebuilt build
+
+The OTP number in the name must match the Erlang/OTP that runs Elixir. `1.16.2-otp-26` needs Erlang/OTP 26. Check the version with the command in [erlang.md](erlang.md#windows).
+
+### A path with spaces fails
+
+Elixir's installs handle a space in the vfox home on every platform, see [changes.md](changes.md). Erlang/OTP's source build does not: its `configure` step does not quote paths. On Linux and macOS, keep spaces out of the vfox home when you build Erlang/OTP from source. If an Elixir install still fails with a space in the path, report it with the output, see below.
+
+### `vfox link --detect` does not find the Elixir installation
+
+- The directory must contain `bin/elixir` (on Windows `bin\elixir.bat`) and either a `VERSION` file or `lib/elixir/ebin/elixir.app`.
+- Installs under `.vfox`, `.version-fox`, or under `VFOX_HOME` are never listed, because vfox manages them.
+- Link it by hand: `vfox link elixir@<name> <path>`, see [link.md](link.md#linking-by-hand).
+
+### The version list is out of date
+
+`vfox search` keeps each result for 12 hours, in `<VFOX_HOME>/plugin/elixir/.available.cache`. Each argument has its own entry: no argument for the releases, `hex` for the hex.pm builds. To refresh it, delete that file. To turn the cache off for all plugins, run `vfox config cache.availableHookDuration 0s`.
+
+## Network
+
+The plugin reads the version list from `fastly.jsdelivr.net` (Linux, macOS and Windows) and from `builds.hex.pm` (hex). It checks each source release on github.com, and downloads the source archive or the Windows installer from github.com.
+
+If one of these hosts is blocked or slow, set vfox's proxy, which covers all of vfox's requests:
+
+```bash
+vfox config proxy.enable true
+vfox config proxy.url http://127.0.0.1:7890
+```
+
+## Reporting a problem
+
+Open an issue at [version-fox/vfox-elixir](https://github.com/version-fox/vfox-elixir/issues) with the output of `vfox --version`, the operating system and CPU, the command you ran, and everything it printed. `vfox --debug <command>` prints more.

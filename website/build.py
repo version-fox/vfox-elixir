@@ -1,4 +1,18 @@
+# Copyright 2026 vfox-elixir contributors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """Build the bilingual documentation site using Python's standard library."""
+
 import argparse
 import html
 import json
@@ -16,7 +30,12 @@ def build(destination, base_url=None):
     default_url = config.pop("site_url")
     base_url = (base_url or default_url).rstrip("/")
     parts = urlsplit(base_url)
-    if parts.scheme not in {"http", "https"} or not parts.netloc or parts.query or parts.fragment:
+    if (
+        parts.scheme not in {"http", "https"}
+        or not parts.netloc
+        or parts.query
+        or parts.fragment
+    ):
         raise ValueError("base URL must be an HTTP(S) URL without query or fragment")
     base_url = urlunsplit(parts._replace(scheme="https"))
     metadata = (ROOT.parent / "metadata.lua").read_text(encoding="utf-8")
@@ -28,30 +47,57 @@ def build(destination, base_url=None):
     shutil.copytree(ROOT / "assets", destination / "assets", dirs_exist_ok=True)
     locale_keys = []
     for locale, route, lang in [("zh", "", "zh-CN"), ("en", "en/", "en")]:
-        messages = json.loads((ROOT / "locales" / f"{locale}.json").read_text(encoding="utf-8"))
+        messages = json.loads(
+            (ROOT / "locales" / f"{locale}.json").read_text(encoding="utf-8")
+        )
         locale_keys.append(set(messages))
-        messages = {key: value.format(min_version=minimum) for key, value in messages.items()}
-        copy_data = json.dumps({key: messages[key] for key in ("copy", "copied", "copy_error")}, ensure_ascii=False)
+        messages = {
+            key: value.format(min_version=minimum) for key, value in messages.items()
+        }
+        copy_data = json.dumps(
+            {key: messages[key] for key in ("copy", "copied", "copy_error")},
+            ensure_ascii=False,
+        )
         messages.pop("copied")
         messages.pop("copy_error")
-        messages.update(config, lang=lang, version=version, copy_data=copy_data,
-                        asset_prefix="../" if route else "", language_href="../" if route else "en/",
-                        language_lang="zh-CN" if route else "en", canonical=base_url + "/" + route,
-                        site_url=base_url)
+        messages.update(
+            config,
+            lang=lang,
+            version=version,
+            copy_data=copy_data,
+            asset_prefix="../" if route else "",
+            language_href="../" if route else "en/",
+            language_lang="zh-CN" if route else "en",
+            canonical=base_url + "/" + route,
+            site_url=base_url,
+        )
         if set(messages) != keys:
-            raise ValueError(f"{locale}: missing {keys - set(messages)}, unused {set(messages) - keys}")
-        rendered = TOKEN.sub(lambda m: html.escape(messages[m[1]], quote=True), template)
+            raise ValueError(
+                f"{locale}: missing {keys - set(messages)}, unused {set(messages) - keys}"
+            )
+        rendered = TOKEN.sub(
+            lambda m: html.escape(messages[m[1]], quote=True), template
+        )
         output = destination / route
         output.mkdir(parents=True, exist_ok=True)
         (output / "index.html").write_text(rendered, encoding="utf-8")
     if locale_keys[0] != locale_keys[1]:
         raise ValueError("Chinese and English translation keys differ")
     (destination / ".nojekyll").touch()
-    (destination / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {base_url}/sitemap.xml\n", encoding="utf-8")
-    urls = "".join(f"<url><loc>{html.escape(base_url + '/' + route)}</loc></url>\n" for route in ("", "en/"))
+    (destination / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\nSitemap: {base_url}/sitemap.xml\n", encoding="utf-8"
+    )
+    urls = "".join(
+        f"<url><loc>{html.escape(base_url + '/' + route)}</loc></url>\n"
+        for route in ("", "en/")
+    )
     (destination / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '</urlset>\n', encoding="utf-8")
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + urls
+        + "</urlset>\n",
+        encoding="utf-8",
+    )
     print(f"Built Chinese and English pages for plugin {version}: {destination}")
 
 
