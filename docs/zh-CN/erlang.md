@@ -40,7 +40,7 @@ brew install autoconf libxslt fop wxwidgets openssl
 
 ## 选择兼容的版本
 
-Elixir 只支持部分 Erlang/OTP 版本。以下是 Elixir 1.16.2 的官方兼容表（2026-11-21 核对）：
+Elixir 只支持部分 Erlang/OTP 版本。以下是 Elixir 1.16.2 的官方兼容表（2026-11-23 核对）：
 
 | Elixir | 支持的 Erlang/OTP |
 | --- | --- |

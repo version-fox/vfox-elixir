@@ -40,7 +40,7 @@ On Linux and macOS, keep spaces out of the vfox home. Erlang/OTP's `configure` s
 
 ## Choose a compatible version
 
-Elixir supports only some Erlang/OTP versions. The official table for Elixir 1.16.2 (checked on 2026-11-21) lists:
+Elixir supports only some Erlang/OTP versions. The official table for Elixir 1.16.2 (checked on 2026-11-23) lists:
 
 | Elixir | Supported Erlang/OTP |
 | --- | --- |
