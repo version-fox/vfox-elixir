@@ -60,7 +60,7 @@ Windows only. The installer could not be downloaded from github.com. See [Networ
 
 On Windows a version name must end in `-elixir-otp-<N>`, for example `1.16.2-elixir-otp-26`. `1.16.2` alone is refused before anything is downloaded. Run `vfox search elixir` to see the names.
 
-### The hex.pm builds are not available on Windows
+### `The hex.pm builds (VFOX_ELIXIR_MIRROR=hex, or vfox search elixir hex) are not available on Windows`
 
 The hex.pm builds, which `VFOX_ELIXIR_MIRROR=hex` and `vfox search elixir hex` use, are for Linux and macOS. Install a name from the official installer, such as `1.16.2-elixir-otp-26`. See [platforms.md](platforms.md#windows).
 
@@ -122,7 +122,7 @@ vfox 1.1.0 finds a command in the PATH of the SDKs only by the name as typed, an
 
 ### Runtime errors after installing a prebuilt build
 
-The OTP number in the name must match the Erlang/OTP that runs Elixir. `1.16.2-otp-26` needs Erlang/OTP 26. Check the version with the command in [erlang.md](erlang.md#windows).
+The OTP number in the name must match the Erlang/OTP that runs Elixir. `1.16.2-otp-26` needs Erlang/OTP 26. Check the version with `erl -noshell -eval 'io:format("~s~n", [erlang:system_info(otp_release)]), halt().'`, which prints `26`.
 
 ### A path with spaces or other shell characters fails
 

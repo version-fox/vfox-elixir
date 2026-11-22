@@ -60,7 +60,7 @@
 
 在 Windows 上，版本名必须以 `-elixir-otp-<N>` 结尾，例如 `1.16.2-elixir-otp-26`。只写 `1.16.2` 会在下载之前被拒绝。运行 `vfox search elixir` 查看可用的名字。
 
-### hex.pm 构建在 Windows 上不可用
+### `The hex.pm builds (VFOX_ELIXIR_MIRROR=hex, or vfox search elixir hex) are not available on Windows`
 
 `VFOX_ELIXIR_MIRROR=hex` 和 `vfox search elixir hex` 使用的 hex.pm 构建只用于 Linux 和 macOS。请改用官方安装器的名字，例如 `1.16.2-elixir-otp-26`。见 [平台](platforms.md#windows)。
 
@@ -122,7 +122,7 @@ vfox 1.1.0 只按写出的名字在 SDK 的 PATH 中查找命令，不会尝试 
 
 ### 安装预编译包后运行时出现错误
 
-名字中的 OTP 编号必须与运行 Elixir 的 Erlang/OTP 一致。`1.16.2-otp-26` 需要 Erlang/OTP 26。用 [erlang.md](erlang.md#windows) 中的命令检查版本。
+名字中的 OTP 编号必须与运行 Elixir 的 Erlang/OTP 一致。`1.16.2-otp-26` 需要 Erlang/OTP 26。用 `erl -noshell -eval 'io:format("~s~n", [erlang:system_info(otp_release)]), halt().'` 检查版本，它会输出 `26`。
 
 ### 路径含空格或其他 Shell 字符时失败
 

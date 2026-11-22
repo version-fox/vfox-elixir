@@ -34,7 +34,7 @@ vfox loads `metadata.lua`, calls a hook when a command needs it, and puts `PLUGI
 | You run | Hooks |
 | --- | --- |
 | `vfox search elixir` | `Available` |
-| `vfox install elixir@1.16.2` | `PreInstall` returns the name and the URL. vfox downloads and unpacks the archive, then calls `PostInstall`, which builds Elixir (Linux, macOS) or runs the installer (Windows) |
+| `vfox install elixir@1.16.2` | `PreInstall` returns the name and the URL. vfox downloads and unpacks the archive, then calls `PostInstall`, which builds Elixir (Linux, macOS) or runs the installer (Windows). With `VFOX_ELIXIR_MIRROR=hex` it builds nothing: it only prints the warning about a name without an `-otp-N` suffix |
 | `vfox use elixir@1.16.2` | `PreUse` returns the installed name to select. `EnvKeys` provides `PATH` |
 | `vfox link --detect elixir` | `Detect` returns the Elixir installations already on the machine |
 | `vfox uninstall elixir@...` | no hook |
