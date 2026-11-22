@@ -65,3 +65,10 @@ check(branch.url, "https://builds.hex.pm/builds/elixir/main-otp-26.zip", "branch
 plugin:PostInstall({
     sdkInfo = { elixir = { path = "/home/u/.version-fox/cache/elixir/v-1.16.2-otp-26", version = "1.16.2-otp-26" } },
 })
+
+-- An empty builds.txt is not a list either: the search stops, and lists nothing.
+answers["https://builds.hex.pm/builds/elixir/builds.txt"] = { status_code = 200, body = "\n" }
+local ok, err = pcall(function()
+    plugin:Available({})
+end)
+assert(not ok and tostring(err):find("not a list of versions", 1, true), "empty builds.txt: " .. tostring(err))

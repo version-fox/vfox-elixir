@@ -49,6 +49,30 @@ local ok, err = pcall(function()
 end)
 assert(not ok and tostring(err):find("HTTP status 503", 1, true), "503: " .. tostring(err))
 
+-- An error page is not a list of versions, whatever its status: a 404 page
+-- stops the hook with its status, and an HTML page or an empty body with
+-- status 200 stops it too. Nothing is listed, and nothing is cached (issue #22).
+answers[LIST] = {
+    status_code = 404,
+    body = "<!DOCTYPE HTML>\n<title>Error response</title>\nError code: 404\n",
+}
+ok, err = pcall(function()
+    plugin:Available({})
+end)
+assert(not ok and tostring(err):find("HTTP status 404", 1, true), "404 page: " .. tostring(err))
+
+answers[LIST] = { status_code = 200, body = "<html><body>Service unavailable</body></html>\n" }
+ok, err = pcall(function()
+    plugin:Available({})
+end)
+assert(not ok and tostring(err):find("not a list of versions", 1, true), "200 HTML page: " .. tostring(err))
+
+answers[LIST] = { status_code = 200, body = " \n" }
+ok, err = pcall(function()
+    plugin:Available({})
+end)
+assert(not ok and tostring(err):find("not a list of versions", 1, true), "empty body: " .. tostring(err))
+
 answers[LIST] = "connection reset"
 ok, err = pcall(function()
     plugin:Available({})

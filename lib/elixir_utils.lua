@@ -42,8 +42,9 @@ function elixir_utils.check_hex_mirror_platform()
     end
 end
 
---- Fetches a URL and returns its body. A network error or a status other than
---- 200 stops the hook with a message that names the address.
+--- Fetches a URL and returns its body. A network error, a status other than
+--- 200, an empty body or an HTML page stops the hook with a message that names
+--- the address.
 function elixir_utils.fetch(url, what)
     local resp, err = http.get({ url = url })
     if err ~= nil or resp == nil then
@@ -60,7 +61,20 @@ function elixir_utils.fetch(url, what)
     if resp.status_code ~= 200 then
         error("Failed to fetch " .. what .. " from " .. url .. ": HTTP status " .. tostring(resp.status_code) .. ".")
     end
-    return resp.body or ""
+    -- An empty body, or an HTML page that a server or a proxy sends in place of
+    -- the list, is not a list of versions. It is neither listed nor cached.
+    local body = resp.body or ""
+    local lower = body:lower()
+    if platform.trim(body) == "" or lower:find("<!doctype", 1, true) or lower:find("<html", 1, true) then
+        error(
+            "Failed to fetch "
+                .. what
+                .. " from "
+                .. url
+                .. ": the response is not a list of versions. Check your network connection and proxy settings."
+        )
+    end
+    return body
 end
 
 --- Turns a text with one version per line into vfox's list of versions. The
