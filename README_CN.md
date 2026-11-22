@@ -102,7 +102,7 @@ mise install vfox:version-fox/vfox-elixir@1.16.2
 
 ## 发布插件
 
-维护者可以在默认分支上运行 **Actions → Plugin → Run workflow**，输入不带 `v` 前缀的稳定插件版本号来发布。共享的工作流会更新 `metadata.lua`、创建版本提交和标签，并在本仓库发布 ZIP 与 manifest。不需要本地打标签，也不需要额外的发布令牌。Pull Request 只运行检查，PR 标题不再触发发布。
+维护者可以在默认分支上运行 **Actions → Plugin → Run workflow**，输入不带 `v` 前缀的稳定插件版本号来发布。共享的工作流会更新 `metadata.lua`、创建版本提交和标签，并在本仓库发布 ZIP 与 manifest。不需要本地打标签，也不需要额外的发布令牌。Pull Request 只运行检查。
 
 当 `PLUGIN.version` 已与标签一致时，推送版本标签也可以发布。发布失败时，重新运行原来失败的任务即可继续。
 

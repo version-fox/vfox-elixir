@@ -54,7 +54,7 @@
   "macos_deps": "先准备 Erlang/OTP 和 Xcode Command Line Tools。OTP 的构建依赖请参考 Erlang 插件。",
   "windows_deps": "先安装 Erlang/OTP。使用 vfox 0.5.3+，Windows 安装支持 Elixir 1.15 及之后的版本；版本名带 OTP 后缀。",
   "guide_tools_title": "使用 Hex 预编译包",
-  "guide_tools_text": "搜索与安装时使用同一个镜像选项，并选择匹配已安装 OTP 的构建。",
+  "guide_tools_text": "先用 vfox search elixir hex 列出构建，再设置 VFOX_ELIXIR_MIRROR=hex 安装。请选择 -otp-N 后缀与已安装 Erlang/OTP 一致的构建。",
   "guide3_label": "WINDOWS / OTP",
   "guide3_title": "Windows 使用 OTP 对应版本",
   "guide3_text": "先激活 Erlang，再安装带 OTP 后缀的 Elixir 版本。这里的 Elixir 1.16.2 配合 OTP 26。",
