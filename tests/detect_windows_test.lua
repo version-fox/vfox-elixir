@@ -55,12 +55,12 @@ io.popen = function(command, mode)
         lines = dir and dirs[dir] or {}
     end
     local index = 0
+    -- The handle as io.popen gives it on Windows in vfox 1.1.0: read returns one
+    -- line per call, and nil after the last one. There is no lines method.
     return {
-        lines = function()
-            return function()
-                index = index + 1
-                return lines[index]
-            end
+        read = function()
+            index = index + 1
+            return lines[index]
         end,
         close = function()
             return true

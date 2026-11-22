@@ -93,6 +93,9 @@ end
 
 --- Returns every line of a shell command's output, without surrounding
 --- whitespace and without blank lines. Returns {} when the command cannot run.
+--- The lines are read one at a time with read("*l"), not with lines(): on Windows
+--- vfox 1.1.0 replaces io.popen with a handle that has read, write and close, and
+--- no lines method.
 function platform.lines(command)
     if io.popen == nil then
         return {}
@@ -102,7 +105,11 @@ function platform.lines(command)
         return {}
     end
     local result = {}
-    for line in handle:lines() do
+    while true do
+        local line = handle:read("*l")
+        if line == nil then
+            break
+        end
         line = platform.trim(line)
         if line ~= "" then
             table.insert(result, line)

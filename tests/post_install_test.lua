@@ -19,13 +19,9 @@ local test = require("vfox.test")
 local plugin = test.load({ os = "linux", arch = "amd64", env = { HOME = "/home/u" } })
 
 io.popen = function(command, mode)
-    local index = 0
     return {
-        lines = function()
-            return function()
-                index = index + 1
-                return nil
-            end
+        read = function()
+            return nil
         end,
         close = function()
             return true

@@ -30,3 +30,54 @@ check(platform.basename("/a/b/1.16.2-otp-26"), "1.16.2-otp-26", "basename")
 check(platform.shell_quote("it's"), "'it'\\''s'", "shell quote")
 check(platform.trim("  x \r\n"), "x", "trim")
 check(platform.env("VFOX_ELIXIR_NOT_SET_FOR_TESTS"), nil, "unset variable")
+
+-- io.popen as vfox 1.1.0 gives it on Windows: a handle with read, write and close,
+-- and no lines method. read("*l") returns the next line without its line ending,
+-- and nil after the last one. The commands are not run; the output is given.
+local function windows_popen(output)
+    return function()
+        local position = 1
+        return {
+            read = function(_, format)
+                assert(format == nil or format == "*l", "unexpected read format " .. tostring(format))
+                if position > #output then
+                    return nil
+                end
+                local stop = output:find("\n", position, true)
+                local line
+                if stop then
+                    line = output:sub(position, stop - 1)
+                    position = stop + 1
+                else
+                    line = output:sub(position)
+                    position = #output + 1
+                end
+                return (line:gsub("\r$", ""))
+            end,
+            close = function()
+                return true
+            end,
+        }
+    end
+end
+
+local saved_popen = io.popen
+local saved_os_type = RUNTIME.osType
+RUNTIME.osType = "windows"
+
+io.popen = windows_popen("Erlang OTP 26\r\n\r\n  Git  \r\nlast line without a newline")
+local lines = platform.lines('dir /b /ad "C:\\Program Files" 2>nul')
+assert(
+    #lines == 3 and lines[1] == "Erlang OTP 26" and lines[2] == "Git" and lines[3] == "last line without a newline",
+    "windows lines: " .. table.concat(lines, "|")
+)
+
+io.popen = windows_popen("Erlang OTP 26\r\nGit\r\n")
+local children = platform.list_children("C:\\Program Files")
+assert(
+    #children == 2 and children[1] == "C:\\Program Files\\Erlang OTP 26" and children[2] == "C:\\Program Files\\Git",
+    "windows children: " .. table.concat(children, "|")
+)
+
+io.popen = saved_popen
+RUNTIME.osType = saved_os_type
