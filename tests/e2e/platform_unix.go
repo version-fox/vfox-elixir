@@ -114,6 +114,17 @@ func (s *suite) installHexMirror(t *testing.T) {
 	s.runHello(t, spec)
 }
 
+// checkHexSearch runs vfox search elixir hex, which must list the hex.pm builds,
+// each with its note.
+func (s *suite) checkHexSearch(t *testing.T) {
+	t.Helper()
+
+	result := s.downloadVfox(t, nil, "search", "elixir", "hex")
+	if !strings.Contains(result.output(), hexNote) {
+		t.Fatalf("vfox search elixir hex must list the hex.pm builds\n--- output ---\n%s", result.output())
+	}
+}
+
 // installSpacedHome is the Windows step that installs Elixir into a home with a
 // space in its path. Unix has no official installer that runs into such a path,
 // and its home may not contain a space at all, so the step is skipped here.

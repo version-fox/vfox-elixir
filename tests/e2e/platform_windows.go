@@ -133,6 +133,22 @@ func (s *suite) installHexMirror(t *testing.T) {
 	}
 }
 
+// checkHexSearch runs vfox search elixir hex, which must fail on Windows, where
+// hex.pm has no builds, and say so.
+func (s *suite) checkHexSearch(t *testing.T) {
+	t.Helper()
+
+	result := s.runVfox(t, "", nil, "search", "elixir", "hex")
+	if result.err == nil {
+		t.Fatalf("vfox search elixir hex must fail on Windows, where hex.pm has no builds\n--- output ---\n%s",
+			result.output())
+	}
+	if !strings.Contains(result.output(), "not available on Windows") {
+		t.Fatalf("the failure should say that the hex.pm builds are not available on Windows\n--- output ---\n%s",
+			result.output())
+	}
+}
+
 // installSpacedHome installs an official Elixir build into a vfox home whose path
 // has a space, as the home of a Windows account with a space in its name would
 // be, and checks the files that the installer writes. It needs no Erlang/OTP: the

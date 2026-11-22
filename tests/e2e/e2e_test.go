@@ -49,8 +49,32 @@ func TestE2E(t *testing.T) {
 	}
 	t.Run("elixir", s.installOfficialElixir)
 	t.Run("hex mirror", s.installHexMirror)
+	t.Run("search lists", s.searchLists)
 	t.Run("use not installed", s.useNotInstalled)
 	t.Run("detect", s.detectFakeInstall)
+}
+
+// hexNote is the note that vfox shows after each build of hex.pm in a search.
+const hexNote = "pre-built from hex.pm"
+
+// searchLists checks the two lists of vfox search. It searches for the releases,
+// then for the hex.pm builds, then for the releases again, in one home. vfox
+// caches each search by its argument, so the last search must not show the
+// hex.pm builds that the second one listed. What the hex argument does on a
+// platform is in checkHexSearch.
+func (s *suite) searchLists(t *testing.T) {
+	t.Helper()
+
+	releases := s.downloadVfox(t, nil, "search", "elixir")
+	if strings.Contains(releases.output(), hexNote) {
+		t.Fatalf("vfox search elixir lists the hex.pm builds\n--- output ---\n%s", releases.output())
+	}
+	s.checkHexSearch(t)
+	again := s.downloadVfox(t, nil, "search", "elixir")
+	if strings.Contains(again.output(), hexNote) {
+		t.Fatalf("vfox search elixir lists the hex.pm builds after the hex search: the cache is shared\n--- output ---\n%s",
+			again.output())
+	}
 }
 
 // useNotInstalled checks that vfox use refuses a version that is not installed,
