@@ -30,13 +30,14 @@ function elixir_utils.use_hex_mirror()
     return os.getenv("VFOX_ELIXIR_MIRROR") == "hex"
 end
 
---- Fails when the hex.pm mirror is asked for on Windows. Its builds are for
---- Unix, and the Windows installer is the only Windows install.
+--- Fails when the hex.pm builds are asked for on Windows, by VFOX_ELIXIR_MIRROR=hex
+--- or by `vfox search elixir hex`. Those builds are for Unix, and the Windows
+--- installer is the only Windows install.
 function elixir_utils.check_hex_mirror_platform()
     if platform.is_windows() then
         error(
-            "VFOX_ELIXIR_MIRROR=hex is not available on Windows: the builds at builds.hex.pm are for Unix. "
-                .. "Unset it and install from the official installer, for example "
+            "The hex.pm builds (VFOX_ELIXIR_MIRROR=hex, or vfox search elixir hex) are not available on Windows: "
+                .. "they are built for Unix. Install from the official installer, for example "
                 .. "vfox install elixir@1.16.2-elixir-otp-26 (see vfox search elixir)."
         )
     end

@@ -14,13 +14,28 @@
 
 local elixirUtils = require("elixir_utils")
 
---- Return all available versions provided by this plugin
---- @param ctx table Empty table used as context, for future extension
+--- Returns the versions that `vfox search elixir` lists: the releases, or with the
+--- argument hex (`vfox search elixir hex`) the builds of hex.pm. vfox keeps the
+--- result per argument, so each list has its own cache entry and one list never
+--- shows for the other. VFOX_ELIXIR_MIRROR does not choose the list; it only
+--- affects the install.
+--- @param ctx table ctx.args holds the words after the plugin name
 --- @return table Descriptions of available versions and accompanying tool descriptions
 function PLUGIN:Available(ctx)
-    if elixirUtils.use_hex_mirror() then
+    local args = ctx.args or {}
+    if #args > 1 then
+        error("vfox search elixir takes one argument at most: hex, for the hex.pm builds")
+    end
+    local choice = args[1]
+    if choice == "hex" then
         elixirUtils.check_hex_mirror_platform()
         return elixirUtils.get_hex_prebuild_versions()
+    end
+    if choice ~= nil then
+        error('unknown argument "' .. choice .. '": vfox search elixir takes hex, for the hex.pm builds, or nothing')
+    end
+    if elixirUtils.use_hex_mirror() then
+        print("VFOX_ELIXIR_MIRROR=hex does not change this list. For the hex.pm builds, run: vfox search elixir hex")
     end
     return elixirUtils.get_release_versions()
 end

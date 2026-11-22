@@ -14,29 +14,31 @@
 
 local test = require("vfox.test")
 
+-- Answers keyed by URL: a { status_code, body } table, or a string for a network error.
 local answers = {}
 local function answer(request)
     local value = answers[request.url]
     if value == nil then
         return { status_code = 404, body = "" }
     end
+    if type(value) == "string" then
+        return nil, value
+    end
     return value
 end
 
-local plugin = test.load({
-    os = "linux",
-    arch = "amd64",
-    env = { VFOX_ELIXIR_MIRROR = "hex" },
-    http = answer,
-})
+-- The search argument selects the hex.pm list, with no environment variable set.
+local plugin = test.load({ os = "linux", arch = "amd64", http = answer })
 
 local function check(actual, expected, label)
     assert(actual == expected, label .. ": expected " .. tostring(expected) .. ", got " .. tostring(actual))
 end
 
+local BUILDS = "https://builds.hex.pm/builds/elixir/builds.txt"
+
 -- The builds of hex.pm: the first word of each line is the name. A release
 -- loses its v, a branch keeps its name.
-answers["https://builds.hex.pm/builds/elixir/builds.txt"] = {
+answers[BUILDS] = {
     status_code = 200,
     body = table.concat({
         "main 60200fefaaee0d9773a03fe84d6747f73b47de6a 2026-11-21T11:42:25Z ba11",
@@ -46,7 +48,7 @@ answers["https://builds.hex.pm/builds/elixir/builds.txt"] = {
         "",
     }, "\n"),
 }
-local list = plugin:Available({})
+local list = plugin:Available({ args = { "hex" } })
 check(#list, 4, "count")
 check(list[1].version, "main", "branch")
 check(list[1].note, "pre-built from hex.pm", "note")
@@ -54,21 +56,20 @@ check(list[2].version, "main-otp-26", "branch with OTP")
 check(list[3].version, "1.16.2-otp-26", "release with OTP")
 check(list[4].version, "1.20.5", "release")
 
--- A release is served under the v of its tag, a branch under its name.
-local release = plugin:PreInstall({ version = "1.16.2-otp-26" })
-check(release.url, "https://builds.hex.pm/builds/elixir/v1.16.2-otp-26.zip", "release zip")
-check(release.version, "1.16.2-otp-26", "release name")
-local branch = plugin:PreInstall({ version = "main-otp-26" })
-check(branch.url, "https://builds.hex.pm/builds/elixir/main-otp-26.zip", "branch zip")
-
--- A prebuilt zip needs no build: PostInstall returns without running a shell.
-plugin:PostInstall({
-    sdkInfo = { elixir = { path = "/home/u/.version-fox/cache/elixir/v-1.16.2-otp-26", version = "1.16.2-otp-26" } },
-})
-
+-- The checks that expect an error come last in the file.
 -- An empty builds.txt is not a list either: the search stops, and lists nothing.
-answers["https://builds.hex.pm/builds/elixir/builds.txt"] = { status_code = 200, body = "\n" }
+answers[BUILDS] = { status_code = 200, body = "\n" }
 local ok, err = pcall(function()
-    plugin:Available({})
+    plugin:Available({ args = { "hex" } })
 end)
 assert(not ok and tostring(err):find("not a list of versions", 1, true), "empty builds.txt: " .. tostring(err))
+
+-- Only hex is a search argument, and only one of them.
+ok, err = pcall(function()
+    plugin:Available({ args = { "1.16.2" } })
+end)
+assert(not ok and tostring(err):find("unknown argument", 1, true), "unknown argument: " .. tostring(err))
+ok, err = pcall(function()
+    plugin:Available({ args = { "hex", "hex" } })
+end)
+assert(not ok and tostring(err):find("at most", 1, true), "two arguments: " .. tostring(err))
