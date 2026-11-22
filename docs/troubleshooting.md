@@ -34,7 +34,7 @@ No answer came from the server. See [Network](#network).
 
 The server answered with status 200, but the body is an error page, an empty body, or plain text with no version names, such as `Error code: 404`. The plugin lists and caches nothing from such an answer, so the search or the install stops with this message. Check the proxy settings, see [Network](#network), and run the command again.
 
-### `Elixir build failed with exit code <code>`
+### `Elixir build failed: make stopped with an error`
 
 `make` stopped. Read the output above this message. `vfox --debug install elixir@<version>` prints more. Common causes:
 

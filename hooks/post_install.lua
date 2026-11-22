@@ -37,12 +37,11 @@ function PLUGIN:PostInstall(ctx)
 
     elixirUtils.check_build_path(path)
     local erlang_bin = elixirUtils.require_erlang_bin(elixirUtils.cache_root(path))
+    -- The value of os.execute is not make's exit status (issue #37), so the message prints no number.
     local status = os.execute(elixirUtils.build_command(path, erlang_bin))
     if status ~= 0 then
         error(
-            "Elixir build failed with exit code "
-                .. tostring(status)
-                .. ". Check the output above; see https://github.com/version-fox/vfox-elixir/blob/main/docs/troubleshooting.md"
+            "Elixir build failed: make stopped with an error. Check the output above for the cause; see https://github.com/version-fox/vfox-elixir/blob/main/docs/troubleshooting.md"
         )
     end
 end

@@ -34,7 +34,7 @@
 
 服务器返回了状态 200，但正文是错误页、空内容，或者不含版本名的纯文本，例如 `Error code: 404`。插件不会把这样的应答列为版本，也不会写入缓存，因此搜索或安装会在这条信息处停止。请检查代理设置，见 [网络](#网络)，然后重新运行命令。
 
-### `Elixir build failed with exit code <code>`
+### `Elixir build failed: make stopped with an error`
 
 `make` 停止了。请阅读这条信息上方的输出。`vfox --debug install elixir@<version>` 会打印更多内容。常见原因：
 
