@@ -51,7 +51,7 @@ Windows：
 
 插件不会报告 vfox 自己的安装（位于 `.vfox` 或 `.version-fox` 下，或位于 `VFOX_HOME` 下），因为它们已经由 vfox 管理。同一路径只报告一次，同名的也只报告第一个找到的。列表按名字排序。
 
-每一项后面的备注说明安装是在哪里找到的，例如 `installed by asdf`、`system Elixir` 或 `found on PATH`。备注只供参考，使用时请用名字。
+每一项后面的备注说明安装是在哪里找到的，例如 `installed by asdf`、`system Elixir` 或 `found on PATH`。备注只供参考。请用这个名字配合 `vfox use` 使用。
 
 ## 手动链接
 
