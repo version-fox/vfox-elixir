@@ -66,7 +66,7 @@ vfox use -g elixir@1.16.2-elixir-otp-26
 - 安装器不需要 Erlang/OTP 也能完成，但 `elixir.bat` 会调用 `erl`。使用 Elixir 之前，请用 `vfox use -g` 选择 Erlang/OTP，让 `erl` 在 `PATH` 上。
 - 版本名为 `<版本>-elixir-otp-<N>`，用 `vfox search elixir` 查看。列表从 `1.15.0-rc.2` 开始。更早的版本可以使用已弃用的 [Online Elixir Installer](https://github.com/elixir-lang/elixir-windows-setup/releases/tag/v2.4)。
 - 安装器不会修改 `PATH`。插件通过 vfox 的环境变量加入 `<路径>\bin`。
-- 没有 Hex 预编译包。`VFOX_ELIXIR_MIRROR=hex` 会被拒绝，见 [mirror.md](mirror.md)。
+- 没有 Hex 预编译包。`VFOX_ELIXIR_MIRROR=hex` 和 `vfox search elixir hex` 都会被拒绝，见 [mirror.md](mirror.md)。
 
 本页没有在 Windows 上实际测试。Windows 的安装流程由 E2E 测试覆盖，见 [e2e.md](e2e.md)。
 

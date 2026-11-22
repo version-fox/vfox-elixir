@@ -58,10 +58,10 @@ Windows 需要 vfox 0.5.3 或更高版本。Windows 的版本列表不包含 1.1
 
 ## Hex 预编译包
 
-设置 `VFOX_ELIXIR_MIRROR=hex` 后，Linux 和 macOS 会从 builds.hex.pm 安装预编译的 Elixir，而不是编译它。Windows 不支持这个选项。见 [Hex 预编译包](docs/zh-CN/mirror.md)。
+设置 `VFOX_ELIXIR_MIRROR=hex` 后，Linux 和 macOS 会从 builds.hex.pm 安装预编译的 Elixir，而不是编译它。`vfox search elixir hex` 会列出这些构建。Windows 不支持它们。见 [Hex 预编译包](docs/zh-CN/mirror.md)。
 
 ```bash
-VFOX_ELIXIR_MIRROR=hex vfox search elixir
+vfox search elixir hex
 VFOX_ELIXIR_MIRROR=hex vfox install elixir@1.16.2-otp-26
 ```
 

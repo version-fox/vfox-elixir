@@ -37,3 +37,4 @@ What changed in each release, as a user notices it.
 - `vfox use` for a version that is not installed reports `is not installed`. Before, it stopped with a Lua error (#21).
 - A name without an OTP suffix selects the installed build with the highest OTP number. `vfox use elixir@1.16.2` selects `1.16.2-otp-26` over `1.16.2-otp-25`, and `vfox use elixir@main` selects `main-otp-26` when it is installed.
 - Source builds look for `erlc` in vfox's own Erlang cache too, and report what to install when no `erlc` is found (#23).
+- `vfox search elixir hex` lists the hex.pm builds. `VFOX_ELIXIR_MIRROR` no longer changes the search list, only the install: vfox keeps each search result by its argument, so the hex.pm builds and the releases no longer show for each other (#22).

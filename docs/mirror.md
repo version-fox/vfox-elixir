@@ -2,10 +2,10 @@
 
 # Hex prebuilt packages
 
-Setting `VFOX_ELIXIR_MIRROR=hex` makes the plugin install prebuilt Elixir zips from [builds.hex.pm](https://builds.hex.pm/builds/elixir/builds.txt) instead of compiling the source. The variable is read by `vfox search` and `vfox install`, and it has an effect only when its value is exactly `hex`.
+Setting `VFOX_ELIXIR_MIRROR=hex` makes the plugin install prebuilt Elixir zips from [builds.hex.pm](https://builds.hex.pm/builds/elixir/builds.txt) instead of compiling the source. The variable is read by `vfox install`, and it has an effect only when its value is exactly `hex`. To list the builds, search with the argument `hex`: `vfox search elixir hex`.
 
 ```bash
-VFOX_ELIXIR_MIRROR=hex vfox search elixir
+vfox search elixir hex
 VFOX_ELIXIR_MIRROR=hex vfox install elixir@1.16.2-otp-26
 vfox use -g elixir@1.16.2-otp-26
 ```
@@ -27,7 +27,7 @@ The names are the lines of `builds.txt` with the leading `v` removed. They inclu
 - Names without a suffix are listed too, but `builds.txt` does not say which Erlang/OTP they were built with.
 - The `main` and `master` names are updated. Installing the same name later can give a newer build.
 
-`VFOX_ELIXIR_MIRROR=hex vfox search elixir` prints the current list.
+`vfox search elixir hex` prints the current list. `vfox search elixir` without the argument lists the releases, whatever `VFOX_ELIXIR_MIRROR` is set to. vfox keeps each search result by its argument, so the two lists do not show for each other.
 
 ## Compared with a source build
 
@@ -41,7 +41,7 @@ The names are the lines of `builds.txt` with the leading `v` removed. They inclu
 
 ## Windows
 
-Hex prebuilt packages are not available on Windows. With `VFOX_ELIXIR_MIRROR=hex`, `vfox search` and `vfox install` stop with an error that says Windows is not supported. Nothing is downloaded. On Windows, use the official installer names, such as `1.16.2-elixir-otp-26`, see [platforms.md](platforms.md#windows).
+Hex prebuilt packages are not available on Windows. With `VFOX_ELIXIR_MIRROR=hex`, `vfox install` or `vfox search elixir hex` stops with an error that the builds are not available on Windows. Nothing is downloaded. On Windows, use the official installer names, such as `1.16.2-elixir-otp-26`, see [platforms.md](platforms.md#windows).
 
 ## Checksums
 

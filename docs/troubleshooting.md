@@ -50,9 +50,9 @@ Windows only. The installer could not be downloaded from github.com. See [Networ
 
 On Windows a version name must end in `-elixir-otp-<N>`, for example `1.16.2-elixir-otp-26`. `1.16.2` alone is refused before anything is downloaded. Run `vfox search elixir` to see the names.
 
-### `VFOX_ELIXIR_MIRROR=hex is not available on Windows`
+### The hex.pm builds are not available on Windows
 
-Hex prebuilt packages are for Linux and macOS. Unset `VFOX_ELIXIR_MIRROR` and install a name from the official installer, such as `1.16.2-elixir-otp-26`. See [platforms.md](platforms.md#windows).
+The hex.pm builds, which `VFOX_ELIXIR_MIRROR=hex` and `vfox search elixir hex` use, are for Linux and macOS. Install a name from the official installer, such as `1.16.2-elixir-otp-26`. See [platforms.md](platforms.md#windows).
 
 ### `You must provide a version number for Elixir, eg: vfox install elixir@1.16.2`
 
@@ -118,7 +118,7 @@ Elixir's installs handle a space in the vfox home on every platform, see [change
 
 ### The version list is out of date
 
-`vfox search` keeps its result for 12 hours, in `<VFOX_HOME>/plugin/elixir/.available.cache`. The cache is not split by `VFOX_ELIXIR_MIRROR`, so right after a search with one mirror setting, a search with the other can list the first list. To refresh it, delete that file. To turn the cache off for all plugins, run `vfox config cache.availableHookDuration 0s`.
+`vfox search` keeps each result for 12 hours, in `<VFOX_HOME>/plugin/elixir/.available.cache`. Each argument has its own entry: no argument for the releases, `hex` for the hex.pm builds. To refresh it, delete that file. To turn the cache off for all plugins, run `vfox config cache.availableHookDuration 0s`.
 
 ## Network
 

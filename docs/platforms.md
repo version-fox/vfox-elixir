@@ -66,7 +66,7 @@ What to know:
 - The installer does not need Erlang/OTP to finish, but `elixir.bat` runs `erl`. Select Erlang/OTP with `vfox use -g` so that `erl` is on `PATH`.
 - Version names are `<version>-elixir-otp-<N>`. Use `vfox search elixir` to see them. The list starts at `1.15.0-rc.2`. For older versions, the deprecated [Online Elixir Installer](https://github.com/elixir-lang/elixir-windows-setup/releases/tag/v2.4) is still available.
 - The installer does not change `PATH`. The plugin adds `<path>\bin` through vfox's environment.
-- Hex prebuilt packages are not available. `VFOX_ELIXIR_MIRROR=hex` is refused, see [mirror.md](mirror.md).
+- Hex prebuilt packages are not available. `VFOX_ELIXIR_MIRROR=hex` and `vfox search elixir hex` are refused, see [mirror.md](mirror.md).
 
 This page was not tested on Windows. The Windows install path is covered by the E2E tests, see [e2e.md](e2e.md).
 

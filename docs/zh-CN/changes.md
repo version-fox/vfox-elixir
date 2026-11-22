@@ -37,3 +37,4 @@
 - `vfox use` 选择的版本未安装时，报告 `is not installed`。之前它会以 Lua 错误停止（#21）。
 - 不带 OTP 后缀的名字会选中 OTP 编号最大的已安装构建。`vfox use elixir@1.16.2` 选中 `1.16.2-otp-26` 而不是 `1.16.2-otp-25`；安装了 `main-otp-26` 时，`vfox use elixir@main` 选中它。
 - 源码构建时查找 `erlc`，也会搜索 vfox 自己的 Erlang 缓存。找不到 `erlc` 时，报错会说明需要安装什么（#23）。
+- `vfox search elixir hex` 列出 hex.pm 构建。`VFOX_ELIXIR_MIRROR` 不再改变搜索列表，只影响安装：vfox 按搜索参数缓存结果，因此 hex.pm 构建和源码版本列表不再互相显示（#22）。

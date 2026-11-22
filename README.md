@@ -58,10 +58,10 @@ Windows needs vfox 0.5.3 or later. Versions before 1.15 are not listed for Windo
 
 ## Hex prebuilt packages
 
-With `VFOX_ELIXIR_MIRROR=hex`, Linux and macOS install prebuilt Elixir from builds.hex.pm instead of compiling it. Windows does not support this. See [mirror.md](docs/mirror.md).
+With `VFOX_ELIXIR_MIRROR=hex`, Linux and macOS install prebuilt Elixir from builds.hex.pm instead of compiling it. `vfox search elixir hex` lists those builds. Windows does not support them. See [mirror.md](docs/mirror.md).
 
 ```bash
-VFOX_ELIXIR_MIRROR=hex vfox search elixir
+vfox search elixir hex
 VFOX_ELIXIR_MIRROR=hex vfox install elixir@1.16.2-otp-26
 ```
 

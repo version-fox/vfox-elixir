@@ -50,9 +50,9 @@
 
 在 Windows 上，版本名必须以 `-elixir-otp-<N>` 结尾，例如 `1.16.2-elixir-otp-26`。只写 `1.16.2` 会在下载之前被拒绝。运行 `vfox search elixir` 查看可用的名字。
 
-### `VFOX_ELIXIR_MIRROR=hex is not available on Windows`
+### hex.pm 构建在 Windows 上不可用
 
-Hex 预编译包只用于 Linux 和 macOS。请取消设置 `VFOX_ELIXIR_MIRROR`，改用官方安装器的名字，例如 `1.16.2-elixir-otp-26`。见 [平台](platforms.md#windows)。
+`VFOX_ELIXIR_MIRROR=hex` 和 `vfox search elixir hex` 使用的 hex.pm 构建只用于 Linux 和 macOS。请改用官方安装器的名字，例如 `1.16.2-elixir-otp-26`。见 [平台](platforms.md#windows)。
 
 ### `You must provide a version number for Elixir, eg: vfox install elixir@1.16.2`
 
@@ -118,7 +118,7 @@ Elixir 的安装在所有平台上都能处理 vfox 主目录中的空格，见 
 
 ### 版本列表过时
 
-`vfox search` 会把结果保存 12 小时，保存在 `<VFOX_HOME>/plugin/elixir/.available.cache` 中。缓存不区分 `VFOX_ELIXIR_MIRROR`，因此用一种镜像设置搜索之后，马上用另一种设置搜索，可能仍然列出第一个列表。删除该文件即可刷新。要为所有插件关闭缓存，请运行 `vfox config cache.availableHookDuration 0s`。
+`vfox search` 会把每个结果保存 12 小时，保存在 `<VFOX_HOME>/plugin/elixir/.available.cache` 中。每个参数各有一份：不带参数的是源码版本列表，`hex` 对应 hex.pm 构建列表。删除该文件即可刷新。要为所有插件关闭缓存，请运行 `vfox config cache.availableHookDuration 0s`。
 
 ## 网络
 

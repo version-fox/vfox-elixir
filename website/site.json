@@ -13,7 +13,7 @@
   "mise_install_code": "mise use -g vfox:version-fox/vfox-elixir@1.16.2",
   "mise_run_code": "mise exec -- elixir --version",
   "project_code": "eval \"$(vfox activate bash)\"\nvfox use -p erlang@26.2.3\nvfox use -p elixir@1.16.2\nvfox exec erlang elixir -- elixir --version",
-  "extra_code": "VFOX_ELIXIR_MIRROR=hex vfox search elixir\nVFOX_ELIXIR_MIRROR=hex vfox install elixir@main-otp-26",
+  "extra_code": "vfox search elixir hex\nVFOX_ELIXIR_MIRROR=hex vfox install elixir@main-otp-26",
   "special_code": "Invoke-Expression \"$(vfox activate pwsh)\"\nvfox use -g erlang@26.2.3\nvfox install elixir@1.16.2-elixir-otp-26\nvfox exec erlang@26.2.3 elixir@1.16.2-elixir-otp-26 -- elixir.bat --version",
   "special_shell": "PowerShell",
   "linux_hint": "Erlang/OTP · Make",

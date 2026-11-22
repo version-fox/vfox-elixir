@@ -46,7 +46,7 @@ vfox loads `metadata.lua`, calls a hook when a command needs it, and puts `PLUGI
 - `PreUse` returns `{ version = <installed name> }`. When nothing matches, it returns the typed name, and vfox reports `is not installed`.
 - `EnvKeys` returns `PATH` set to `<path>/bin`, or to `<path>\bin` on Windows.
 - `Detect` returns an array of `{ version = <name>, path = <install root>, note = <text> }`.
-- `Available` returns an array of `{ version = <name> }`, with an optional `note`.
+- `Available` returns an array of `{ version = <name> }`, with an optional `note`. `ctx.args` holds the words after `vfox search elixir`: none for the releases, `hex` for the hex.pm builds. vfox caches the result by those words.
 
 The vfox documentation describes the other fields of these hooks.
 

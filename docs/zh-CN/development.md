@@ -46,7 +46,7 @@ vfox 会加载 `metadata.lua`，在命令需要时调用对应的钩子，并把
 - `PreUse` 返回 `{ version = <已安装的名字> }`。如果没有匹配，它返回输入的名字，由 vfox 报告 `is not installed`。
 - `EnvKeys` 返回 `PATH`，值为 `<path>/bin`；在 Windows 上为 `<path>\bin`。
 - `Detect` 返回由 `{ version = <名字>, path = <安装目录>, note = <备注> }` 组成的数组。
-- `Available` 返回由 `{ version = <名字> }` 组成的数组，可以带可选的 `note`。
+- `Available` 返回由 `{ version = <名字> }` 组成的数组，可以带可选的 `note`。`ctx.args` 是 `vfox search elixir` 后面的词：不带参数是源码版本，`hex` 表示 hex.pm 构建。vfox 按这些词缓存结果。
 
 这些钩子的其他字段见 vfox 文档。
 

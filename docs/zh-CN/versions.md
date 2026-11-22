@@ -12,6 +12,7 @@
 
 ```bash
 vfox search elixir                                         # 可以安装的名字
+vfox search elixir hex                                     # hex.pm 构建，Linux 和 macOS
 vfox install elixir@1.16.2                                 # 源码构建，Linux 和 macOS
 VFOX_ELIXIR_MIRROR=hex vfox install elixir@1.16.2-otp-26   # Hex 预编译包，Linux 和 macOS
 vfox install elixir@1.16.2-elixir-otp-26                   # Windows
@@ -38,9 +39,9 @@ Hex 和 Windows 的版本名以 `-otp-<N>` 或 `-elixir-otp-<N>` 结尾。`<N>` 
 
 - Linux 和 macOS：仓库中 `assets/versions.txt` 的名字。
 - Windows：`assets/versions_win.txt` 的名字。
-- 设置了 `VFOX_ELIXIR_MIRROR=hex`：[builds.txt](https://builds.hex.pm/builds/elixir/builds.txt) 中的名字。
+- `vfox search elixir hex`：[builds.txt](https://builds.hex.pm/builds/elixir/builds.txt) 中的名字，即 Linux 和 macOS 的 hex.pm 构建。
 
-仓库里的两个列表由定时工作流每周更新。vfox 默认缓存 `vfox search` 的结果 12 小时（配置项 `cache.availableHookDuration`），所以刚发布的版本可能暂时看不到。
+仓库里的两个列表由定时工作流每周更新。vfox 默认缓存 `vfox search` 的结果 12 小时（配置项 `cache.availableHookDuration`），所以刚发布的版本可能暂时看不到。缓存按搜索参数分别保存：源码版本列表和 hex.pm 构建列表各有一份。
 
 ## 使用版本
 

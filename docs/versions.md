@@ -12,6 +12,7 @@ The part after `elixir@` is a version name. The name depends on where the build 
 
 ```bash
 vfox search elixir                                         # names you can install
+vfox search elixir hex                                     # hex.pm builds, Linux and macOS
 vfox install elixir@1.16.2                                 # source build, Linux and macOS
 VFOX_ELIXIR_MIRROR=hex vfox install elixir@1.16.2-otp-26   # hex prebuilt, Linux and macOS
 vfox install elixir@1.16.2-elixir-otp-26                   # Windows
@@ -38,9 +39,9 @@ The name you type is the installed name. `vfox install elixir@1.16.2-otp-26` ins
 
 - Linux and macOS: the names in `assets/versions.txt`.
 - Windows: the names in `assets/versions_win.txt`.
-- With `VFOX_ELIXIR_MIRROR=hex`: the names in [builds.txt](https://builds.hex.pm/builds/elixir/builds.txt).
+- `vfox search elixir hex`: the names in [builds.txt](https://builds.hex.pm/builds/elixir/builds.txt), the hex.pm builds for Linux and macOS.
 
-The two files in this repository are refreshed by a scheduled workflow every week. vfox caches the result of `vfox search` for 12 hours by default (`cache.availableHookDuration`), so a version published a moment ago may not be listed yet.
+The two files in this repository are refreshed by a scheduled workflow every week. vfox caches the result of `vfox search` for 12 hours by default (`cache.availableHookDuration`), so a version published a moment ago may not be listed yet. The cache is kept per search argument: the releases and the hex.pm builds each have their own entry.
 
 ## Using a version
 
