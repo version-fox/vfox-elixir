@@ -73,6 +73,22 @@ ok, err = pcall(function()
 end)
 assert(not ok and tostring(err):find("not a list of versions", 1, true), "empty body: " .. tostring(err))
 
+-- Plain text with status 200 is no list either when its lines are not version
+-- names: nothing is listed, and nothing is cached (issue #30). One bad line is
+-- enough to refuse the whole list, including a line that starts with a number.
+local PLAIN_TEXT = {
+    "Error code: 404\nMessage: File not found\n",
+    "404 Not Found\n",
+    "1.20.5\nForbidden\n",
+}
+for _, body in ipairs(PLAIN_TEXT) do
+    answers[LIST] = { status_code = 200, body = body }
+    ok, err = pcall(function()
+        plugin:Available({})
+    end)
+    assert(not ok and tostring(err):find("not a list of versions", 1, true), "plain text " .. body .. tostring(err))
+end
+
 answers[LIST] = "connection reset"
 ok, err = pcall(function()
     plugin:Available({})

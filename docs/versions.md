@@ -39,7 +39,7 @@ The name you type is the installed name. `vfox install elixir@1.16.2-otp-26` ins
 
 - Linux and macOS: the names in `assets/versions.txt`.
 - Windows: the names in `assets/versions_win.txt`.
-- `vfox search elixir hex`: the names in [builds.txt](https://builds.hex.pm/builds/elixir/builds.txt), the hex.pm builds for Linux and macOS.
+- `vfox search elixir hex`: the names in [builds.txt](https://builds.hex.pm/builds/elixir/builds.txt) that carry an OTP suffix, the hex.pm builds for Linux and macOS.
 
 The two files in this repository are refreshed by a scheduled workflow every week. vfox caches the result of `vfox search` for 12 hours by default (`cache.availableHookDuration`), so a version published a moment ago may not be listed yet. The cache is kept per search argument: the releases and the hex.pm builds each have their own entry.
 

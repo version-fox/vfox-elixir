@@ -56,6 +56,17 @@ check(release.version, "1.16.2-otp-26", "release name")
 local branch = plugin:PreInstall({ version = "main-otp-26" })
 check(branch.url, "https://builds.hex.pm/builds/elixir/main-otp-26.zip", "branch zip")
 
+-- A name without an OTP suffix still installs, with a warning printed (issue #28).
+local unnamed = plugin:PreInstall({ version = "1.20.5" })
+check(unnamed.url, "https://builds.hex.pm/builds/elixir/v1.20.5.zip", "unnamed zip")
+
+-- latest resolves to a release line, which hex.pm does not build: the install
+-- stops before the download, and says so (issue #27).
+local ok, err = pcall(function()
+    plugin:PreInstall({ version = "1.20-latest" })
+end)
+assert(not ok and tostring(err):find("has no pre-built build on hex.pm", 1, true), "latest: " .. tostring(err))
+
 -- A prebuilt zip needs no build: PostInstall returns without running a shell.
 plugin:PostInstall({
     sdkInfo = { elixir = { path = "/home/u/.version-fox/cache/elixir/v-1.16.2-otp-26", version = "1.16.2-otp-26" } },

@@ -35,3 +35,12 @@ local ok, err = pcall(function()
     })
 end)
 assert(not ok and tostring(err):find("Erlang/OTP was not found", 1, true), "no Erlang: " .. tostring(err))
+
+-- A path with a space is refused before the Erlang/OTP lookup, which runs a
+-- shell, because Elixir's Makefile cannot take it (issue #31).
+ok, err = pcall(function()
+    plugin:PostInstall({
+        sdkInfo = { elixir = { path = "/home/u/vfox home/cache/elixir/v-1.16.2/elixir-1.16.2", version = "1.16.2" } },
+    })
+end)
+assert(not ok and tostring(err):find("cannot run in", 1, true), "space in path: " .. tostring(err))

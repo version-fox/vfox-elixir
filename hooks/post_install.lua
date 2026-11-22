@@ -33,6 +33,7 @@ function PLUGIN:PostInstall(ctx)
         return elixirUtils.windows_install_exe(sdkInfo.version, path)
     end
 
+    elixirUtils.check_build_path(path)
     local erlang_bin = elixirUtils.require_erlang_bin(elixirUtils.cache_root(path))
     local status = os.execute(elixirUtils.build_command(path, erlang_bin))
     if status ~= 0 then

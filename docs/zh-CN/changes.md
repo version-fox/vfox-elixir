@@ -6,6 +6,19 @@
 
 ## 未发布
 
+### 修复
+
+- Linux 和 macOS：vfox 主目录的路径含空格或其他会被 Shell 解释的字符时，源码构建在调用 `make` 之前停止。Elixir 的 Makefile 无法在这样的路径上构建，以前构建会在 `make` 中失败。文档曾说 Elixir 的安装在所有平台上都能处理 vfox 主目录中的空格，这对源码构建并不成立（#31）。
+- `VFOX_ELIXIR_MIRROR=hex` 时，`latest` 被解析为 `1.20-latest`，而 hex.pm 没有它的构建，安装在下载时失败。现在安装会在下载前停止，并提示改装一个构建（#27）。
+- `vfox search elixir hex` 只列出名字带 OTP 后缀的构建，例如 `1.16.2-otp-26`。没有后缀的构建（例如 `1.20.5`）可能拒绝在另一个 Erlang/OTP 下运行，因此不再列出（#28）。
+- `VFOX_ELIXIR_MIRROR=hex` 时，提示 `vfox search elixir hex` 输出到标准错误，不再混入版本列表（#29）。
+- 服务器以状态 200 返回纯文本的版本列表（例如 `Error code: 404`）时，插件不再把它列为版本或写入缓存。搜索和安装都会给出与错误页相同的提示（#30）。
+- README 曾写插件会管理每个版本所需的 Erlang/OTP。插件并不安装 Erlang/OTP，README 现已说明这一点（#32）。
+
+### 变更
+
+- `VFOX_ELIXIR_MIRROR=hex` 时，`vfox install` 会打印构建所需的 Erlang/OTP；名字没有 OTP 后缀时会给出警告，因为该构建可能拒绝在另一个 Erlang/OTP 下运行（#28）。
+
 ## 1.0.1 - 2026-11-22
 
 ### 新增

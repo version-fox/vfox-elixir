@@ -54,7 +54,7 @@ vfox 会加载 `metadata.lua`，在命令需要时调用对应的钩子，并把
 
 `vfox plugin test .` 离线运行 `tests/*_test.lua` 中的钩子测试，需要 vfox 1.1.0 或更高版本。请在仓库根目录运行。
 
-`tests/post_install_layouts.lua` 在真实目录中运行 `PostInstall` 使用的 Shell 命令，其中一个目录的路径含空格；`make` 和 `erlc` 是放在 vfox 缓存中的假命令。它不是 `*_test.lua` 文件，因为 vfox 的测试虚拟机禁用了 `os.execute` 和 `io.popen`。它在 `gopher-lua` 下运行，这是 vfox 内嵌的 Lua 解释器：
+`tests/post_install_layouts.lua` 在真实目录中运行 `PostInstall` 使用的 Shell 命令，`make` 和 `erlc` 是放在 vfox 缓存中的假命令，并检查含空格或其他 Shell 字符的路径会在 `make` 运行前被拒绝。它不是 `*_test.lua` 文件，因为 vfox 的测试虚拟机禁用了 `os.execute` 和 `io.popen`。它在 `gopher-lua` 下运行，这是 vfox 内嵌的 Lua 解释器：
 
 ```bash
 go run github.com/yuin/gopher-lua/cmd/glua@v1.1.1 tests/post_install_layouts.lua

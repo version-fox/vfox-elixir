@@ -43,6 +43,16 @@ function elixir_utils.check_hex_mirror_platform()
     end
 end
 
+--- The error for a response that is not a list of versions: an error page, or
+--- plain text that holds no version names.
+local function not_a_list(what, url)
+    return "Failed to fetch "
+        .. what
+        .. " from "
+        .. url
+        .. ": the response is not a list of versions. Check your network connection and proxy settings."
+end
+
 --- Fetches a URL and returns its body. A network error, a status other than
 --- 200, an empty body or an HTML page stops the hook with a message that names
 --- the address.
@@ -67,24 +77,50 @@ function elixir_utils.fetch(url, what)
     local body = resp.body or ""
     local lower = body:lower()
     if platform.trim(body) == "" or lower:find("<!doctype", 1, true) or lower:find("<html", 1, true) then
-        error(
-            "Failed to fetch "
-                .. what
-                .. " from "
-                .. url
-                .. ": the response is not a list of versions. Check your network connection and proxy settings."
-        )
+        error(not_a_list(what, url))
     end
     return body
 end
 
---- Turns a text with one version per line into vfox's list of versions. The
---- first word of each line is the version; note, when given, goes with each.
-local function version_list(body, note)
+--- The version named by a line of the release lists: the whole line, one name
+--- such as 1.16.2, 1.20.0-rc.6 or 1.20-latest. Returns nil for any other line.
+local function release_line(text)
+    if string.match(text, "^%d[%w%.%-_+]*$") then
+        return text
+    end
+    return nil
+end
+
+--- Returns true when a name of builds.txt is a release, such as v1.20.5, or a
+--- branch, such as main-otp-26.
+local function is_hex_name(name)
+    return name:match("^v?%d") ~= nil or name:match("^main") ~= nil or name:match("^master") ~= nil
+end
+
+--- The version named by a line of builds.txt: a name, then the commit of the
+--- build (40 hex digits) and the rest of the line. Returns nil for any other line.
+local function hex_build_line(text)
+    local name, commit = text:match("^(%S+)%s+(%x+)%s")
+    if name and #commit == 40 and is_hex_name(name) then
+        return name
+    end
+    return nil
+end
+
+--- Turns a list that fetch returned, with one version per line, into vfox's list
+--- of versions. line_version gives the version named by a line, or nil for a line
+--- that names none. Such a line makes the whole body no list of versions: a server
+--- that answers with plain text, such as `Error code: 404`, is neither listed nor
+--- cached (issue #30). note, when given, goes with each version.
+local function parse_list(body, url, what, line_version, note)
     local result = {}
     for line in string.gmatch(body, "[^\r\n]+") do
-        local name = string.match(line, "^%s*(%S+)")
-        if name then
+        local text = platform.trim(line)
+        if text ~= "" then
+            local name = line_version(text)
+            if name == nil then
+                error(not_a_list(what, url))
+            end
             local entry = { version = name }
             if note then
                 entry.note = note
@@ -98,23 +134,32 @@ end
 --- Returns the versions of the official releases: the source list on Linux
 --- and macOS, the installer list on Windows.
 function elixir_utils.get_release_versions()
-    if platform.is_windows() then
-        local url = VERSION_LISTS .. "versions_win.txt"
-        return version_list(elixir_utils.fetch(url, "the Windows Elixir versions"))
-    end
+    local what = "the Elixir versions"
     local url = VERSION_LISTS .. "versions.txt"
-    return version_list(elixir_utils.fetch(url, "the Elixir versions"))
+    if platform.is_windows() then
+        what = "the Windows Elixir versions"
+        url = VERSION_LISTS .. "versions_win.txt"
+    end
+    local body = elixir_utils.fetch(url, what)
+    return parse_list(body, url, what, release_line)
 end
 
---- Returns the prebuilt builds of hex.pm. A release is listed without the v
---- of its tag (v1.16.2-otp-26 is 1.16.2-otp-26), a branch keeps its name
---- (main-otp-26).
+--- Returns the prebuilt builds of hex.pm that name their Erlang/OTP, such as
+--- 1.16.2-otp-26 and main-otp-26. A release is listed without the v of its tag
+--- (v1.16.2-otp-26 is 1.16.2-otp-26). builds.txt has builds without an OTP suffix
+--- too, but it does not say which Erlang/OTP they were built with, and one can
+--- refuse to run under another. They are not listed; check_hex_build still
+--- installs them by name, with a warning.
 function elixir_utils.get_hex_prebuild_versions()
+    local what = "the hex.pm builds"
     local url = HEX_BUILDS .. "builds.txt"
+    local body = elixir_utils.fetch(url, what)
     local result = {}
-    for _, entry in ipairs(version_list(elixir_utils.fetch(url, "the hex.pm builds"), "pre-built from hex.pm")) do
+    for _, entry in ipairs(parse_list(body, url, what, hex_build_line, "pre-built from hex.pm")) do
         entry.version = string.match(entry.version, "^v(%d.*)$") or entry.version
-        table.insert(result, entry)
+        if elixir_utils.hex_otp_release(entry.version) then
+            table.insert(result, entry)
+        end
     end
     return result
 end
@@ -127,6 +172,29 @@ function elixir_utils.get_hex_prebuild_url(version)
         name = "v" .. version
     end
     return HEX_BUILDS .. name .. ".zip"
+end
+
+--- Returns the Erlang/OTP release that a hex.pm build names with its -otp-N
+--- suffix, such as 26 for 1.16.2-otp-26, or nil for a name without one.
+function elixir_utils.hex_otp_release(version)
+    return string.match(version, "%-otp%-(%d+)$")
+end
+
+--- Fails for a hex.pm name that has no pre-built build, and returns the Erlang/OTP
+--- release that the name names (see hex_otp_release), or nil. latest resolves to
+--- a release line such as 1.20-latest, which hex.pm does not build, so the
+--- install stops here, before the download (issue #27).
+function elixir_utils.check_hex_build(version)
+    if string.match(version, "%-latest$") then
+        error(
+            "Elixir "
+                .. version
+                .. " has no pre-built build on hex.pm: it is a release line, and latest resolves to one. "
+                .. "Install a name that vfox search elixir hex lists, such as 1.16.2-otp-26, "
+                .. "or unset VFOX_ELIXIR_MIRROR to build it from source."
+        )
+    end
+    return elixir_utils.hex_otp_release(version)
 end
 
 --- Fails unless the Elixir release exists on GitHub. A network error is told
@@ -319,6 +387,27 @@ function elixir_utils.require_erlang_bin(cache)
         )
     end
     return bin
+end
+
+--- The characters that the shell splits or expands in a word: whitespace, quotes,
+--- and $ ; & | < > ( ) * ? [ ] { }. Elixir's Makefile expands $(CURDIR) into a
+--- command without quotes, so one of them in the source directory breaks the build.
+local UNQUOTED_PATH_CHARS = "[%s\"'`\\%$;&|<>%(%)%*%?%[%]{}]"
+
+--- Fails when a source build would run in a directory whose path holds one of
+--- those characters, which Elixir's Makefile cannot take (issue #31). The
+--- prebuilt builds run no make and are not checked here.
+function elixir_utils.check_build_path(source_dir)
+    if string.find(source_dir, UNQUOTED_PATH_CHARS) then
+        error(
+            "Elixir's source build cannot run in "
+                .. source_dir
+                .. ": Elixir's Makefile does not quote its directory, so a space or another character the shell reads "
+                .. "breaks the build. Keep those characters out of the vfox home (VFOX_HOME) and install again. "
+                .. "A prebuilt build (VFOX_ELIXIR_MIRROR=hex) runs no make and does not need this. "
+                .. "See https://github.com/version-fox/vfox-elixir/blob/main/docs/troubleshooting.md"
+        )
+    end
 end
 
 --- The shell command that builds Elixir in source_dir with make. When erlang_bin

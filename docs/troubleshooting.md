@@ -106,9 +106,9 @@ vfox 1.1.0 finds a command in the PATH of the SDKs only by the name as typed, an
 
 The OTP number in the name must match the Erlang/OTP that runs Elixir. `1.16.2-otp-26` needs Erlang/OTP 26. Check the version with the command in [erlang.md](erlang.md#windows).
 
-### A path with spaces fails
+### A path with spaces or other shell characters fails
 
-Elixir's installs handle a space in the vfox home on every platform, see [changes.md](changes.md). Erlang/OTP's source build does not: its `configure` step does not quote paths. On Linux and macOS, keep spaces out of the vfox home when you build Erlang/OTP from source. If an Elixir install still fails with a space in the path, report it with the output, see below.
+A source build of Elixir on Linux and macOS stops before `make` when the vfox home (`VFOX_HOME`) has a space, a quote or another character that the shell reads, such as `$`, `;`, `&`, `(` or `*`. The error names the path. Elixir's Makefile puts the directory into a command without quotes, so `make` cannot build there. Keep those characters out of the vfox home and install again. A prebuilt build (`VFOX_ELIXIR_MIRROR=hex`) runs no `make`, so this does not apply to it. Erlang/OTP's source build has the same limit, because its `configure` step does not quote paths: on Linux and macOS, keep spaces out of the vfox home when you build Erlang/OTP from source, see [erlang.md](erlang.md).
 
 ### `vfox link --detect` does not find the Elixir installation
 
