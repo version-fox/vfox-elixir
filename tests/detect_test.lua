@@ -22,9 +22,11 @@ local detect_elixir = require("detect_elixir")
 
 -- A fake filesystem. files maps a path to its content, dirs maps a directory to
 -- the names of its children, and commands maps a shell command to its output.
+-- A file has the execute bit unless not_executable names it.
 local files = {}
 local dirs = {}
 local commands = {}
+local not_executable = {}
 
 io.open = function(path, mode)
     local content = files[path]
@@ -49,6 +51,11 @@ io.popen = function(command, mode)
     if lines == nil then
         local dir = command:match("^ls %-1 '(.*)' 2>/dev/null$")
         lines = dir and dirs[dir] or {}
+        -- platform.is_executable asks the shell whether the file is one that test -x accepts.
+        local probed = command:match("^test %-f '(.*)' && test %-x '%1' && echo yes$")
+        if probed and files[probed] ~= nil and not not_executable[probed] then
+            lines = { "yes" }
+        end
     end
     local index = 0
     -- The handle as io.popen gives it on Windows in vfox 1.1.0: read returns one
@@ -155,3 +162,23 @@ check("PATH install", "1.19.0 /home/u/bin/elixir-src (found on PATH)", found(det
 -- The plugin itself exposes Detect, which returns the same list.
 local hook = plugin:Detect({})
 check("Detect hook", "1.19.0 /home/u/bin/elixir-src (found on PATH)", found(hook))
+
+-- A launcher without the execute bit is no installation: vfox cannot link it, so
+-- link --detect must not offer it. The installations beside it are still found.
+files = {}
+dirs = {}
+commands = {}
+not_executable = {}
+install("/home/u/.asdf/installs/elixir/1.18.4-otp-26", "1.18.4")
+install("/home/u/.asdf/installs/elixir/1.19.4-otp-26", "1.19.4")
+not_executable["/home/u/.asdf/installs/elixir/1.19.4-otp-26/bin/elixir"] = true
+install("/home/u/.asdf/installs/elixir/1.20.5-otp-27", "1.20.5")
+dirs["/home/u/.asdf/installs/elixir"] = { "1.18.4-otp-26", "1.19.4-otp-26", "1.20.5-otp-27" }
+check(
+    "a launcher without the execute bit is skipped",
+    table.concat({
+        "1.18.4-otp-26 /home/u/.asdf/installs/elixir/1.18.4-otp-26 (installed by asdf)",
+        "1.20.5-otp-27 /home/u/.asdf/installs/elixir/1.20.5-otp-27 (installed by asdf)",
+    }, "\n"),
+    found(detect_elixir.find_all())
+)

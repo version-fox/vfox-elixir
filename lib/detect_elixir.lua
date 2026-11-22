@@ -28,15 +28,16 @@ local function launcher(root)
     return platform.child(root, "bin", "elixir")
 end
 
---- Returns the installation root at path, or nil. A Homebrew keg keeps the
---- files of Elixir under libexec (opt/elixir/libexec/bin/elixir), so libexec is
---- looked at first.
+--- Returns the installation root at path, or nil. The launcher must be one that
+--- can run: vfox cannot link a root without one. A Homebrew keg keeps the files
+--- of Elixir under libexec (opt/elixir/libexec/bin/elixir), so libexec is looked
+--- at first.
 function detect.installation_root(path)
     if path == nil or path == "" then
         return nil
     end
     for _, root in ipairs({ platform.child(path, "libexec"), path }) do
-        if platform.file_exists(launcher(root)) then
+        if platform.is_executable(launcher(root)) then
             return root
         end
     end

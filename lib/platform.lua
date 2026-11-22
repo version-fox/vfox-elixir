@@ -156,6 +156,20 @@ function platform.file_exists(path)
     return true
 end
 
+--- Returns true when path is a regular file that the current user can run. On
+--- Windows there is no execute bit, so a file that exists counts. On Unix the
+--- shell tests the bit, because a launcher that has lost it cannot be run.
+function platform.is_executable(path)
+    if not platform.file_exists(path) then
+        return false
+    end
+    if platform.is_windows() then
+        return true
+    end
+    local quoted = platform.shell_quote(path)
+    return platform.first_line("test -f " .. quoted .. " && test -x " .. quoted .. " && echo yes") == "yes"
+end
+
 --- Returns the content of a file, or nil when it cannot be read.
 function platform.read_file(path)
     local file = io.open(path, "r")
