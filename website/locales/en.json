@@ -54,7 +54,7 @@
   "macos_deps": "Prepare Erlang/OTP and Xcode Command Line Tools. See the Erlang plugin for OTP build dependencies.",
   "windows_deps": "Install Erlang/OTP first. Use vfox 0.5.3+. Windows installation supports Elixir 1.15 and later, with an OTP suffix in the version name.",
   "guide_tools_title": "Use Hex prebuilt packages",
-  "guide_tools_text": "Use the same mirror option for search and installation, and choose a build matching your installed OTP.",
+  "guide_tools_text": "Search with vfox search elixir hex, then install with VFOX_ELIXIR_MIRROR=hex. Choose a build whose -otp-N suffix matches your installed Erlang/OTP.",
   "guide3_label": "WINDOWS / OTP",
   "guide3_title": "Match the OTP version on Windows",
   "guide3_text": "Activate Erlang first, then install an Elixir version with an OTP suffix. This example pairs Elixir 1.16.2 with OTP 26.",

@@ -24,9 +24,15 @@ The plugin could not reach GitHub. See [Network](#network).
 
 ### `Failed to fetch <list> from <url>: <error>. Please check your network connection.`
 
+No answer came from the server. See [Network](#network).
+
 ### `Failed to fetch <list> from <url>: HTTP status <code>.`
 
 `<list>` is `the Elixir versions`, `the Windows Elixir versions` or `the hex.pm builds`. The plugin reads these lists to answer `vfox search elixir`, and it reads them again for an install. The first form means no answer came, the second means the server answered with an error. See [Network](#network).
+
+### `Failed to fetch <list> from <url>: the response is not a list of versions. Check your network connection and proxy settings.`
+
+The server answered with status 200, but the body is an error page, an empty body, or plain text with no version names, such as `Error code: 404`. The plugin lists and caches nothing from such an answer, so the search or the install stops with this message. Check the proxy settings, see [Network](#network), and run the command again.
 
 ### `Elixir build failed with exit code <code>`
 
@@ -37,6 +43,10 @@ The plugin could not reach GitHub. See [Network](#network).
 - `make` is missing. On Ubuntu it comes with `build-essential`. On macOS it comes with `xcode-select --install`.
 
 If vfox still lists the version after the failure, run `vfox uninstall elixir@<version>` before you install it again.
+
+### `Elixir's source build cannot run in <path>: Elixir's Makefile does not quote its directory, ...`
+
+A source build on Linux and macOS stops before `make` when the vfox home (`VFOX_HOME`) has a space, a quote or another character that the shell reads. The message names the path. Keep those characters out of the vfox home and install again. See [A path with spaces or other shell characters fails](#a-path-with-spaces-or-other-shell-characters-fails).
 
 ### `Elixir installer failed with exit code <code>`
 
@@ -53,6 +63,14 @@ On Windows a version name must end in `-elixir-otp-<N>`, for example `1.16.2-eli
 ### The hex.pm builds are not available on Windows
 
 The hex.pm builds, which `VFOX_ELIXIR_MIRROR=hex` and `vfox search elixir hex` use, are for Linux and macOS. Install a name from the official installer, such as `1.16.2-elixir-otp-26`. See [platforms.md](platforms.md#windows).
+
+### `Elixir <version> has no pre-built build on hex.pm: it is a release line, and latest resolves to one.`
+
+With `VFOX_ELIXIR_MIRROR=hex`, `latest` resolves to a release line such as `1.20-latest`, and hex.pm has no build for a release line. `vfox install` stops before the download. Name a build that `vfox search elixir hex` lists, such as `1.16.2-otp-26`, or unset `VFOX_ELIXIR_MIRROR` to build from source. See [mirror.md](mirror.md#names).
+
+### `Warning: this name has no -otp-N suffix, so hex.pm does not say which Erlang/OTP the build is for. ...`
+
+Printed by `vfox install` with `VFOX_ELIXIR_MIRROR=hex` for a name such as `main` or `1.16.2`. The install goes on. For a name with a suffix, `vfox install` prints `This build needs Erlang/OTP <N>.` instead. If `elixir` then refuses to run, install a name with `-otp-N`, see [mirror.md](mirror.md#names).
 
 ### `You must provide a version number for Elixir, eg: vfox install elixir@1.16.2`
 

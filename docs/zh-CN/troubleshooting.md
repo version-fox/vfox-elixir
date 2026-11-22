@@ -24,9 +24,15 @@
 
 ### `Failed to fetch <list> from <url>: <error>. Please check your network connection.`
 
+没有收到服务器的应答。见 [网络](#网络)。
+
 ### `Failed to fetch <list> from <url>: HTTP status <code>.`
 
 `<list>` 是 `the Elixir versions`、`the Windows Elixir versions` 或 `the hex.pm builds`。插件需要读取这些列表来回答 `vfox search elixir`，安装时也会再读一次。第一种形式表示没有收到应答，第二种表示服务器返回了错误。见 [网络](#网络)。
+
+### `Failed to fetch <list> from <url>: the response is not a list of versions. Check your network connection and proxy settings.`
+
+服务器返回了状态 200，但正文是错误页、空内容，或者不含版本名的纯文本，例如 `Error code: 404`。插件不会把这样的应答列为版本，也不会写入缓存，因此搜索或安装会在这条信息处停止。请检查代理设置，见 [网络](#网络)，然后重新运行命令。
 
 ### `Elixir build failed with exit code <code>`
 
@@ -37,6 +43,10 @@
 - 缺少 `make`。Ubuntu 上它包含在 `build-essential` 中；macOS 上运行 `xcode-select --install` 安装。
 
 如果失败后 vfox 仍然列出了这个版本，请先运行 `vfox uninstall elixir@<version>`，再重新安装。
+
+### `Elixir's source build cannot run in <path>: Elixir's Makefile does not quote its directory, ...`
+
+在 Linux 和 macOS 上，源码构建时 vfox 主目录（`VFOX_HOME`）含有空格、引号或其他会被 Shell 解释的字符，会在调用 `make` 之前停止，并指出该路径。请让这些字符不出现在 vfox 主目录中，然后重新安装。见 [路径含空格或其他 Shell 字符时失败](#路径含空格或其他-shell-字符时失败)。
 
 ### `Elixir installer failed with exit code <code>`
 
@@ -53,6 +63,14 @@
 ### hex.pm 构建在 Windows 上不可用
 
 `VFOX_ELIXIR_MIRROR=hex` 和 `vfox search elixir hex` 使用的 hex.pm 构建只用于 Linux 和 macOS。请改用官方安装器的名字，例如 `1.16.2-elixir-otp-26`。见 [平台](platforms.md#windows)。
+
+### `Elixir <version> has no pre-built build on hex.pm: it is a release line, and latest resolves to one.`
+
+设置 `VFOX_ELIXIR_MIRROR=hex` 后，`latest` 会被解析为 `1.20-latest` 这样的版本线，而 hex.pm 没有版本线的构建。`vfox install` 会在下载之前停止。请改用 `vfox search elixir hex` 列出的名字，例如 `1.16.2-otp-26`；或者取消 `VFOX_ELIXIR_MIRROR`，从源码构建。见 [Hex 预编译包](mirror.md#名字)。
+
+### `Warning: this name has no -otp-N suffix, so hex.pm does not say which Erlang/OTP the build is for. ...`
+
+`VFOX_ELIXIR_MIRROR=hex` 时，名字没有 OTP 后缀（例如 `main` 或 `1.16.2`），`vfox install` 会打印这条警告，但安装照常进行。名字带后缀时，`vfox install` 会改为打印 `This build needs Erlang/OTP <N>.`。如果之后 `elixir` 拒绝运行，请安装带 `-otp-N` 的名字，见 [Hex 预编译包](mirror.md#名字)。
 
 ### `You must provide a version number for Elixir, eg: vfox install elixir@1.16.2`
 
