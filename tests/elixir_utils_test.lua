@@ -135,6 +135,12 @@ check(
     "bin of a prebuilt install"
 )
 
+-- The prebuilt Erlang/OTP of issue #23 is named OTP-28.4.2 by vfox-erlang, and
+-- its Install script keeps erlc in bin/ at the root of the install.
+local prebuilt = "/home/u/.version-fox/cache/erlang/v-OTP-28.4.2/erlang-OTP-28.4.2"
+commands[cache_find] = { prebuilt .. "/bin/erlc" }
+check(elixir_utils.find_erlang_bin("/home/u/.version-fox/cache"), prebuilt .. "/bin", "OTP-28.4.2 prebuilt")
+
 -- Where the cache holds only a bootstrap, mise's installs are searched.
 local mise_find = "find '/home/u/.local/share/mise/installs/erlang' -maxdepth 6 -name erlc 2>/dev/null | sort"
 commands[cache_find] = { otp_root .. "/bootstrap/bin/erlc" }

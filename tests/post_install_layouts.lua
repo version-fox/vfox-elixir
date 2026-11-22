@@ -73,6 +73,12 @@ local erlc_on_path = os.execute("command -v erlc >/dev/null 2>&1") == 0
 local root = os.tmpname() .. "-elixir-layout"
 command("mkdir -p " .. quote(root))
 
+-- The first word of the install path below names this directory. An unquoted
+-- cd stops there, so make would run here and the install would report success
+-- without building anything (issue #20).
+local decoy = root .. "/vfox"
+command("mkdir -p " .. quote(decoy))
+
 -- VFOX_HOME may hold a space, so the install directory does too. The Erlang/OTP
 -- layout is the one vfox-erlang's source build leaves: release/bin holds the
 -- erlc that runs make.
@@ -104,6 +110,7 @@ else
     -- make runs in the source directory, and the Erlang/OTP bin directory is
     -- first on its PATH.
     PLUGIN:PostInstall(ctx)
+    assert(read(decoy .. "/make.log") == nil, "make ran in " .. decoy .. ", the first word of the install path")
     local log = assert(read(sdk .. "/make.log"), "make did not run in the install directory")
     local dir, path_line = log:match("^(.-)\n(.-)\n$")
     assert(dir == sdk, "make ran in " .. tostring(dir) .. ", not " .. sdk)
