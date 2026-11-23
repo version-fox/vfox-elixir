@@ -19,7 +19,7 @@ PLUGIN = {}
 --- Plugin name
 PLUGIN.name = "elixir"
 --- Plugin version
-PLUGIN.version = "1.0.5"
+PLUGIN.version = "1.0.6"
 --- Plugin homepage
 PLUGIN.homepage = "https://github.com/version-fox/vfox-elixir"
 --- Plugin license, please choose a correct license according to your needs.
