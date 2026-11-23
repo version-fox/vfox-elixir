@@ -164,14 +164,49 @@ function elixir_utils.get_hex_prebuild_versions()
     return result
 end
 
+--- The name hex.pm gives a build, as builds.txt lists it: a release with the v of
+--- its tag (v1.16.2-otp-26), a branch as it is (main-otp-26).
+local function hex_build_name(version)
+    if string.match(version, "^%d") then
+        return "v" .. version
+    end
+    return version
+end
+
 --- Returns the address of the prebuilt zip of a version. A release is served
 --- under the v of its tag (v1.16.2-otp-26.zip), a branch under its name.
 function elixir_utils.get_hex_prebuild_url(version)
-    local name = version
-    if string.match(version, "^%d") then
-        name = "v" .. version
+    return HEX_BUILDS .. hex_build_name(version) .. ".zip"
+end
+
+--- The SHA-256 in a column of builds.txt, in lowercase. A column that is not 64
+--- hexadecimal digits is no checksum: nil.
+local function checksum_of(column)
+    if column ~= nil and #column == 64 and string.match(column, "^%x+$") then
+        return string.lower(column)
     end
-    return HEX_BUILDS .. name .. ".zip"
+    return nil
+end
+
+--- Returns the SHA-256 that builds.txt publishes for the zip of a version, or nil
+--- when the index has no value for it: a line with no fourth column, or one that is
+--- not 64 hexadecimal digits. The index is read here, once per install. When it
+--- cannot be read, the install stops before the download, rather than installing
+--- the zip without a check and saying nothing.
+function elixir_utils.get_hex_prebuild_sha256(version)
+    local name = hex_build_name(version)
+    local body = elixir_utils.fetch(HEX_BUILDS .. "builds.txt", "the hex.pm builds index")
+    local sha256 = nil
+    for line in string.gmatch(body, "[^\r\n]+") do
+        local fields = {}
+        for field in string.gmatch(line, "%S+") do
+            table.insert(fields, field)
+        end
+        if fields[1] == name then
+            sha256 = checksum_of(fields[4])
+        end
+    end
+    return sha256
 end
 
 --- Returns the Erlang/OTP release that a hex.pm build names with its -otp-N

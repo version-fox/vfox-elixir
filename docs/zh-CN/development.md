@@ -41,7 +41,7 @@ vfox 会加载 `metadata.lua`，在命令需要时调用对应的钩子，并把
 
 ## 契约
 
-- `PreInstall` 返回 `version`；在 Linux 和 macOS 上还返回 `url`。在 Windows 上只返回 `version`，因为安装器由 `PostInstall` 下载。`version` 就是安装后的名字。
+- `PreInstall` 返回 `version`；在 Linux 和 macOS 上还返回 `url`。设置 `VFOX_ELIXIR_MIRROR=hex` 时，还返回 `sha256`：`builds.txt` 为该 zip 发布的 SHA-256；索引中没有时则不返回。在 Windows 上只返回 `version`，因为安装器由 `PostInstall` 下载。`version` 就是安装后的名字。
 - `PostInstall` 从 `ctx.sdkInfo['elixir'].path` 取得安装目录。不要用其他路径的相对部分拼出它。
 - `PreUse` 返回 `{ version = <已安装的名字> }`。如果没有匹配，它返回输入的名字，由 vfox 报告 `is not installed`。
 - `EnvKeys` 返回 `PATH`，值为 `<path>/bin`；在 Windows 上为 `<path>\bin`。

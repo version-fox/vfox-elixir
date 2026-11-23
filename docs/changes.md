@@ -4,6 +4,12 @@
 
 What changed in each release, as a user notices it.
 
+## Unreleased
+
+### Fixed
+
+- With `VFOX_ELIXIR_MIRROR=hex`, vfox checks the zip against the SHA-256 that `builds.txt` publishes for the build, before it unpacks the zip (`Verifying checksum ...`). Before, the plugin passed no checksum to vfox, so the install printed `Checksum is not provided` even when the index had one. A build whose line in `builds.txt` has no SHA-256 still installs, with that warning. If `builds.txt` cannot be read, the install stops before the download (#44).
+
 ## 1.0.5 - 2026-11-22
 
 ### Fixed

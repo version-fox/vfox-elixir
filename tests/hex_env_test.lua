@@ -75,6 +75,24 @@ end
 local RELEASES = "https://fastly.jsdelivr.net/gh/version-fox/vfox-elixir@main/assets/versions.txt"
 
 answers[RELEASES] = { status_code = 200, body = "1.20.5\n" }
+
+-- The index of builds.txt (issue #44). Its fourth column is the SHA-256 of the zip. The lines
+-- below have one, have none, have a column that is not 64 hexadecimal digits, or are a release.
+local BUILDS = "https://builds.hex.pm/builds/elixir/builds.txt"
+local SHA_OTP29 = "f424d6f0bb710a1d4898f2645d8ad6cab3f5eab8d71848c0dda2579d3a8e8a06"
+local SHA_V1205 = "d059cfde1f16618d4c651f02dc5c5387f0b8c66e088489849660688ff315e98e"
+answers[BUILDS] = {
+    status_code = 200,
+    body = table.concat({
+        "v1.16.2-otp-26 41f6ee3f2e605f7066b23d96362e3b0c620c565b 2024-03-10T11:08:31Z",
+        "v1.20.5 4a28692668bef879029291b7ff329a84a1f933bb 2026-10-29T19:43:19Z " .. SHA_V1205,
+        "v1.20.5-otp-29 4a28692668bef879029291b7ff329a84a1f933bb 2026-10-29T19:43:19Z " .. SHA_OTP29,
+        "main-otp-26 8914dcdcbb9841ff07b786724671c58d8ccacc55 2026-03-09T19:38:40Z 187f",
+        "main-otp-29 60200fefaaee0d9773a03fe84d6747f73b47de6a 2026-11-21T11:42:25Z " .. string.rep("AB", 32),
+        "",
+    }, "\n"),
+}
+
 -- Nothing goes to standard error: vfox calls the hook without arguments for
 -- `vfox install elixir@latest` too, so a hint would show during an install (issue #35).
 local stderr_writes = {}
@@ -98,6 +116,19 @@ check(release.url, "https://builds.hex.pm/builds/elixir/v1.16.2-otp-26.zip", "re
 check(release.version, "1.16.2-otp-26", "release name")
 local branch = plugin:PreInstall({ version = "main-otp-26" })
 check(branch.url, "https://builds.hex.pm/builds/elixir/main-otp-26.zip", "branch zip")
+
+-- PreInstall returns the SHA-256 that builds.txt publishes for the zip, so vfox checks the zip before
+-- it unpacks it (issue #44). A build without a value gets none, and vfox warns. A release is found
+-- under its v name, and an upper-case value comes back in lower case.
+local published = plugin:PreInstall({ version = "1.20.5-otp-29" })
+check(published.sha256, SHA_OTP29, "published SHA-256")
+check(published.url, "https://builds.hex.pm/builds/elixir/v1.20.5-otp-29.zip", "published zip")
+check(plugin:PreInstall({ version = "1.20.5" }).sha256, SHA_V1205, "release without OTP suffix")
+check(plugin:PreInstall({ version = "main-otp-29" }).sha256, string.rep("ab", 32), "lower case")
+check(plugin:PreInstall({ version = "1.16.2-otp-26" }).sha256, nil, "line without a SHA-256")
+check(plugin:PreInstall({ version = "main-otp-26" }).sha256, nil, "column that is not a SHA-256")
+check(plugin:PreInstall({ version = "1.20.5-otp-2" }).sha256, nil, "a prefix of a name is not that name")
+check(plugin:PreInstall({ version = "9.9.9" }).sha256, nil, "name not in the index")
 
 -- A name without an OTP suffix still installs (issue #28). Its warning comes from
 -- PostInstall, once the build is downloaded, so PreInstall prints none (issue #35).
@@ -140,4 +171,15 @@ check(
     end)),
     false,
     "named build: no warning"
+)
+
+-- An index that cannot be read stops the install before the download, instead of installing the zip
+-- without the check. This check makes the request fail, so it comes last in the file (issue #44).
+answers[BUILDS] = "connection reset"
+ok, err = pcall(function()
+    plugin:PreInstall({ version = "1.20.5-otp-29" })
+end)
+assert(
+    not ok and tostring(err):find("Failed to fetch the hex.pm builds index", 1, true),
+    "unreadable index: " .. tostring(err)
 )

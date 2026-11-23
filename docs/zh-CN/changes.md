@@ -4,6 +4,12 @@
 
 每个版本的变化，按用户能察觉到的方式记录。
 
+## 未发布
+
+### 修复
+
+- `VFOX_ELIXIR_MIRROR=hex` 时，vfox 会在解压之前，用 `builds.txt` 为该构建发布的 SHA-256 校验 zip（`Verifying checksum ...`）。之前插件没有把校验和交给 vfox，因此即使索引中有值，安装也会打印 `Checksum is not provided`。`builds.txt` 中该构建那一行没有 SHA-256 的，仍会安装，并打印该警告。读不到 `builds.txt` 时，安装会在下载之前停止（#44）。
+
 ## 1.0.5 - 2026-11-22
 
 ### 修复
