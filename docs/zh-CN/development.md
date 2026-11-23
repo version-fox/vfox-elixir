@@ -7,12 +7,12 @@
 ```
 metadata.lua                    插件名、版本、依赖和备注
 hooks/available.lua             vfox search
-hooks/pre_install.lua           vfox install：版本名和下载地址
+hooks/pre_install.lua           vfox install：版本名、下载地址和 hex.pm 的校验和
 hooks/post_install.lua          vfox install：源码构建（Linux、macOS）或运行安装器（Windows）
 hooks/pre_use.lua               vfox use：把输入的内容映射到已安装的名字
 hooks/env_keys.lua              已安装版本的 PATH
 hooks/detect.lua                vfox link --detect：本机已有的 Elixir
-lib/elixir_utils.lua            版本列表、下载、Erlang/OTP 查找、Windows 安装器
+lib/elixir_utils.lua            版本列表、下载和校验和、Erlang/OTP 查找、Windows 安装器
 lib/installed_version.lua       把名字与已安装的版本匹配（PreUse）
 lib/detect_elixir.lua           查找本机已有的 Elixir（Detect）
 lib/platform.lua                与平台相关的路径、Shell 命令和文件操作
@@ -34,7 +34,7 @@ vfox 会加载 `metadata.lua`，在命令需要时调用对应的钩子，并把
 | 运行的命令 | 钩子 |
 | --- | --- |
 | `vfox search elixir` | `Available` |
-| `vfox install elixir@1.16.2` | `PreInstall` 返回名字和下载地址。vfox 下载并解压之后调用 `PostInstall`，它会构建 Elixir（Linux、macOS）或运行安装器（Windows）。设置 `VFOX_ELIXIR_MIRROR=hex` 时它不构建任何东西，只打印名字没有 `-otp-N` 后缀的警告 |
+| `vfox install elixir@1.16.2` | `PreInstall` 返回名字和下载地址。设置 `VFOX_ELIXIR_MIRROR=hex` 时，它还返回 `builds.txt` 中的 SHA-256。vfox 下载压缩包并用 SHA-256 校验；`PreInstall` 没有返回它时，只打印警告。然后解压，并调用 `PostInstall`，它会构建 Elixir（Linux、macOS）或运行安装器（Windows）。设置 `VFOX_ELIXIR_MIRROR=hex` 时它不构建任何东西，只打印名字没有 `-otp-N` 后缀的警告 |
 | `vfox use elixir@1.16.2` | `PreUse` 返回要选中的已安装名字。`EnvKeys` 提供 `PATH` |
 | `vfox link --detect elixir` | `Detect` 返回本机已有的 Elixir 安装 |
 | `vfox uninstall elixir@...` | 没有钩子 |

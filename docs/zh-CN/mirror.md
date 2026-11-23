@@ -36,6 +36,7 @@ vfox use -g elixir@1.16.2-otp-26
 | 是否编译 | 是，用 `make` | 否 |
 | 安装时需要 `erlc` | 需要 | 不需要 |
 | 运行时需要 Erlang/OTP | 需要 | 需要，且 OTP 主版本必须与后缀一致 |
+| 校验和 | 无，vfox 会打印警告 | `builds.txt` 中的 SHA-256，索引中有时由 vfox 校验 |
 | 名字示例 | `1.16.2` | `1.16.2-otp-26` |
 
 ## Windows
@@ -46,6 +47,6 @@ Windows 没有 Hex 预编译包。设置 `VFOX_ELIXIR_MIRROR=hex` 后，`vfox in
 
 `builds.txt` 为大多数构建发布了 SHA-256。安装开始时插件会读取它，vfox 会在解压之前用它校验下载的 zip：
 
-- vfox 会打印 `Verifying checksum <sha256>...`。zip 与之不符时，安装停止。
+- vfox 会打印 `Verifying checksum <sha256>...`。zip 与之不符时，安装停止，见 [问题排查](troubleshooting.md#checksum-error-file-path)。
 - `builds.txt` 中该构建那一行没有 SHA-256 时，安装不做这项校验。vfox 会为它打印 `WARNING: Checksum is not provided, skip verify...`。
 - 读不到 `builds.txt` 时，安装会在下载之前停止。检查网络连接后再安装。

@@ -4,7 +4,7 @@
 
 What changed in each release, as a user notices it.
 
-## Unreleased
+## 1.0.6 - 2026-11-23
 
 ### Fixed
 

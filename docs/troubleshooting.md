@@ -28,7 +28,7 @@ No answer came from the server. See [Network](#network).
 
 ### `Failed to fetch <list> from <url>: HTTP status <code>.`
 
-`<list>` is `the Elixir versions`, `the Windows Elixir versions` or `the hex.pm builds`. The plugin reads these lists to answer `vfox search elixir`, and it reads them again for an install. The first form means no answer came, the second means the server answered with an error. See [Network](#network).
+`<list>` is `the Elixir versions`, `the Windows Elixir versions`, `the hex.pm builds` or `the hex.pm builds index`. The plugin reads these lists to answer `vfox search elixir`, and it reads them again for an install. `the hex.pm builds index` is `builds.txt`, which an install with `VFOX_ELIXIR_MIRROR=hex` reads for the checksum of the zip. The first form means no answer came, the second means the server answered with an error. See [Network](#network).
 
 ### `Failed to fetch <list> from <url>: the response is not a list of versions. Check your network connection and proxy settings.`
 
@@ -71,6 +71,12 @@ With `VFOX_ELIXIR_MIRROR=hex`, `latest` resolves to a release line such as `1.20
 ### `Warning: this name has no -otp-N suffix, so hex.pm does not say which Erlang/OTP the build is for. ...`
 
 Printed by `vfox install` with `VFOX_ELIXIR_MIRROR=hex`, after the build is downloaded, for a name such as `main` or `1.16.2`. The install goes on. A name that hex.pm does not have fails at the download, and gets no warning. For a name with a suffix, `vfox install` prints `This build needs Erlang/OTP <N>.` instead. If `elixir` then refuses to run, install a name with `-otp-N`, see [mirror.md](mirror.md#names).
+
+### `Checksum error, file: <path>`
+
+With `VFOX_ELIXIR_MIRROR=hex`, the zip that was downloaded does not match the SHA-256 that `builds.txt` publishes for the build. vfox prints `Verifying checksum <sha256>...`, then this message, and it stops before the zip is unpacked. The install ends with `checksum error` and `failed to install elixir`.
+
+Run `vfox install` again. Each install reads `builds.txt` anew, so a build that hex.pm replaced between that read and the download is checked against its new SHA-256. If the error stays, the zip and the index on builds.hex.pm do not agree, or something on the network path changes the download. Run `vfox --debug install elixir@<version>` and report it, see [Reporting a problem](#reporting-a-problem).
 
 ### `You must provide a version number for Elixir, eg: vfox install elixir@1.16.2`
 
@@ -140,7 +146,7 @@ A source build of Elixir on Linux and macOS stops before `make` when the vfox ho
 
 ## Network
 
-The plugin reads the version list from `fastly.jsdelivr.net` (Linux, macOS and Windows) and from `builds.hex.pm` (hex). It checks each source release on github.com, and downloads the source archive or the Windows installer from github.com.
+The plugin reads the version list from `fastly.jsdelivr.net` (Linux, macOS and Windows) and from `builds.hex.pm` (hex). An install with `VFOX_ELIXIR_MIRROR=hex` also reads `builds.txt` from `builds.hex.pm`, for the checksum of the zip. It checks each source release on github.com, and downloads the source archive or the Windows installer from github.com.
 
 If one of these hosts is blocked or slow, set vfox's proxy, which covers all of vfox's requests:
 
