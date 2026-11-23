@@ -17,8 +17,9 @@ local platform = require("platform")
 
 --- Returns some pre-installed information, such as version number, download address, local files, etc.
 --- The source tarball of a release, or the prebuilt zip of hex.pm when
---- VFOX_ELIXIR_MIRROR=hex. On Windows no download is named: PostInstall runs
---- the installer, which vfox cannot download itself.
+--- VFOX_ELIXIR_MIRROR=hex, with the SHA-256 that builds.txt publishes for it.
+--- On Windows no download is named: PostInstall runs the installer, which vfox
+--- cannot download itself.
 --- @param ctx table Context information; ctx.version is the version the user typed
 --- @return table Version information
 function PLUGIN:PreInstall(ctx)
@@ -33,6 +34,9 @@ function PLUGIN:PreInstall(ctx)
         elixirUtils.check_hex_mirror_platform()
         local otp_release = elixirUtils.check_hex_build(elixir_version)
         local hex_url = elixirUtils.get_hex_prebuild_url(elixir_version)
+        -- builds.txt publishes the SHA-256 of the zip. vfox checks the zip against it before it unpacks
+        -- it. nil, for a build that the index has no value for, makes vfox warn and skip the check.
+        local sha256 = elixirUtils.get_hex_prebuild_sha256(elixir_version)
         print("Download URL: " .. hex_url)
         -- The warning for a name without an OTP suffix is printed by PostInstall,
         -- once the build is downloaded: here the name may not exist (issue #35).
@@ -42,6 +46,7 @@ function PLUGIN:PreInstall(ctx)
         return {
             version = elixir_version,
             url = hex_url,
+            sha256 = sha256,
         }
     end
 

@@ -41,7 +41,7 @@ vfox loads `metadata.lua`, calls a hook when a command needs it, and puts `PLUGI
 
 ## Contracts
 
-- `PreInstall` returns `version`, and `url` on Linux and macOS. On Windows it returns only `version`, because `PostInstall` downloads the installer. `version` is the name of the install.
+- `PreInstall` returns `version`, and `url` on Linux and macOS. With `VFOX_ELIXIR_MIRROR=hex` it also returns `sha256`: the SHA-256 that `builds.txt` publishes for the zip, or nothing when the index has none. On Windows it returns only `version`, because `PostInstall` downloads the installer. `version` is the name of the install.
 - `PostInstall` takes the install directory from `ctx.sdkInfo['elixir'].path`. Do not build it from relative parts of other paths.
 - `PreUse` returns `{ version = <installed name> }`. When nothing matches, it returns the typed name, and vfox reports `is not installed`.
 - `EnvKeys` returns `PATH` set to `<path>/bin`, or to `<path>\bin` on Windows.

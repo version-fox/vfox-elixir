@@ -44,4 +44,8 @@ Hex prebuilt packages are not available on Windows. With `VFOX_ELIXIR_MIRROR=hex
 
 ## Checksums
 
-The plugin does not check the downloaded zip against the `sha256` value in `builds.txt`.
+`builds.txt` publishes a SHA-256 for most builds. The plugin reads it when the install starts, and vfox checks the downloaded zip against it before the zip is unpacked:
+
+- vfox prints `Verifying checksum <sha256>...`. A zip that does not match stops the install.
+- A build whose line in `builds.txt` has no SHA-256 is installed without the check. vfox prints `WARNING: Checksum is not provided, skip verify...` for it.
+- If `builds.txt` cannot be read, the install stops before the download. Check the network connection, then install again.
