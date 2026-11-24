@@ -7,12 +7,12 @@
 ```
 metadata.lua                    plugin name, version, dependency, notes
 hooks/available.lua             vfox search
-hooks/pre_install.lua           vfox install: the version name and the download URL
+hooks/pre_install.lua           vfox install: the version name, the download URL and the hex.pm checksum
 hooks/post_install.lua          vfox install: the source build (Linux, macOS) or the installer (Windows)
 hooks/pre_use.lua               vfox use: maps what was typed to an installed name
 hooks/env_keys.lua              PATH for an installed version
 hooks/detect.lua                vfox link --detect: Elixir already on the machine
-lib/elixir_utils.lua            version lists, downloads, the Erlang/OTP lookup, the Windows installer
+lib/elixir_utils.lua            version lists, downloads and checksums, the Erlang/OTP lookup, the Windows installer
 lib/installed_version.lua       matching names against installed versions (PreUse)
 lib/detect_elixir.lua           finding Elixir already on the machine (Detect)
 lib/platform.lua                paths, shell commands and files that depend on the platform
@@ -34,7 +34,7 @@ vfox loads `metadata.lua`, calls a hook when a command needs it, and puts `PLUGI
 | You run | Hooks |
 | --- | --- |
 | `vfox search elixir` | `Available` |
-| `vfox install elixir@1.16.2` | `PreInstall` returns the name and the URL. vfox downloads and unpacks the archive, then calls `PostInstall`, which builds Elixir (Linux, macOS) or runs the installer (Windows). With `VFOX_ELIXIR_MIRROR=hex` it builds nothing: it only prints the warning about a name without an `-otp-N` suffix |
+| `vfox install elixir@1.16.2` | `PreInstall` returns the name and the URL. With `VFOX_ELIXIR_MIRROR=hex` it also returns the SHA-256 from `builds.txt`. vfox downloads the archive and checks it against the SHA-256, or prints a warning when `PreInstall` returned none. Then it unpacks the archive and calls `PostInstall`, which builds Elixir (Linux, macOS) or runs the installer (Windows). With `VFOX_ELIXIR_MIRROR=hex` it builds nothing: it only prints the warning about a name without an `-otp-N` suffix |
 | `vfox use elixir@1.16.2` | `PreUse` returns the installed name to select. `EnvKeys` provides `PATH` |
 | `vfox link --detect elixir` | `Detect` returns the Elixir installations already on the machine |
 | `vfox uninstall elixir@...` | no hook |

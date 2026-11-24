@@ -28,7 +28,7 @@
 
 ### `Failed to fetch <list> from <url>: HTTP status <code>.`
 
-`<list>` 是 `the Elixir versions`、`the Windows Elixir versions` 或 `the hex.pm builds`。插件需要读取这些列表来回答 `vfox search elixir`，安装时也会再读一次。第一种形式表示没有收到应答，第二种表示服务器返回了错误。见 [网络](#网络)。
+`<list>` 是 `the Elixir versions`、`the Windows Elixir versions`、`the hex.pm builds` 或 `the hex.pm builds index`。插件需要读取这些列表来回答 `vfox search elixir`，安装时也会再读一次。`the hex.pm builds index` 是 `builds.txt`，设置 `VFOX_ELIXIR_MIRROR=hex` 安装时，插件用它读取 zip 的校验和。第一种形式表示没有收到应答，第二种表示服务器返回了错误。见 [网络](#网络)。
 
 ### `Failed to fetch <list> from <url>: the response is not a list of versions. Check your network connection and proxy settings.`
 
@@ -71,6 +71,12 @@
 ### `Warning: this name has no -otp-N suffix, so hex.pm does not say which Erlang/OTP the build is for. ...`
 
 `VFOX_ELIXIR_MIRROR=hex` 时，名字没有 OTP 后缀（例如 `main` 或 `1.16.2`），`vfox install` 会在下载构建之后打印这条警告，但安装照常进行。hex.pm 没有的名字会在下载时失败，不会打印这条警告。名字带后缀时，`vfox install` 会改为打印 `This build needs Erlang/OTP <N>.`。如果之后 `elixir` 拒绝运行，请安装带 `-otp-N` 的名字，见 [Hex 预编译包](mirror.md#名字)。
+
+### `Checksum error, file: <path>`
+
+设置 `VFOX_ELIXIR_MIRROR=hex` 时，下载的 zip 与 `builds.txt` 为该构建发布的 SHA-256 不符。vfox 会打印 `Verifying checksum <sha256>...`，然后打印这条信息，并在解压 zip 之前停止。最后输出 `checksum error` 和 `failed to install elixir`。
+
+再次运行 `vfox install`。每次安装都会重新读取 `builds.txt`，因此如果 hex.pm 在读取索引和下载之间替换了该构建，第二次会用新的 SHA-256 校验。如果仍然失败，说明 builds.hex.pm 上的 zip 与索引不一致，或者网络路径上有东西改动了下载的文件。请运行 `vfox --debug install elixir@<版本>`，并按[报告问题](#报告问题)中的说明提交 issue。
 
 ### `You must provide a version number for Elixir, eg: vfox install elixir@1.16.2`
 
@@ -140,7 +146,7 @@ vfox 1.1.0 只按写出的名字在 SDK 的 PATH 中查找命令，不会尝试 
 
 ## 网络
 
-插件从 `fastly.jsdelivr.net`（Linux、macOS 和 Windows）读取版本列表，从 `builds.hex.pm`（Hex）读取预编译包列表。它会在 github.com 上检查源码发行版是否存在，并从 github.com 下载源码包或 Windows 安装器。
+插件从 `fastly.jsdelivr.net`（Linux、macOS 和 Windows）读取版本列表，从 `builds.hex.pm`（Hex）读取预编译包列表。设置 `VFOX_ELIXIR_MIRROR=hex` 安装时，还会从 `builds.hex.pm` 读取 `builds.txt`，以获得 zip 的校验和。它会在 github.com 上检查源码发行版是否存在，并从 github.com 下载源码包或 Windows 安装器。
 
 如果其中某个站点被阻断或速度很慢，可以设置 vfox 的代理，它对 vfox 的所有请求都生效：
 

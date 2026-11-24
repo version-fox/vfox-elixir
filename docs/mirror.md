@@ -36,6 +36,7 @@ The names are the lines of `builds.txt` with the leading `v` removed. `vfox sear
 | Compiles | yes, with `make` | no |
 | Needs `erlc` to install | yes | no |
 | Needs Erlang/OTP to run | yes | yes, and the OTP major version must match the suffix |
+| Checksum | none, so vfox prints a warning | the SHA-256 in `builds.txt`, which vfox checks when the index has one |
 | Example name | `1.16.2` | `1.16.2-otp-26` |
 
 ## Windows
@@ -46,6 +47,6 @@ Hex prebuilt packages are not available on Windows. With `VFOX_ELIXIR_MIRROR=hex
 
 `builds.txt` publishes a SHA-256 for most builds. The plugin reads it when the install starts, and vfox checks the downloaded zip against it before the zip is unpacked:
 
-- vfox prints `Verifying checksum <sha256>...`. A zip that does not match stops the install.
+- vfox prints `Verifying checksum <sha256>...`. A zip that does not match stops the install, see [troubleshooting.md](troubleshooting.md#checksum-error-file-path).
 - A build whose line in `builds.txt` has no SHA-256 is installed without the check. vfox prints `WARNING: Checksum is not provided, skip verify...` for it.
 - If `builds.txt` cannot be read, the install stops before the download. Check the network connection, then install again.
